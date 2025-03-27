@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.block1 {
+    width: 100%;
+    height: 720px;
+    background-color: #191A26;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .block1-cart {
+    margin-left: 300px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #e51b1b;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 18s linear infinite;
+  }
+  .block1-cart2 {
+    margin-left: 600px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #e51b1b;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 14s linear infinite;
+  }
+  
+  .block1-cart3 {
+    margin-left: 800px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #e51b1b;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 16s linear infinite;
+  }
+  
+  .block1-item {
+    z-index: 10;
+    text-align: center;
+    width: 900px;
+    margin-top: 100px;
+    margin: 0 auto;
+    color: white;
+    margin-top: 140px;
+    h1{
+      font-family: "Roboto Flex", sans-serif;
+font-weight: 800;
+font-size: 60px;
+text-align: center;
+
+    }
+    p{
+      margin-top: 40px;
+      font-family: "Inter", sans-serif;
+font-weight: 800;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: -1%;
+text-align: center;
+vertical-align: middle;
+
+    }
+    button{
+      width: 264px;
+      height: 66px;
+      margin-top: 40px;
+      border-radius: 45px;
+      background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
+      color: white;
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      font-size: 18px;
+      border: none;
+      
+    }
+    button:hover{
+      border: 1px solid #fff;
+      background: radial-gradient(circle, #8745FE 3%, #F36DFF 140%, #17BAE5 170%);
+      transition: all 3s ease;
+    }
+  }
+  
+  @keyframes blockcart {
+    0% {
+        margin-top: -300px;
+      transform: translateY(0); /* Начальная позиция */
+      transform: rotate(0deg);
+    }
+    50% {
+        transform: translateY(500px);
+        transform: rotate(100deg); /* Поворот на 100 градусов */
+    }
+    100% {
+        transform: rotate(10deg);
+      transform: translateY(900px); /* Конечная позиция (вниз) */
+    }
+  }
+  
