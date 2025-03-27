@@ -1,10 +1,12 @@
 import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { myRouter } from './router'
-
+import './App.css'
 function App() {
   return (    // тийишпегиле 
 <div>         
+  return (    // тийишпегиле
+<div className='wrapper'>         
       <RouterProvider router={myRouter} />
     </div>
   )
