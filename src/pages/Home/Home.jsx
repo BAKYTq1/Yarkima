@@ -8,6 +8,9 @@ import Block2 from '../../components/Block2/Block2'
 // import CourseChat from '../../components/CoursesChat/CourseChat'
 import Author from '../../components/Author/Author'
 import Chat from '../../components/Chat/Chat'
+import Recommendation from '../../components/Recommendation/Recommendation'
+import Otzyvy from '../../components/otsyvy/otzyvy'
+import Trust from '../../components/trust/Trust'
 
 function Home() {
   return (
@@ -16,10 +19,13 @@ function Home() {
       <Register/> */}
       <Block1/>
       <Block2/>
+      <Recommendation/>
       <Author/>
-      <Chat/>
+      <Otzyvy/>
+      <Trust/>
+      {/* <Chat/>
       <Voyti/>
-      <Register/>
+      <Register/> */}
       {/* <CourseChat/> */}
     </div>
   )

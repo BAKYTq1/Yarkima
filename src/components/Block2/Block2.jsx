@@ -14,7 +14,6 @@ const Block2 = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const rowsRef = useRef([]);
 
-  // Создаем 3 ряда с разными наборами курсов
   const createRows = () => {
     const row1 = [...courses.slice(0, 8), ...courses.slice(0, 8)]; // Дублируем для бесшовности
     const row2 = [...courses.slice(8, 16), ...courses.slice(8, 16)];
@@ -33,11 +32,9 @@ const Block2 = () => {
     setSelectedCourse(null);
   };
 
-  // Инициализация анимации для каждого ряда
   const initAnimation = (rowElement, index) => {
     if (!rowElement) return;
     
-    // Разная скорость для каждого ряда для более интересного эффекта
     const speeds = [30, 31, 34];
     rowElement.style.animationDuration = `${speeds[index]}s`;
   };
