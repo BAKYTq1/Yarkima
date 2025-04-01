@@ -1,0 +1,118 @@
+.author{
+    width: 1280px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.author h1{
+    color: rgb(25, 26, 38);
+    font-family: Roboto Flex;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 120%;
+    letter-spacing: -1%;
+    text-align: left;
+    text-transform: uppercase;    
+}
+.all-author{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1280px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.author-p{
+    width: 416px;
+    height: 168px;
+    box-sizing: border-box;
+    border: 1px solid rgb(222, 227, 232);
+    border-radius: 20px; 
+    background: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 25px;
+    transition: border 0.5s ease, transform 0.5s ease ;
+}
+.author-p:hover{
+    border: 1px solid rgb(142, 53, 255);
+}
+.about-author{
+    width: 191px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.about-author img{
+    width: 64px;
+    height: 64px;
+}
+.about-author p{
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -1%;
+    text-align: left;    
+}
+.about-div{
+    width: 159px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 35px;
+}
+.d-first{
+    padding-top: 3px;
+    width: 88px;
+    height: 32px;
+    border-radius: 48px; 
+    background: rgb(245, 248, 250);
+    border: 1px solid rgb(222, 227, 232);
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    cursor: pointer;
+}
+.d-first:hover{
+    color: white;
+    background-color: rgb(142, 53, 255);
+}
+.d-second{
+    width: 63px;
+    height: 32px;
+    border-radius: 48px; 
+    background: rgb(245, 248, 250);
+    border: 1px solid rgb(222, 227, 232);
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: center;  
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;  
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    padding-top: 3px;
+}
+.d-second:hover{
+    color: white;
+    background-color: rgb(142, 53, 255);
+}

@@ -1,0 +1,14 @@
+<svg width="16.000000" height="16.000000" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip41_30976">
+			<rect id="Stack" rx="-0.500000" width="15.000000" height="15.000000" transform="translate(0.500000 0.500000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="Stack" rx="-0.500000" width="15.000000" height="15.000000" transform="translate(0.500000 0.500000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip41_30976)">
+		<path id="Vector" d="M3.71 3.1C3.96 3.03 4.23 3 4.5 3L11.5 3C11.77 3 12.03 3.03 12.28 3.1C12.12 2.77 11.86 2.49 11.55 2.29C11.23 2.1 10.87 2 10.5 2L5.5 2C5.12 2 4.76 2.1 4.44 2.29C4.13 2.49 3.87 2.77 3.71 3.1ZM1.5 8C1.5 7.46 1.71 6.96 2.08 6.58C2.46 6.21 2.96 6 3.5 6L12.5 6C13.03 6 13.53 6.21 13.91 6.58C14.28 6.96 14.5 7.46 14.5 8L14.5 12C14.5 12.53 14.28 13.03 13.91 13.41C13.53 13.78 13.03 14 12.5 14L3.5 14C2.96 14 2.46 13.78 2.08 13.41C1.71 13.03 1.5 12.53 1.5 12L1.5 8ZM3.5 5C3.22 5 2.96 5.03 2.71 5.1C2.87 4.77 3.13 4.49 3.44 4.29C3.76 4.1 4.12 4 4.5 4L11.5 4C11.87 4 12.23 4.1 12.55 4.29C12.86 4.49 13.12 4.77 13.28 5.1C13.03 5.03 12.76 5 12.5 5L3.5 5Z" fill="#B9BDCC" fill-opacity="1.000000" fill-rule="nonzero"/>
+	</g>
+</svg>

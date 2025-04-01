@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.scss";
-import Logo from "../../assets/image/logo.png"
-import LogoText from "../../assets/image/logoText.png"
+import Logo from "../../assets/svg/logo.svg"
+import LogoText from "../../assets/image/backgraund.png"
 import { CiSearch } from "react-icons/ci";
 import { FaGripLines } from "react-icons/fa";
 
@@ -10,8 +10,8 @@ import { FaGripLines } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <header className="header container">
-      <div className="box container">
+    <header className="header">
+      <div className="box ">
         {/* Логотип */}
         <div className="logo">
           <img src={Logo} alt="" />
