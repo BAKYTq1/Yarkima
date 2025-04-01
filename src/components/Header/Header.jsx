@@ -4,6 +4,7 @@ import Logo from "../../assets/svg/logo.svg"
 import LogoText from "../../assets/image/backgraund.png"
 import { CiSearch } from "react-icons/ci";
 import { FaGripLines } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 
@@ -11,15 +12,21 @@ import { FaGripLines } from "react-icons/fa";
 const Header = () => {
   return (
     <header className="header">
+<<<<<<< HEAD
       <div className="box ">
+=======
+      <div className="box container">
+>>>>>>> 2b59325b43ebbb1d2d97f5ec93bd39aff2453d77
         {/* Логотип */}
+        <Link to={'/'}>
         <div className="logo">
           <img src={Logo} alt="" />
           <img className="logoText" src={LogoText} alt="" />
         </div>
+        </Link>
 
         {/* Кнопка "Изучить" */}
-        <button className="dropdown">ИЗУЧИТЬ</button>
+        <button className="dropdown99">ИЗУЧИТЬ 🔻</button>
 
         {/* Поиск */}
         <div className="search">
