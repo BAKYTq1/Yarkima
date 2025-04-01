@@ -1,0 +1,14 @@
+<svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip846_31868">
+			<rect id="Menu button" rx="23.500000" width="47.000000" height="47.000000" transform="translate(0.500000 0.500000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="Menu button" rx="23.500000" width="47.000000" height="47.000000" transform="translate(0.500000 0.500000)" fill="#F5F8FA" fill-opacity="1.000000"/>
+	<g clip-path="url(#clip846_31868)">
+		<path id="Vector" d="M15 33L33 15M15 15L33 33" stroke="#191A26" stroke-opacity="1.000000" stroke-width="2.000000" stroke-linejoin="round" stroke-linecap="round"/>
+	</g>
+</svg>

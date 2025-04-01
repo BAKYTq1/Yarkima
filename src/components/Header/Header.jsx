@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.scss";
-import Logo from "../../assets/image/logo.png"
-import LogoText from "../../assets/image/logoText.png"
+import Logo from "../../assets/svg/logo.svg"
+import LogoText from "../../assets/image/backgraund.png"
 import { CiSearch } from "react-icons/ci";
 import { FaGripLines } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -12,7 +12,11 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className="header">
+<<<<<<< HEAD
+      <div className="box ">
+=======
       <div className="box container">
+>>>>>>> 2b59325b43ebbb1d2d97f5ec93bd39aff2453d77
         {/* Логотип */}
         <Link to={'/'}>
         <div className="logo">

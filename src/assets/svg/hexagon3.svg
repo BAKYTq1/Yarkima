@@ -1,0 +1,40 @@
+<svg width="35.925781" height="38.976562" viewBox="0 0 35.9258 38.9766" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_82_34835_dd" x="0.000000" y="0.000000" width="35.925781" height="38.976562" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feOffset dx="1.28001" dy="1.28001"/>
+			<feGaussianBlur stdDeviation="2.18668"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.051 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+		<clipPath id="clip82_34836">
+			<rect id="Frame" rx="-0.126935" width="15.746129" height="15.746129" transform="translate(9.130841 10.330060)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<radialGradient gradientTransform="translate(16.6835 18.2031) rotate(90) scale(16 15.9999)" cx="0.000000" cy="0.000000" r="1.000000" id="paint_angular_82_34834_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FAC602"/>
+			<stop offset="1.000000" stop-color="#FAC602" stop-opacity="0.400000"/>
+		</radialGradient>
+	</defs>
+	<path id="Polygon 13" d="M15.4 2.94L4.1 9.46C3.31 9.92 2.82 10.76 2.82 11.67L2.82 24.72C2.82 25.64 3.31 26.48 4.1 26.94L15.4 33.46C16.19 33.92 17.17 33.92 17.96 33.46L29.26 26.94C30.05 26.48 30.53 25.64 30.53 24.72L30.53 11.67C30.53 10.76 30.05 9.92 29.26 9.46L17.96 2.94C17.17 2.48 16.19 2.48 15.4 2.94Z" fill="url(#paint_angular_82_34834_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<path id="Polygon 13" d="M4.1 9.46C3.31 9.92 2.82 10.76 2.82 11.67L2.82 24.72C2.82 25.64 3.31 26.48 4.1 26.94L15.4 33.46C16.19 33.92 17.17 33.92 17.96 33.46L29.26 26.94C30.05 26.48 30.53 25.64 30.53 24.72L30.53 11.67C30.53 10.76 30.05 9.92 29.26 9.46L17.96 2.94C17.17 2.48 16.19 2.48 15.4 2.94L4.1 9.46ZM4.74 10.57C4.35 10.8 4.1 11.22 4.1 11.67L4.1 24.72C4.1 25.17 4.35 25.6 4.74 25.83L16.04 32.35C16.44 32.58 16.92 32.58 17.32 32.35L28.62 25.83C29.01 25.6 29.26 25.17 29.26 24.72L29.26 11.67C29.26 11.22 29.01 10.8 28.62 10.57L17.32 4.04C16.92 3.82 16.44 3.82 16.04 4.04L4.74 10.57Z" fill="#FAC602" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<g filter="url(#filter_82_34835_dd)">
+		<path id="Polygon 14" d="M16.04 5.77L6.23 11.43C5.83 11.66 5.59 12.08 5.59 12.54L5.59 23.86C5.59 24.32 5.83 24.75 6.23 24.97L16.04 30.64C16.43 30.86 16.92 30.86 17.32 30.64L27.12 24.97C27.52 24.75 27.76 24.32 27.76 23.86L27.76 12.54C27.76 12.08 27.52 11.66 27.12 11.43L17.32 5.77C16.92 5.54 16.43 5.54 16.04 5.77Z" fill="#FFFFFF" fill-opacity="0.500000" fill-rule="evenodd"/>
+		<path id="Polygon 14" d="M6.23 11.43C5.83 11.66 5.59 12.08 5.59 12.54L5.59 23.86C5.59 24.32 5.83 24.75 6.23 24.97L16.04 30.64C16.43 30.86 16.92 30.86 17.32 30.64L27.12 24.97C27.52 24.75 27.76 24.32 27.76 23.86L27.76 12.54C27.76 12.08 27.52 11.66 27.12 11.43L17.32 5.77C16.92 5.54 16.43 5.54 16.04 5.77L6.23 11.43ZM6.07 11.15C5.58 11.44 5.27 11.97 5.27 12.54L5.27 23.86C5.27 24.43 5.58 24.96 6.07 25.25L15.88 30.91C16.37 31.2 16.98 31.2 17.48 30.91L27.28 25.25C27.78 24.96 28.08 24.43 28.08 23.86L28.08 12.54C28.08 11.97 27.78 11.44 27.28 11.15L17.48 5.5C16.98 5.21 16.37 5.21 15.88 5.5L6.07 11.15Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+	</g>
+	<g style="mix-blend-mode:multiply">
+		<rect id="Frame" rx="-0.126935" width="15.746129" height="15.746129" transform="translate(9.130841 10.330060)" fill="#FFFFFF" fill-opacity="0"/>
+		<g clip-path="url(#clip82_34836)">
+			<path id="Vector" d="M18.34 12.86L18.34 14.57C18.34 14.75 18.45 14.9 18.61 14.96C24.3 17.11 22.94 24.86 19.01 24.86L15.01 24.86C11.07 24.86 9.71 17.11 15.4 14.96C15.56 14.9 15.67 14.75 15.67 14.57L15.67 12.86L18.34 12.86Z" stroke="#FAC602" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+			<path id="Vector" d="M13 16.86L21 16.86" stroke="#FAC602" stroke-opacity="1.000000" stroke-width="1.000000"/>
+			<path id="Vector" d="M15 11.53L19 11.53" stroke="#FAC602" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linecap="round"/>
+			<path id="Vector" d="M16.77 18.86L15.66 20.86L18.33 20.86L17.22 22.86" stroke="#FAC602" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+		</g>
+	</g>
+</svg>
+
