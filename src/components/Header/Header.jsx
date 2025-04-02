@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import "./Header.scss";
 
-import Logo from "../../assets/image/logo.png";
+import Logo from "../../assets/svg/logo.svg";
 import LogoText from "../../assets/image/logoText.png";
-
-import Logo from "../../assets/svg/logo.svg"
-import LogoText from "../../assets/image/backgraund.png"
 
 import { CiSearch } from "react-icons/ci";
 import { FaGripLines } from "react-icons/fa";
@@ -16,32 +13,16 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-
     <>
       <header className="header">
         <div className="box container">
           {/* Логотип */}
-          <Link to={'/'}>
+          <Link to="/">
             <div className="logo">
               <img src={Logo} alt="logo" />
               <img className="logoText" src={LogoText} alt="logo text" />
             </div>
           </Link>
-
-    <header className="header">
-
-      <div className="box ">
-
-      <div className="box container">
-
-        {/* Логотип */}
-        <Link to={'/'}>
-        <div className="logo">
-          <img src={Logo} alt="" />
-          <img className="logoText" src={LogoText} alt="" />
-        </div>
-        </Link>
-
 
           {/* Кнопка "Изучить" */}
           <button className="dropdown99">ИЗУЧИТЬ 🔻</button>
