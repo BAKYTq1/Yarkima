@@ -13,6 +13,15 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
+    <header className="header">
+      <div className="box ">
+        {/* Логотип */}
+        <Link to={'/'}>
+        <div className="logo">
+          <img src={Logo} alt="" />
+          <img className="logoText" src={LogoText} alt="" />
+        </div>
+        </Link>
     <>
       <header className="header">
         <div className="box container">
