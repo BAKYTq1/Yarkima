@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Down1 = ({ className }) => {
+export const Down1 = ({ className, onClick }) => {
   return (
     <svg
       className={`down-1 ${className}`}
@@ -9,6 +9,7 @@ export const Down1 = ({ className }) => {
       viewBox="0 0 16 16"
       width="16"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick} // Добавляем обработчик клика
     >
       <path
         className="path"
