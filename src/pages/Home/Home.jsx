@@ -11,6 +11,7 @@ import Chat from '../../components/Chat/Chat'
 import Recommendation from '../../components/Recommendation/Recommendation'
 import Otzyvy from '../../components/otsyvy/otzyvy'
 import Trust from '../../components/trust/Trust'
+import CourseCover from '../../components/CourseCover/CourseCover'
 
 function Home() {
   return (
@@ -23,6 +24,7 @@ function Home() {
       <Author/>
       <Otzyvy/>
       <Trust/>
+      <CourseCover/>
       {/* <Chat/>
       <Voyti/>
       <Register/> */}

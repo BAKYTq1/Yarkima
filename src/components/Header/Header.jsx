@@ -12,11 +12,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header className="header">
-<<<<<<< HEAD
       <div className="box ">
-=======
-      <div className="box container">
->>>>>>> 2b59325b43ebbb1d2d97f5ec93bd39aff2453d77
         {/* Логотип */}
         <Link to={'/'}>
         <div className="logo">
