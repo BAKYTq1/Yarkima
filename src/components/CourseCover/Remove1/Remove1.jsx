@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Remove1 = ({ className }) => {
+export const Remove1 = ({ className, onClick }) => {
   return (
     <svg
       className={`remove-1 ${className}`}
@@ -9,6 +9,7 @@ export const Remove1 = ({ className }) => {
       viewBox="0 0 20 20"
       width="20"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={onClick} // Добавляем обработчик клика
     >
       <path
         className="path"
