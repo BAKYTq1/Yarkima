@@ -1,0 +1,103 @@
+.reviews {
+  position: relative;
+}
+
+.reviews__h1{
+  color: rgb(25, 26, 38);
+  font-family: Roboto Flex;
+  font-size: 60px !important;
+  font-weight: 800 !important;
+  line-height: 120% !important;
+  letter-spacing: -1%;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: -120px;
+
+}
+
+.review {
+  width: 400px !important;
+  height: 420px;
+  position: relative;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.rew{
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -520px;
+  margin-bottom: 50px;
+}
+
+.review-content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 25px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  width: 100%;
+  height: 100%;
+ border-radius: 6px !important; 
+}
+.review-content:hover{
+  transition: all 0.80s ease;
+  border-radius: 6px !important; 
+  background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
+  h4{
+    color: white
+  }
+  h3{
+    color: white;
+  }
+  p{
+    color: white;
+  }
+}
+
+.review h4 {
+  width: 330px;
+
+  color: rgb(25, 26, 38);
+  font-family: Inter Display;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -1%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.review h3 {
+  color: rgb(142, 53, 255);
+  font-family: Inter Display;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -1%;
+  text-align: center;
+}
+
+.review p {
+  color: rgb(139, 142, 154);
+  font-family: Inter Display;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -1%;
+  text-align: center;
+}
+
+.man {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-left: 130px;
+}
+.setka-rewievs{
+  margin-left: -200;
+  width: 537px;
+  height: 739px;
+}

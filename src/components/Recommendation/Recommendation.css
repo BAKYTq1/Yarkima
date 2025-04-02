@@ -1,0 +1,122 @@
+.recommendation{
+    width: 1280px;
+    height: 292px;
+    margin: 0 auto;
+    margin-top: 50px;
+    cursor: pointer;
+}
+.recommendation h1{
+    color: rgb(25, 26, 38);
+    font-family: Roboto Flex;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 120%;
+    letter-spacing: -1%;
+    text-align: left;
+    text-transform: uppercase;    
+}
+.recommendation-about{
+    width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+.about-p{
+    display: flex;
+    flex-direction: column;
+    width: 416px;
+    height: 204px;
+    border-radius: 50px;
+    border: 1px solid rgb(222, 227, 232);
+    border-radius: 20px; 
+    background-color: rgb(255, 255, 255);
+    padding-left: 25px;
+    padding-top: 15px;
+    margin-bottom: 100px;
+    transition: border 0.5s ease, transform 0.5s ease ;
+}
+.about-p:hover{
+    border: 1px solid rgb(142, 53, 255);
+}
+.profile-about{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 130px;
+    margin-top: 10px;
+}
+.profile-about img{
+    width: 40px;
+    height: 40px;
+}
+.profile-about h3{
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+}
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 206px;
+    height: 32px;
+    margin-top: 40px;
+}
+.card-first{
+    width: 105px;
+    height: 32px;
+    border-radius: 48px; 
+    background-color: rgb(245, 248, 250);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+}
+.card-first:hover{
+    color: white;
+    background-color: rgb(142, 53, 255);
+}
+.card-second{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-second img{
+    width: 16.51px;
+    height: 15.81px;
+}
+.card-second h4{
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+    color: (25, 26, 38)
+}
+.card-second p{
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+    color: rgb(139, 142, 154);
+}
+.recommendation-about h1{
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -1%;
+    text-align: left;    
+    margin-top: 20px;
+}

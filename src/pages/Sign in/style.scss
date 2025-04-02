@@ -1,117 +1,177 @@
-.Sign-In{
-    width: 1355px;
-    padding-top: 59px;
-    padding-bottom: 140px;
+.auth-container {
     display: flex;
-    justify-content: space-between;
-    .item-signin{
+    min-height: 100vh;
+    
+    .auth-image-section {
+      flex: 1;
+      background: #f5f5f5;
+      
+      .auth-background {
         width: 100%;
- display: flex;
- align-items: center;
- justify-content: space-between;
+        height: 100%;
+        object-fit: cover;
+      }
     }
-    .signin{
-        width: 391px;
-        p{
-            color: rgb(0, 0, 0);
-font-family: Poppins;
-font-size: 16px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: 0%;
-text-align: left;
-margin-top: 24px;
+    
+    .auth-form-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      
+      .auth-form-wrapper {
+        max-width: 400px;
+        width: 100%;
+        
+        h2 {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
         }
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 45px;
-            .submits{
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                button{
-                    width: 143px;
-                    height: 56px;
-                    border: none;
-                    background-color: rgb(219, 68, 68);
-                    color: white;
-                    font-size: 16px;
-                    cursor: pointer;
-                    border-radius: 4px;
-                }
-                button:hover{
-                    transition: all 0.3s ease-in-out;
-                    background-color: rgb(227, 70, 70);
-                }
-                a{
-                    text-decoration: none;
-                    color: rgb(219, 68, 68);
-font-family: Poppins;
-font-size: 16px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: 0%;
-text-align: left;
-                }
-            }
+        
+        .auth-subtitle {
+          color: #666;
+          margin-bottom: 2rem;
         }
-        input{
-            width: 100%;
-           height: 32px;
-           border: none;
-           border-bottom: 2px solid rgb(222, 217, 217);
-        }
-        .from-google{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            height: 56px;
-            border: 1px solid rgba(0, 0, 0, 0.4);
-            border-radius: 4px;
-            margin-top: 16px;
-            p{
-                color: rgb(0, 0, 0);
-                font-family: Poppins;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 24px;
-                letter-spacing: 0%;
-                text-align: left;
-                margin-top: 15px;   
-            }
-        }
-        .sing-tag-p{
-            margin-top: 34px;
-            color: rgb(0, 0, 0);
-font-family: Poppins;
-font-size: 15px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: 0%;
-text-align: center; 
-a{
-    margin-left: 19px;
-    color: black;
-    text-decoration: none;
-    position: relative;
-}
-a::after{
-    content: "";
-    position: absolute;
-    width: 0px;
-    height: 2px;
-    left: 0px;
-    bottom: 0;
-    background-color: black;
-    transition: all 0.3s ease;
-}
-a:hover::after{
-    width: 100%;
-}
-        }
+      }
     }
-}
+    
+    .form-group {
+      margin-bottom: 1rem;
+      
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        
+        &:focus {
+          outline: none;
+          border-color: #4285f4;
+        }
+      }
+    }
+    
+    .form-options {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+      
+      .forgot-password {
+        color: #4285f4;
+        text-decoration: none;
+        font-size: 0.9rem;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    
+    .primary-button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      
+      &:hover {
+        background: #3367d6;
+      }
+      
+      &:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
+    }
+    
+    .auth-divider {
+      margin: 1.5rem 0;
+      text-align: center;
+      position: relative;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: #ddd;
+        z-index: -1;
+      }
+      
+      span {
+        background: white;
+        padding: 0 1rem;
+        color: #666;
+      }
+    }
+    
+    .google-button {
+      width: 100%;
+      padding: 0.75rem;
+      background: white;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      
+      &:hover {
+        background: #f5f5f5;
+      }
+      
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      
+      .google-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    
+    .auth-redirect {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #666;
+      
+      .auth-link {
+        color: #4285f4;
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    
+    .logout-button {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      
+      &:hover {
+        background: #d32f2f;
+      }
+    }
+  }

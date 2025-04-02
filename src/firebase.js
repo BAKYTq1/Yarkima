@@ -1,27 +1,77 @@
-// Import the functions you need from the SDKs you need
+// Импорт необходимых функций из Firebase
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { 
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,  // Добавлен недостающий импорт
+  addDoc,      // Для отправки сообщений
+  serverTimestamp
+} from "firebase/firestore";
 
-// Your web app's Firebase configuration
+// Конфигурация вашего Firebase проекта
 const firebaseConfig = {
-  apiKey: "AIzaSyAi3jDPSKJpt4OWGrSn06jO77jVLoVoCAU",
-  authDomain: "register-7dbf8.firebaseapp.com",
-  projectId: "register-7dbf8",
-  storageBucket: "register-7dbf8.firebasestorage.app",
-  messagingSenderId: "765206203965",
-  appId: "1:765206203965:web:4fbfa49c407e4a2622a454",
-  measurementId: "G-0LNVYVLZ70"
+  apiKey: "AIzaSyDAF2K5VsbhQpbZ_4rXxfiRvFaRAqVo97s",
+  authDomain: "yarkima-register.firebaseapp.com",
+  projectId: "yarkima-register",
+  storageBucket: "yarkima-register.appspot.com",
+  messagingSenderId: "24557997554",
+  appId: "1:24557997554:web:b89a215143fdb644c36f6b",
+  measurementId: "G-D8DKTCRVBN"
 };
 
-// Initialize Firebase
+// Инициализация Firebase
 const app = initializeApp(firebaseConfig);
 
-// Получаем Firestore
+// Инициализация сервисов
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Получаем Auth
-const auth = getAuth(app);
+// Ссылка на коллекцию сообщений
+const messagesRef = collection(db, "messages");
 
-// Экспортируем db и auth
-export { db, auth };
+// Функция для подписки на сообщения
+const subscribeToMessages = (callback) => {
+  const q = query(messagesRef, orderBy("timestamp", "desc")); // Сортировка по времени
+  
+  // Подписка на обновления
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    const messages = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    callback(messages);
+  });
+
+  return unsubscribe; // Функция для отписки
+};
+
+// Добавьте эту функцию в ваш firebase.js
+export const getUserData = async (userId) => {
+  try {
+    const userDoc = await getDoc(doc(db, "users", userId));
+    return userDoc.data();
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return null;
+  }
+};
+// Функция отправки сообщения
+export const sendMessage = async (text, userId, displayName, userEmail) => {
+  try {
+    await addDoc(messagesRef, {
+      text,
+      uid: userId,
+      displayName,  // Добавляем имя пользователя
+      userEmail,    // Добавляем email
+      timestamp: serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Ошибка отправки:", error);
+    throw error;
+  }
+};
+
+export { auth, db, subscribeToMessages };
