@@ -1,18 +1,81 @@
-import React from "react";
-import { Down1 } from "./Down1/Down1";
-import { Plus } from "./Plus/index";
-import { Remove1 } from "./Remove1/index";
-import { Settings } from "./Settings/index";
+import React, { useState } from "react";
+import { Down1 } from "./Down1/Down1"; // Пример использования компонента выпадающего списка
+import { Plus } from "./Plus/Plus";
+import { Remove1 } from "./Remove1/Remove1";
+import { Settings } from "./Settings/Settings";
 import "./CourseCover.css";
 
 const CourseCover = () => {
+  const [courseName, setCourseName] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
+  const [category, setCategory] = useState("Языки"); // по умолчанию категория
+  const [language, setLanguage] = useState("Русский"); // по умолчанию язык
+  const [courseType, setCourseType] = useState("Тест");
+  const [coverImage, setCoverImage] = useState(null);
+  const [shirtImage, setShirtImage] = useState(null);
+  const [questions, setQuestions] = useState([
+    { term: "Milk", definition: "Молоко", options: ["Молоко", "Корова", "Трава", "Творог"] },
+    { term: "ЯЗЫК", definition: "ЯЗЫК", options: [] }
+  ]);
+
+  const handleCreateCourse = () => {
+    // Логика создания курса
+    console.log("Создать курс", {
+      courseName,
+      courseDescription,
+      category,
+      language,
+      courseType,
+      coverImage,
+      shirtImage,
+      questions
+    });
+  };
+
+  const handleAddQuestion = () => {
+    setQuestions([...questions, { term: "", definition: "", options: [] }]);
+  };
+
+  const handleAddOption = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push("");
+    setQuestions(newQuestions);
+  };
+
+  const handleRemoveQuestion = (index) => {
+    const newQuestions = questions.filter((_, i) => i !== index);
+    setQuestions(newQuestions);
+  };
+
+  const handleRemoveOption = (qIndex, oIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[qIndex].options = newQuestions[qIndex].options.filter((_, i) => i !== oIndex);
+    setQuestions(newQuestions);
+  };
+
+  // Проверка, активна ли кнопка "Создать"
+  const isCreateButtonActive = courseName.trim() !== "" && category !== "" && language !== "";
+
+  // Функции для переключения категории и языка
+  const toggleCategory = () => {
+    setCategory(prevCategory => (prevCategory === "Языки" ? "Программирование" : "Языки"));
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(prevLanguage => (prevLanguage === "Русский" ? "Английский" : "Русский"));
+  };
+
   return (
     <div className="frame container">
       <div className="div">
         <div className="text-wrapper">СОЗДАТЬ НОВЫЙ КУРС</div>
 
         <div className="div-2">
-          <button className="button">
+          <button
+            className={`button ${isCreateButtonActive ? "active" : ""}`} // Кнопка окрашивается в синий, если активна
+            onClick={handleCreateCourse}
+            disabled={!isCreateButtonActive} // Кнопка будет отключена, если условия не выполнены
+          >
             <div className="text-wrapper-2">СОЗДАТЬ</div>
           </button>
 
@@ -30,13 +93,14 @@ const CourseCover = () => {
 
               <div className="div-5">
                 <div className="FIELD-NAME">Изображение</div>
-
                 <div className="FIELD-NAME-2">Макс. размер 10 мб</div>
               </div>
 
-              <button className="button-2">
-                <div className="text-wrapper-4">ДОБАВИТЬ</div>
-              </button>
+              <input
+                type="file"
+                className="button-2"
+                onChange={(e) => setCoverImage(e.target.files[0])}
+              />
             </div>
           </div>
         </div>
@@ -48,15 +112,14 @@ const CourseCover = () => {
 
               <div className="div-5">
                 <div className="FIELD-NAME">Изображение или видео</div>
-
-                <p className="FIELD-NAME-2">
-                  Макс. размер 10 мб и продолжительность 15 с.
-                </p>
+                <p className="FIELD-NAME-2">Макс. размер 10 мб и продолжительность 15 с.</p>
               </div>
 
-              <button className="button-2">
-                <div className="text-wrapper-4">ДОБАВИТЬ</div>
-              </button>
+              <input
+                type="file"
+                className="button-2"
+                onChange={(e) => setShirtImage(e.target.files[0])}
+              />
             </div>
           </div>
         </div>
@@ -65,284 +128,130 @@ const CourseCover = () => {
       <div className="div-7">
         <div className="field">
           <div className="FIELD-NAME-3">Название курса</div>
+          <input
+            className="input-99"
+            type="text"
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
+          />
         </div>
 
         <div className="field-2">
           <div className="FIELD-NAME-4">Описание</div>
-
-          <div className="TEXT">
-            <p className="TEXT-2">
-              Английский язык - мировой язык, используется в качестве
-              универсального языка
-            </p>
-          </div>
+          <textarea
+            className="opisani"
+            value={courseDescription}
+            onChange={(e) => setCourseDescription(e.target.value)}
+          />
         </div>
 
         <div className="div-8">
+          {/* Категория */}
           <div className="dropdown">
             <div className="div-9">
               <div className="NAME">Категория</div>
-
-              <div className="TEXT-3">Языки</div>
+              <div className="TEXT-3">{category}</div>
             </div>
-
-            <Down1 className="down" />
+            <Down1 className="down" onClick={toggleCategory} /> {/* Добавляем обработчик для категории */}
           </div>
 
+          {/* Язык */}
+          <div className="dropdown">
+            <div className="div-9">
+              <div className="NAME">Язык</div>
+              <div className="TEXT-3">{language}</div>
+            </div>
+            <Down1 className="down" onClick={toggleLanguage} /> {/* Добавляем обработчик для языка */}
+          </div>
+
+          {/* Тип курса */}
           <div className="dropdown">
             <div className="div-9">
               <div className="NAME">Тип курса</div>
-
-              <div className="TEXT-3">Тест</div>
+              <div className="TEXT-3">{courseType}</div>
             </div>
-
-            <Down1 className="down" />
+            <Down1
+              className="down"
+              onClick={() => setCourseType(courseType === "Тест" ? "Курс" : "Тест")}
+            />
           </div>
         </div>
       </div>
 
-      <div className="div-10">
-        <div className="view">
+      {questions.map((question, qIndex) => (
+        <div className="view" key={qIndex}>
           <div className="div-11">
-            <div className="FIELD-NAME-5">1</div>
+            <div className="FIELD-NAME-5">{qIndex + 1}</div>
 
             <div className="div-12">
-              <img
-                className="img"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame-7.svg"
-              />
-
-              <div className="rectangle-wrapper">
-                <div className="rectangle" />
-              </div>
-
-              <img
-                className="img"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame-2.svg"
-              />
-
-              <Remove1 className="img" />
+              <Remove1 className="img" onClick={() => handleRemoveQuestion(qIndex)} />
             </div>
 
             <div className="div-13">
-              <img
+              <input
+                type="text"
                 className="img-2"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame-3.svg"
+                placeholder="Термин"
+                value={question.term}
+                onChange={(e) => {
+                  const newQuestions = [...questions];
+                  newQuestions[qIndex].term = e.target.value;
+                  setQuestions(newQuestions);
+                }}
               />
 
-              <img
+              <input
+                type="text"
                 className="img-2"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame.svg"
+                placeholder="Определение"
+                value={question.definition}
+                onChange={(e) => {
+                  const newQuestions = [...questions];
+                  newQuestions[qIndex].definition = e.target.value;
+                  setQuestions(newQuestions);
+                }}
               />
             </div>
           </div>
 
           <div className="div-8">
-            <div className="div-14">
-              <div className="field-3">
-                <div className="FIELD-NAME-2">Термин</div>
-
-                <div className="TEXT">
-                  <div className="TEXT-2">Milk</div>
+            {question.options.map((option, oIndex) => (
+              <div className="div-14" key={oIndex}>
+                <div className="field-3">
+                  <input
+                    type="text"
+                    className="FIELD-NAME-2"
+                    placeholder={`Вариант ${oIndex + 1}`}
+                    value={option}
+                    onChange={(e) => {
+                      const newQuestions = [...questions];
+                      newQuestions[qIndex].options[oIndex] = e.target.value;
+                      setQuestions(newQuestions);
+                    }}
+                  />
+                  <Remove1 className="img" onClick={() => handleRemoveOption(qIndex, oIndex)} />
                 </div>
               </div>
+            ))}
 
-              <button className="div-wrapper">
-                <div className="text-wrapper-5">АНГЛИЙСКИЙ</div>
-              </button>
-            </div>
-
-            <div className="div-14">
-              <div className="field-3">
-                <div className="FIELD-NAME-2">Определение</div>
-
-                <div className="TEXT">
-                  <div className="TEXT-2">Молоко</div>
-                </div>
-              </div>
-
-              <button className="div-wrapper">
-                <div className="text-wrapper-5">РУССКИЙ</div>
-              </button>
-            </div>
-
-            <div className="frame-wrapper">
-              <img
-                className="img-2"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame.svg"
-              />
-            </div>
-          </div>
-
-          <div className="div-15">
-            <div className="div-16">
-              <div className="text-wrapper-6">
-                Варианты ответов для тестирования
-              </div>
-
-              <Remove1 className="img-2" />
-            </div>
-
-            <div className="div-17">
-              <div className="div-18">
-                <div className="text-wrapper-7">Кол-во вариантов</div>
-
-                <div className="dropdown-2">
-                  <div className="text-wrapper-4">4</div>
-
-                  <Down1 className="down" />
-                </div>
-              </div>
-
-              <div className="div-19">
-                <div className="view-2">
-                  <div className="text-wrapper-8">Молоко</div>
-
-                  <div className="overlap-group-wrapper">
-                    <div className="overlap-group-2">
-                      <img
-                        className="avatar"
-                        alt="Avatar"
-                        src="https://c.animaapp.com/m8x1txhjYL67TX/img/avatar.svg"
-                      />
-
-                      <div className="text-wrapper-9">1</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="view-2">
-                  <div className="text-wrapper-8">Корова</div>
-
-                  <div className="overlap-group-wrapper">
-                    <div className="overlap-group-2">
-                      <img
-                        className="avatar"
-                        alt="Avatar"
-                        src="https://c.animaapp.com/m8x1txhjYL67TX/img/avatar.svg"
-                      />
-
-                      <div className="text-wrapper-9">2</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="view-2">
-                  <div className="text-wrapper-8">Трава</div>
-
-                  <div className="overlap-group-wrapper">
-                    <div className="overlap-group-2">
-                      <img
-                        className="avatar"
-                        alt="Avatar"
-                        src="https://c.animaapp.com/m8x1txhjYL67TX/img/avatar.svg"
-                      />
-
-                      <div className="text-wrapper-9">3</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="view-2">
-                  <div className="text-wrapper-8">Творог</div>
-
-                  <div className="overlap-group-wrapper">
-                    <div className="overlap-group-2">
-                      <img
-                        className="avatar"
-                        alt="Avatar"
-                        src="https://c.animaapp.com/m8x1txhjYL67TX/img/avatar.svg"
-                      />
-
-                      <div className="text-wrapper-9">4</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button className="button-3" onClick={() => handleAddOption(qIndex)}>
+              <Plus className="img-33" />
+              <div className="text-wrapper-4">ДОБАВИТЬ ВАРИАНТЫ ОТВЕТА</div>
+            </button>
           </div>
         </div>
+      ))}
 
-        <div className="view">
-          <div className="div-11">
-            <div className="FIELD-NAME-5">2</div>
-
-            <img
-              className="img-2"
-              alt="Frame"
-              src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame-1.svg"
-            />
-
-            <div className="div-13">
-              <img
-                className="img-2"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame-3.svg"
-              />
-
-              <img
-                className="img-2"
-                alt="Frame"
-                src="https://c.animaapp.com/m8x1txhjYL67TX/img/frame.svg"
-              />
-            </div>
-          </div>
-
-          <div className="div-8">
-            <div className="div-14">
-              <div className="field">
-                <div className="FIELD-NAME-3">Термин</div>
-              </div>
-
-              <button className="div-wrapper">
-                <div className="text-wrapper-10">ЯЗЫК</div>
-              </button>
-            </div>
-
-            <div className="div-14">
-              <div className="field">
-                <div className="FIELD-NAME-3">Определение</div>
-              </div>
-
-              <button className="div-wrapper">
-                <div className="text-wrapper-10">ЯЗЫК</div>
-              </button>
-            </div>
-
-            <div className="div-20">
-              <Plus className="plus-instance" />
-              <div className="div-21">
-                <div className="FIELD-NAME-6">Изображение или видео</div>
-
-                <p className="FIELD-NAME-2">до 10 мб и 15 с.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="button-3">
-            <Plus className="img-33" />
-            <div className="text-wrapper-4">ДОБАВИТЬ ВАРИАНТЫ ОТВЕТА</div>
-          </div>
-        </div>
-
-        <div className="button-4">
-          <Plus className="img-33" />
-          <div className="text-wrapper-11">ДОБАВИТЬ КАРТОЧКУ</div>
-        </div>
+      <div className="button-4" onClick={handleAddQuestion}>
+        <Plus className="img-33" />
+        <div className="text-wrapper-11">ДОБАВИТЬ КАРТОЧКУ</div>
       </div>
 
-      <button className="button-5">
+      <button className="button-5" onClick={handleCreateCourse}>
         <div className="text-wrapper-2">СОЗДАТЬ</div>
       </button>
     </div>
   );
 };
 
-export default CourseCover
-
-
+export default CourseCover;
