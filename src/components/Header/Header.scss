@@ -90,8 +90,6 @@
     cursor: pointer;
   }
 }
-
-/* === Выпадающее меню сверху === */
 .dropdown-menu {
   height: 100px;
   background: transparent;
@@ -135,11 +133,10 @@
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;
-  position: relative; /* Для псевдоэлемента */
+  position: relative; 
   padding-bottom: 5px;
 }
 
-/* Линия при наведении */
 .dropdown-menu nav ul li a::after {
   content: "";
   position: absolute;
@@ -153,5 +150,5 @@
 }
 
 .dropdown-menu nav ul li a:hover::after {
-  width: 100%; /* Линия становится полной ширины */
+  width: 100%; 
 }
