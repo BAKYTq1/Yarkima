@@ -25,7 +25,7 @@ function Login() {
       setUser(currentUser);
       if (currentUser) {
         toast.success(`Добро пожаловать, ${currentUser.email}!`);
-        navigate('/'); // Перенаправляем на главную после входа
+        navigate('/');
       }
     });
 
@@ -82,11 +82,13 @@ function Login() {
   return (
     <div className='auth-container'>
       <div className='auth-image-section'>
-        <img 
-          src="/login-background.jpg" 
-          alt="Фон входа" 
-          className="auth-background" 
-        />
+       <div className='animation'>
+        <div className="loginAnimation"></div>
+        <div className="login-cart"></div>
+        <div className="login-cart"></div>
+        <div className="login-cart"></div>
+        <div className="login-cart"></div>
+       </div>
       </div>
       
       <div className="auth-form-section">
@@ -117,7 +119,7 @@ function Login() {
             </div>
             
             <div className="form-options">
-              <Link to="/forgot-password" className="forgot-password">
+              <Link to="/register" className="forgot-password">
                 Забыли пароль?
               </Link>
             </div>

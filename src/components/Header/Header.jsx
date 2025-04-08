@@ -30,6 +30,11 @@ const Header = () => {
             <span className="icon"><CiSearch /></span>
             <input type="text" placeholder="Поиск" />
           </div>
+
+          {/* Кнопки */}
+          <div>
+            <Link to={'/login'}><button className="login">ВОЙТИ</button></Link>
+           <Link to={'register'}><button className="register">ЗАРЕГИСТРИРОВАТЬСЯ</button></Link>
           
           {/* Buttons */}
           <div className="auth-buttons">
