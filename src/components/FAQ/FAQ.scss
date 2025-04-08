@@ -34,7 +34,9 @@
         transition: background 0.3s ease;
   
         &:hover {
-          background: #e0e5ec;
+          background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
+          color: white;
+          transition: all 1s;
         }
   
         .faq-icon {
@@ -46,12 +48,13 @@
       .faq-answer {
         padding: 15px;
         font-size: 14px;
-        color: #333;
-        background: #e0e5ec;
         border-radius: 0 0 10px 10px;
         text-align: left;
         line-height: 1.6;
+        background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
+        color: white;
       }
+     
     }
   }
   
