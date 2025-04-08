@@ -13,15 +13,6 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="header">
-      <div className="box ">
-        {/* Логотип */}
-        <Link to={'/'}>
-        <div className="logo">
-          <img src={Logo} alt="" />
-          <img className="logoText" src={LogoText} alt="" />
-        </div>
-        </Link>
     <>
       <header className="header">
         <div className="box container">
@@ -44,8 +35,8 @@ const Header = () => {
 
           {/* Кнопки */}
           <div>
-            <button className="login">ВОЙТИ</button>
-            <button className="register">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            <Link to={'/login'}><button className="login">ВОЙТИ</button></Link>
+           <Link to={'register'}><button className="register">ЗАРЕГИСТРИРОВАТЬСЯ</button></Link>
             <span className="menu" onClick={() => setMenuOpen(!menuOpen)}>
               <FaGripLines />
             </span>

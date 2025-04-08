@@ -89,11 +89,13 @@ function Register() {
   return (
     <div className='auth-container'>
       <div className='auth-image-section'>
-        <img 
-          src="/auth-background.jpg" 
-          alt="Фон регистрации" 
-          className="auth-background" 
-        />
+      <div className='animation'>
+        <div className="loginAnimation"></div>
+        <div className="login-cart"></div>
+        <div className="login-cart"></div>
+        <div className="login-cart"></div>
+        <div className="login-cart"></div>
+       </div>
       </div>
       
       <div className="auth-form-section">
@@ -161,7 +163,7 @@ function Register() {
           </button>
           
           <p className="auth-redirect">
-            Уже есть аккаунт? <Link to="/signin" className="auth-link">Войти</Link>
+            Уже есть аккаунт? <Link to="/login" className="auth-link">Войти</Link>
           </p>
         </div>
       </div>

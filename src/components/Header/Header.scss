@@ -69,19 +69,18 @@
 
   .register {
     color: white;
-    border: none;
     padding: 12px 18px;
     border-radius: 20px;
     background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
     font-family: "Inter", sans-serif;
     font-size: 15px;
+    border: 1px solid transparent;
     border: none;
     cursor: pointer;
   }
   .register:hover{
-    border: 1px solid #fff;
-    background: radial-gradient(circle, #8745FE 3%, #F36DFF 140%, #17BAE5 170%);
-    transition: all 3s ease;
+    // background: radial-gradient(circle, #8745FE 3%, #F36DFF 140%, #17BAE5 170%);
+    // transition: all 3s ease;
   }
 
   .menu {
