@@ -12,7 +12,7 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #d2d3e8aa);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -30,6 +30,7 @@
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
+rfylfqcsyfb yt rskjbfvsyfh yt rskjnfcsyfh rfylqfsvufh yt rskjnfcsyf 
   }
 }
 
@@ -39,4 +40,15 @@
 
 .read-the-docs {
   color: #888;
+}
+.color::after {
+  content :attr(
+    data color 
+
+  )
+  color #888;
+  position : relative;
+  top : auto;
+  botom : auto ;
+  rfylqdcsfy yt rskjbfcsyfn yt rskjnnfcsyfh 
 }
