@@ -1,6 +1,6 @@
 import React from 'react'
 // import CourseList from '../../components/CourseList/CourseList'
-import Voyti from '../Sign in/SignIn'
+import Voyti from '../SignIn/SignIn'
 import Register from '../Sign up/SignUp'
 import Products from '../../components/products/Products'
 import Block1 from '../../components/Block-1/Block1'
@@ -12,6 +12,7 @@ import Recommendation from '../../components/Recommendation/Recommendation'
 import Otzyvy from '../../components/otsyvy/otzyvy'
 import Trust from '../../components/trust/Trust'
 import CourseCover from '../../components/CourseCover/CourseCover'
+import Login from '../SignIn/SignIn'
 
 function Home() {
   return (
@@ -24,10 +25,9 @@ function Home() {
       <Author/>
       <Otzyvy/>
       <Trust/>
-      <CourseCover/>
-      {/* <Chat/>
-      <Voyti/>
-      <Register/> */}
+      {/* <CourseCover/> */}
+      <Chat/>
+      {/* <Login/> */}
       {/* <CourseChat/> */}
     </div>
   )

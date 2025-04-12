@@ -21,7 +21,7 @@
   .block1-cart2 {
     margin-left: 600px;
     clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
-    background-color: #e51b1b;
+    background-color: #1bcae5;
     position: absolute;
     width: 150px; 
     height: 150px; 
@@ -36,6 +36,44 @@
     width: 150px; 
     height: 150px; 
     animation: blockcart 16s linear infinite;
+  }
+  .block1-cart4 {
+    margin-left: 200px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #b6e51b;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 16s linear infinite;
+  }
+  .block1-cart5 {
+    margin-left: 1000px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #1f36d2;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 9s linear infinite ;
+  }
+  
+  .block1-cart6 {
+    margin-left: 500px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #4508e1;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 7s linear infinite;
+  }
+  
+  .block1-cart7 {
+    margin-left: 1200px;
+    clip-path: polygon(51% 3%, 93% 29%, 93% 75%, 53% 96%, 9% 74%, 9% 28%);
+    background-color: #df1ab1;
+    position: absolute;
+    width: 150px; 
+    height: 150px; 
+    animation: blockcart 20s linear infinite;
   }
   
   .block1-item {
