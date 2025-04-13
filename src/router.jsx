@@ -29,7 +29,8 @@ export const myRouter = createBrowserRouter([
 
                 path: "Quiz",
                 element: <Quiz />
-
+            },
+            {
                 path: "login",
                 element: <Login />
             },
