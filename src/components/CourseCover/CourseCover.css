@@ -768,7 +768,7 @@
     white-space: nowrap;
     font-style: var(--BUTTON-TEXT-button-l-font-style);
   }
-   .button-4, .button-5 {
+   .button-4 {
     all: unset;
     box-sizing: border-box;
     display: flex;
@@ -803,6 +803,7 @@
     position: relative;
     border-radius: 99999px;
     margin-top: -30px;
+    margin-bottom: 60px;
   }
   .button-5:hover {
     transition: all 3s;
@@ -838,3 +839,166 @@ border-radius: 20px;
 
 background: rgb(245, 248, 250);
   }
+/* Стили для кнопки закрытия */
+.modal-header555 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-close-btn555 {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #999;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.modal-close-btn555:hover {
+  color: #666;
+}
+
+/* Остальные стили остаются без изменений */
+.checkbox-wrapper-555 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.checkbox-label-text555 {
+  font-size: 14px;
+  margin-right: 10px;
+  order: 1;
+}
+
+.tgl555 + .tgl-btn555 {
+  order: 2;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.tgl555 {
+  display: none;
+}
+.tgl555, .tgl555:after, .tgl555:before, .tgl555 *, .tgl555 *:after, .tgl555 *:before, .tgl555 + .tgl-btn555 {
+  box-sizing: border-box;
+}
+.tgl555 + .tgl-btn555 {
+  outline: 0;
+  display: block;
+  width: 4em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+.tgl555 + .tgl-btn555:after, .tgl555 + .tgl-btn555:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.tgl555 + .tgl-btn555:after {
+  left: 0;
+}
+.tgl555 + .tgl-btn555:before {
+  display: none;
+}
+.tgl555:checked + .tgl-btn555:after {
+  left: 50%;
+}
+
+.tgl-light555 + .tgl-btn555 {
+  background: #f0f0f0;
+  border-radius: 2em;
+  padding: 2px;
+  transition: all 0.4s ease;
+}
+.tgl-light555 + .tgl-btn555:after {
+  border-radius: 50%;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+.tgl-light555:checked + .tgl-btn555 {
+  background: #9FD6AE;
+}
+
+.modal-overlay555 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal555 {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modal-title555 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.modal-section555 {
+  margin-bottom: 20px;
+}
+
+.modal-subtitle555 {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.number-input-container555 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.number-input-label555 {
+  font-size: 14px;
+  color: #666;
+}
+
+.number-input555 {
+  width: 60px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.save-button555 {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.save-button555:hover {
+  background: #0069d9;
+}
