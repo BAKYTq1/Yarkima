@@ -75,14 +75,6 @@ function Personal() {
     return () => unsubscribe();
   }, [auth, db, storage]);
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
-
   const toggleDropdown = () => {
     if (moreButtonRef.current) {
       const rect = moreButtonRef.current.getBoundingClientRect();
@@ -102,7 +94,6 @@ function Personal() {
     }
   };
 
-  const handleSidebarBottomClick = (button) => setActiveSidebarBottom(button);
 
   const renderContent = () => {
     if (loading) return <div>Загрузка...</div>;
