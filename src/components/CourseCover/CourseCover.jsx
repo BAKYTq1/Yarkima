@@ -6,12 +6,13 @@ import { Settings } from "./Settings/Settings";
 import "./CourseCover.css";
 
 const CourseCover = () => {
-  const [courseName, setCourseName] = useState("");
+  const [ courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [category, setCategory] = useState("Языки"); // по умолчанию категория
   const [language, setLanguage] = useState("Русский"); // по умолчанию язык
   const [courseType, setCourseType] = useState("Тест");
   const [coverImage, setCoverImage] = useState(null);
+  const [showSettings, setShowSettings] = useState(false);
   const [shirtImage, setShirtImage] = useState(null);
   const [questions, setQuestions] = useState([
     { term: "Milk", definition: "Молоко", options: ["Молоко", "Корова", "Трава", "Творог"] },
@@ -19,7 +20,6 @@ const CourseCover = () => {
   ]);
 
   const handleCreateCourse = () => {
-    // Логика создания курса
     console.log("Создать курс", {
       courseName,
       courseDescription,
@@ -79,8 +79,9 @@ const CourseCover = () => {
             <div className="text-wrapper-2">СОЗДАТЬ</div>
           </button>
 
-          <div className="settings-wrapper">
-            <Settings className="settings-instance" />
+          <div className="settings-wrapper" 
+          onClick={() => setShowSettings(true)}>
+            <Settings className="settings-instance"/>
           </div>
         </div>
       </div>
@@ -250,6 +251,58 @@ const CourseCover = () => {
       <button className="button-5" onClick={handleCreateCourse}>
         <div className="text-wrapper-2">СОЗДАТЬ</div>
       </button>
+      {showSettings && (
+  <div className="modal-overlay555" onClick={() => setShowSettings(false)}>
+    <div className="modal555" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header555">
+        <h2 className="modal-title555">НАСТРОЙКИ КУРСА</h2>
+        <button className="modal-close-btn555" onClick={() => setShowSettings(false)}>
+          ×
+        </button>
+      </div>
+      
+      <div className="modal-content555">
+        <div className="modal-section555">
+          <div className="modal-subtitle555">Вопросы (Максимум 20)</div>
+          <div className="checkbox-group555">
+            <div className="checkbox-wrapper-555">
+              <span className="checkbox-label-text555">Верно - неверно</span>
+              <input className="tgl555 tgl-light555" id="cb1-555" type="checkbox" defaultChecked />
+              <label className="tgl-btn555" htmlFor="cb1-555"></label>
+            </div>
+            <div className="checkbox-wrapper-555">
+              <span className="checkbox-label-text555">С выбором ответов</span>
+              <input className="tgl555 tgl-light555" id="cb2-555" type="checkbox" defaultChecked />
+              <label className="tgl-btn555" htmlFor="cb2-555"></label>
+            </div>
+            <div className="checkbox-wrapper-555">
+              <span className="checkbox-label-text555">Подбор</span>
+              <input className="tgl555 tgl-light555" id="cb3-555" type="checkbox" />
+              <label className="tgl-btn555" htmlFor="cb3-555"></label>
+            </div>
+          </div>
+        </div>
+
+        <div className="modal-section555">
+          <div className="number-input-container555">
+            <span className="number-input-label555">Количество вопросов</span>
+            <input
+              type="number"
+              className="number-input555"
+              min="1"
+              max="20"
+              defaultValue="4"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="modal-footer555">
+        <button className="save-button555">СОХРАНИТЬ</button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

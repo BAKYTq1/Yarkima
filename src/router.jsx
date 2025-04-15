@@ -33,6 +33,10 @@ export const myRouter = createBrowserRouter([
                 element: <Quiz />
             },
             {
+                path: "login",
+                element: <Login />
+            },
+            {
                 path: "register",
                 element: <Register />
             },
