@@ -9,6 +9,8 @@ import Quiz from "./components/Quiz/Quiz";
 import Login from "./pages/SignIn/SignIn";
 import Register from "./pages/Sign up/SignUp";
 import Chat from "./components/Chat/Chat";
+import Personal from "./components/personal/Personal";
+import Profile from "./components/Profile/Profile";
 
 
 export const myRouter = createBrowserRouter([
@@ -29,9 +31,6 @@ export const myRouter = createBrowserRouter([
 
                 path: "Quiz",
                 element: <Quiz />
-
-                path: "login",
-                element: <Login />
             },
             {
                 path: "register",
@@ -40,6 +39,21 @@ export const myRouter = createBrowserRouter([
             {
                 path: "chat",
                 element: <Chat />
+
+            },
+            {
+                path: "login",
+                element: <Login />
+
+            },
+            {
+                path: "personal",
+                element: <Personal />
+
+            },
+            {
+                path: "personInformation",
+                element: <Profile />
 
             },
         ]

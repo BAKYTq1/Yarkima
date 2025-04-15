@@ -1,0 +1,487 @@
+.personal__flex {
+    display: flex;
+    padding-top: 50px;
+    width: 1440px;
+    margin: 0 auto;
+    margin-left: 200px;
+}
+
+.fixed__button1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.fixed__button1 button {
+    width: 290px;
+    height: 48px;
+    color: rgb(139, 142, 154);
+    font-family: Inter Display;
+    font-size: 16px !important;
+    font-weight: 500;
+    line-height: 24px;
+  display: flex;
+  justify-content: left;
+  padding-left:24px;
+  gap: 12px;
+  align-items: center;
+    letter-spacing: -1%;
+    text-align: left !important;
+    border-radius: 99999px;
+    background: rgb(245, 248, 250) ;
+}
+
+
+
+.fixed__button2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fixed__button2 button{
+    width: 290px;
+height: 48px;
+border-radius: 99999px;
+color: rgb(139, 142, 154);
+font-family: Inter Display;
+font-size: 16px;
+font-weight: 500;
+line-height: 24px;
+letter-spacing: -1%;
+text-align: left; 
+padding-left: 26px;
+gap: 12px !important;
+background-color: white;
+}
+
+// .fixed__button2 button:hover{
+//     background: rgb(245, 248, 250);
+// }
+.fixed__button2 button:active{
+    background: rgb(24, 120, 183) !important;
+}
+
+.personal__fixed p {
+    font-family: Inter Display;
+    background: radial-gradient(115.00% 168.00% at 50% -52%, rgb(243, 109, 255), rgb(135, 69, 254) 60.5%, rgb(98, 23, 229) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: left;
+    margin: 15px;
+}
+
+
+.personal__profile {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.personal__profile img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.personal__profile h1 {
+    color: rgb(25, 26, 38);
+    font-family: Roboto Flex;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.personal__profile p {
+    color: rgb(139, 142, 154);
+    font-family: Inter Display;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: left;
+}
+
+.personal__icons img {
+    width: 32px;
+    height: 32px;
+}
+
+.personal__icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.personal__text {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 25px;
+    margin-left: 20px;
+}
+
+.personal__profile {
+    width: 950px;
+    height: 168px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 2px solid purple;
+}
+
+.personal__icons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn__buttons {
+    margin-top: 20px;
+    margin-right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+
+.btn__buttons button {
+    width: 170px;
+    height: 48px;
+    box-sizing: border-box;
+    border: 1px solid rgb(222, 227, 232);
+    border-radius: 99999px;
+    background: rgb(255, 255, 255);
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.btn__gradient {
+    background: radial-gradient(115.00% 168.00% at 50% -52%, rgb(243, 109, 255), rgb(135, 69, 254) 60.5%, rgb(23, 186, 229) 100%) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.personal__profiles {
+    width: 950px;
+    height: 268px;
+    box-sizing: border-box;
+    border: 1px solid rgb(222, 227, 232);
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+    padding: 24px;
+}
+
+
+.personal__word {
+    text-align: center;
+    margin: 25px;
+    margin-left: 150px;
+    display: flex;
+    gap: 15px;
+}
+
+.personal__word button {
+    background-color: white;
+    width: 187px;
+    height: 48px;
+    border-radius: 99999px;
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -1%;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color, color 2 ease, transform 2 ease;
+}
+
+.personal__word button:hover {
+    border-radius: 99999px;
+    background: rgb(241, 230, 255);
+    color: rgb(142, 53, 255);
+}
+
+
+.first__button {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.first__image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.first__text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.first__text button {
+    height: 32px;
+    padding: 0px 12px 0px 12px;
+    border-radius: 48px;
+    background: rgb(245, 248, 250);
+}
+
+
+.second__text h1 {
+    margin-top: 15px;
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -1%;
+    text-align: left;
+}
+
+.second__text p {
+    color: rgb(139, 142, 154);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+}
+
+.personal__third {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+
+.personal__third button {
+    height: 32px;
+    padding: 0px 12px 0px 12px;
+    border-radius: 48px;
+    background: rgb(245, 248, 250);
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: center;
+}
+// personal.scss
+
+.personal {
+    &__flex {
+      display: flex;
+      padding-top: 50px;
+      width: 1440px;
+      margin: 0 auto;
+    }
+  
+    &__fixed {
+      p {
+        font-family: Inter Display;
+        background: radial-gradient(115.00% 168.00% at 50% -52%, rgb(243, 109, 255), rgb(135, 69, 254) 60.5%, rgb(98, 23, 229) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        letter-spacing: -1%;
+        text-align: left;
+        margin: 15px;
+      }
+    }
+  
+    &__content {
+      // Стили для content
+    }
+  
+    &__profile {
+      width: 950px;
+      height: 168px;
+      box-sizing: border-box;
+      border-radius: 20px;
+      border: 2px solid purple;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+  
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+      }
+    }
+  
+    // Добавьте остальные стили из вашего SCSS
+  }
+  
+  .fixed__button1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+  
+    button {
+      width: 290px;
+      height: 48px;
+      color: rgb(139, 142, 154);
+      font-family: Inter Display;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -1%;
+      text-align: center;
+      border-radius: 99999px;
+      background: rgb(245, 248, 250);
+  
+      &.active {
+        background: rgb(241, 230, 255);
+        color: rgb(142, 53, 255);
+      }
+    }
+  }
+  
+  // Добавьте все остальные стили, которые у вас были...
+  
+  .active {
+    background: rgb(241, 230, 255);
+    color: rgb(142, 53, 255);
+  }
+  
+  .btn__gradient {
+    background: radial-gradient(115.00% 168.00% at 50% -52%, rgb(243, 109, 255), rgb(135, 69, 254) 60.5%, rgb(23, 186, 229) 100%) !important;
+    color: rgb(255, 255, 255) !important;
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    min-width: 200px;
+    margin-top: 5px;
+    overflow: hidden;
+  
+    .dropdown-item {
+      width: 100%;
+      padding: 12px 16px;
+      text-align: left;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: Inter Display;
+      font-size: 14px;
+      color: #333;
+  
+      &:hover {
+        background: #f5f8fa;
+      }
+  
+      &.logout {
+        color: #ff4d4f;
+  
+        &:hover {
+          background: #fff1f0;
+        }
+      }
+    }
+  }
+  .personal {
+    &__flex {
+      display: flex;
+      padding-top: 50px;
+      width: 1240px;
+      justify-content: space-between;
+      margin: 0 auto;
+      position: relative;
+    }
+  
+    &__fixed {
+      position: relative;
+      
+      .fixed__button1 {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0 auto;
+        position: relative;
+  
+        button {
+          width: 290px;
+          height: 48px;
+          color: rgb(139, 142, 154);
+          font-family: Inter Display;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: -1%;
+          text-align: center;
+          border-radius: 99999px;
+          background: transparent !important;
+          border: none;
+          cursor: pointer;
+  
+          &.active {
+            background: #F5F8FA !important;
+            color: rgb(142, 53, 255);
+          }
+        }
+      }
+    }
+  }
+  
+  .dropdown-menu {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    overflow: hidden;
+    margin-top: 5px;
+  
+    .dropdown-item {
+      width: 100%;
+      padding: 12px 16px;
+      text-align: left;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: Inter Display;
+      font-size: 14px;
+      color: #333;
+      display: block;
+      white-space: nowrap;
+  
+      &:hover {
+        background: #f5f8fa;
+      }
+  
+      &.logout {
+        color: #ff4d4f;
+  
+        &:hover {
+          background: #fff1f0;
+        }
+      }
+    }
+  }
+  
+  // Остальные ваши стили...

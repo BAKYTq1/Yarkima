@@ -13,6 +13,9 @@ import Otzyvy from '../../components/otsyvy/otzyvy'
 import Trust from '../../components/trust/Trust'
 import CourseCover from '../../components/CourseCover/CourseCover'
 import Login from '../SignIn/SignIn'
+import Profile from '../../components/Profile/Profile'
+import Personal from '../../components/personal/Personal'
+import Quiz from '../../components/Quiz/Quiz'
 
 function Home() {
   return (
@@ -27,6 +30,9 @@ function Home() {
       <Trust/>
       {/* <CourseCover/> */}
       <Chat/>
+      <Personal/>
+      <Profile/>
+      <Quiz/>
       {/* <Login/> */}
       {/* <CourseChat/> */}
     </div>
