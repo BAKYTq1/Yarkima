@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.subscription-wrapper {
+  display: flex;
+  width: 1000px;
+height: 720px;
+  margin: 40px auto;
+  font-family: 'Inter', sans-serif;
+
+  .left-panel {
+    background: linear-gradient(180deg, #201c3d 0%, #1e2c49 100%);
+    color: white;
+    width: 50%;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-start;
+gap: 40px;
+padding: 120px 80px 120px 80px;
+
+    .label {
+      font-size: 14px;
+      color: #b0b0b0;
+      margin-bottom: 10px;
+    }
+
+    .flag-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 40px;
+
+      .flag{
+        width: 50px;
+        height: auto;
+      }
+
+      .hex {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .price-block {
+      .price {
+        font-size: 26px;
+        font-weight: 700;
+
+        span {
+          font-weight: 400;
+          font-size: 16px;
+        }
+      }
+
+      .note {
+        font-size: 12px;
+        margin-top: 20px;
+        color: #ccc;
+      }
+    }
+  }
+
+  .right-panel {
+    background: transparent;
+    width: 50%;
+    border-radius: 0 20px 20px 0;
+    position: relative;
+    display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-start;
+gap: 40;
+padding: 120px 64px 120px 64px;
+    h3 {
+      margin-bottom: 20px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .method-select {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      button {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        background: #f6f6f6;
+        border-radius: 80px;
+        cursor: pointer;
+        font-weight: 500;
+
+        &.active {
+          background: #fff;
+          border: 2px solid #ae00ff;
+        }
+      }
+    }
+
+    .balance-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      .balance-info{
+        display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap:   150px  ;
+        .balance {
+          color: #a100ff;
+          font-size: 24px;
+          font-weight: 700;
+        }
+    
+        .recharge {
+          padding: 6px 14px;
+          border: 1px solid #999;
+          background: transparent;
+          border-radius: 80px;
+          cursor: pointer;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .subscribe-button {
+      width: 370px;
+      color: white;
+    padding: 12px 18px;
+    border-radius: 20px;
+    background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    border: 1px solid transparent;
+    border: none;
+    cursor: pointer;
+    }
+    .subscribe-button:hover{
+      background: radial-gradient(circle, #8745FE 3%, #F36DFF 140%, #17BAE5 170%);
+      transition: all 3s ease;
+    }
+  }
+}
