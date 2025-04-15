@@ -30,7 +30,7 @@
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
-rfylfqcsyfb yt rskjbfvsyfh yt rskjnfcsyfh rfylqfsvufh yt rskjnfcsyf 
+
   }
 }
 
@@ -49,6 +49,6 @@ rfylfqcsyfb yt rskjbfvsyfh yt rskjnfcsyfh rfylqfsvufh yt rskjnfcsyf
   color #888;
   position : relative;
   top : auto;
-  botom : auto ;
-  rfylqdcsfy yt rskjbfcsyfn yt rskjnnfcsyfh 
+ bottom: auto;
+ 
 }

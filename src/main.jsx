@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
     <Provider store={myStore}>
      
     <App />
-    <Cartochka></Cartochka>
+   
    
     </Provider>
   </StrictMode>,

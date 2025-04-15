@@ -124,7 +124,6 @@ function Popular() {
 
       </div>
 
-
       <div className='flex'>
         <div className='modals'>
           <div className='container'>
