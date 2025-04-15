@@ -9,8 +9,13 @@ import Quiz from "./components/Quiz/Quiz";
 import Login from "./pages/SignIn/SignIn";
 import Register from "./pages/Sign up/SignUp";
 import Chat from "./components/Chat/Chat";
+
 import SubscriptionForm from "./components/Subscribe/SubscriptionForm";
 import ErrorMessage from "./components/Subscribe/ErrorMessage";
+
+import Personal from "./components/personal/Personal";
+import Profile from "./components/Profile/Profile";
+
 
 
 export const myRouter = createBrowserRouter([
@@ -46,6 +51,7 @@ export const myRouter = createBrowserRouter([
 
             },
             {
+
                 path: "subscribe",
                 element: <SubscriptionForm />,
             },
@@ -53,6 +59,22 @@ export const myRouter = createBrowserRouter([
                 path: "/errormassege",
                 element: <ErrorMessage />
             }
+
+                path: "login",
+                element: <Login />
+
+            },
+            {
+                path: "personal",
+                element: <Personal />
+
+            },
+            {
+                path: "personInformation",
+                element: <Profile />
+
+            },
+
         ]
     }
 ])
