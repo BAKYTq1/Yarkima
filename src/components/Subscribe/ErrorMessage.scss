@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+.subscription-wrapper {
+  display: flex;
+  width: 1000px;
+height: 720px;
+  margin: 40px auto;
+  font-family: 'Inter', sans-serif;
+
+  .left-panel {
+    background: linear-gradient(180deg, #201c3d 0%, #1e2c49 100%);
+    color: white;
+    width: 50%;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-start;
+gap: 40px;
+padding: 120px 80px 120px 80px;
+
+    .label {
+      font-size: 14px;
+      color: #b0b0b0;
+      margin-bottom: 10px;
+    }
+
+    .flag-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 40px;
+
+      .flag{
+        width: 50px;
+        height: auto;
+      }
+
+      .hex {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .price-block {
+      .price {
+        font-size: 26px;
+        font-weight: 700;
+
+        span {
+          font-weight: 400;
+          font-size: 16px;
+        }
+      }
+
+      .note {
+        font-size: 12px;
+        margin-top: 20px;
+        color: #ccc;
+      }
+    }
+  }
+  .right-panel {
+    background: transparent;
+    width: 50%;
+    border-radius: 0 20px 20px 0;
+    position: relative;
+    display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-start;
+padding: 120px 64px 120px 64px;
+
+.error-message{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40;
+  padding: 160px 64px 160px 64px;
+
+  .error-panel{
+    width: 343px;
+height: 152px;
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 24px;
+padding: 0px;
+.error-text{
+  width: 343px;
+height: 64px;
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 16px;
+padding: 0px;
+}
+
+h2{/* TITLE/T1 Roboto Flex */
+  color: rgb(25, 26, 38);
+  font-family: Roboto Flex;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 100%;
+  letter-spacing: -1%;
+  text-align: left;
+  text-transform: uppercase;}
+p{/* BODY/Body Medium */
+  color: rgb(139, 142, 154);
+  font-family: Inter Display;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -1%;
+  text-align: center;}
+  }
+
+  button {
+    width: 164px;
+height: 48px;
+margin-top: 25px;
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 4px 24px 4px 24px;
+box-sizing: border-box;
+border: 1px solid rgb(222, 227, 232);
+border-radius: 99999px;
+font-size: 16px;
+font-family: Roboto Flex;
+background: transparent;
+  }
+
+}
+
+}
+
+
+}
