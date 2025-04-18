@@ -114,6 +114,7 @@
 
 
 .info__ul {
+    margin-top: 25px !important;
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -4,7 +4,7 @@ import { myRouter } from './router'
 import './App.css'
 function App() {
   return (    // тийишпегиле 
-<div className='wrapper'>         
+<div>         
       <RouterProvider router={myRouter} />
     </div>
   )

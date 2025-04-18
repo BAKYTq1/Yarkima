@@ -69,16 +69,16 @@ const Profile = () => {
                     <button className='join' onClick={handleSave}>Сохранить изменения</button>
                 </div>
             </div>
-            <div className='info__ul'>
+            {/* <div className='info__ul'>
                 <button>Основная информация</button>
-                <Link to="/add__info"><button>Дополнительная информация</button></Link>
+                <Link to="/addinfo"><button>Дополнительная информация</button></Link>
                 <button>Социальные сети</button>
                 <button>Идентификатор пользователя</button>
                 <button>Лицевой счет</button>
-                <Link to="/publi"><button>История заказов</button></Link>
+                <Link to="/public"><button>История заказов</button></Link>
                 <button>Пароль</button>
                 <button className='info__red'>Выйти</button>
-            </div>
+            </div> */}
         </section>
     );
 };

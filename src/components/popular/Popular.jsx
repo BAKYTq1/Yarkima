@@ -11,7 +11,7 @@ import back from "../../assets/image/back.png"
 import sword from "../../assets/svg/sword.svg"
 import vector from "../../assets/svg/vector.svg"
 import "./popular.css"
-import { katalog } from '../../data/katalog'
+import { katalog } from '../data/katalog.js'
 import kub from "../../assets/svg/kub.svg"
 import six from "../../assets/svg/six.svg"
 import popular from "../../assets/image/color.png"
@@ -46,7 +46,8 @@ function Popular() {
 
 
   const handlePopup = () => {
-    setPopup(true);
+    setPopup(true ? true : false);
+    
   };
 
   const handlePopupType = () => {

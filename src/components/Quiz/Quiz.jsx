@@ -1,31 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Quiz.scss';
+import { saveQuizResult } from '../../firebase'; // Путь под себя
 
 const questions = [
-  {
-    word: 'Coffee',
-    transcription: '[ˈkɔfɪ]',
-    correctIndex: 0,
-    options: ['Кофе', 'Соль', 'Чай', 'Сахар'],
-  },
-  {
-    word: 'Apple',
-    transcription: '[ˈæpl]',
-    correctIndex: 2,
-    options: ['Груша', 'Молоко', 'Яблоко', 'Масло'],
-  },
-  {
-    word: 'Milk',
-    transcription: '[mɪlk]',
-    correctIndex: 1,
-    options: ['Сыр', 'Молоко', 'Яблоко', 'Чай'],
-  },
-  {
-    word: 'Sugar',
-    transcription: '[ˈʃʊɡər]',
-    correctIndex: 3,
-    options: ['Мука', 'Соль', 'Сыр', 'Сахар'],
-  },
+  // Ваши вопросы
 ];
 
 const Quiz = () => {
@@ -34,6 +12,7 @@ const Quiz = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [streak, setStreak] = useState(0);
+  const [answers, setAnswers] = useState([]);
 
   const current = questions[currentIndex];
   const { word, transcription, options, correctIndex } = current;
@@ -61,14 +40,31 @@ const Quiz = () => {
     setIsCorrect(correct);
     setIsChecked(true);
     setStreak(correct ? streak + 1 : 0);
+  
+    const answer = {
+      word,
+      transcription,
+      selectedAnswer: options[selected],
+      correctAnswer: options[correctIndex],
+      isCorrect: correct,
+    };
+  
+    setAnswers(prev => [...prev, answer]);
   };
 
   const handleNext = () => {
     const nextIndex = currentIndex + 1;
     if (nextIndex >= questions.length) {
+      // Сохранение результатов викторины в Firebase после завершения всех вопросов
+      saveQuizResult({
+        userId: "example_user_id", // Замените на реальный ID пользователя
+        answers,
+      });
+
       alert('Вы прошли все вопросы!');
       setCurrentIndex(0);
       setStreak(0);
+      setAnswers([]);
     } else {
       setCurrentIndex(nextIndex);
     }

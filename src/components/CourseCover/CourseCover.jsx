@@ -4,6 +4,7 @@ import { Plus } from "./Plus/Plus";
 import { Remove1 } from "./Remove1/Remove1";
 import { Settings } from "./Settings/Settings";
 import "./CourseCover.css";
+import { createCourse } from "../../firebase"; // путь подкорректируй под себя
 
 const CourseCover = () => {
   const [ courseName, setCourseName] = useState("");
@@ -19,17 +20,23 @@ const CourseCover = () => {
     { term: "ЯЗЫК", definition: "ЯЗЫК", options: [] }
   ]);
 
-  const handleCreateCourse = () => {
-    console.log("Создать курс", {
-      courseName,
-      courseDescription,
-      category,
-      language,
-      courseType,
-      coverImage,
-      shirtImage,
-      questions
-    });
+  const handleCreateCourse = async () => {
+    try {
+      const newCourse = {
+        courseName,
+        courseDescription,
+        category,
+        language,
+        courseType,
+        questions,
+      };
+  
+      await createCourse(newCourse);
+      alert("Курс успешно создан!");
+      navigate("/courses"); // если хочешь редирект
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
   };
 
   const handleAddQuestion = () => {

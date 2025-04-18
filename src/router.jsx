@@ -15,6 +15,10 @@ import ErrorMessage from "./components/Subscribe/ErrorMessage";
 
 import Personal from "./components/personal/Personal";
 import Profile from "./components/Profile/Profile";
+import Public from "./components/Public/Public";
+import Addinfo from "./components/dopinfo/Add__info";
+import Layout2 from "./components/Layout/ItemLayout/Layout2";
+import Popular from "./components/popular/Popular";
 
 
 
@@ -60,21 +64,40 @@ export const myRouter = createBrowserRouter([
                 element: <ErrorMessage />
             },
             {
-                path: "login",
-                element: <Login />
-
-            },
-            {
                 path: "personal",
                 element: <Personal />
 
             },
             {
-                path: "personInformation",
-                element: <Profile />
+                path: "catalog",
+                element: <Popular />
 
             },
+        ]
+    },
+    {
+        path: 'infoblock',
+        element: <Layout2/>,
+        children: [
+            {
+                index: true,
+                element: <Profile/>
+            },
+            {
+                path: "addinfo",
+                element: <Addinfo/>
 
+            },
+            {
+                path: "addinfo",
+                element: <Addinfo/>
+
+            },
+            {
+                path: "public",
+                element: <Public/>
+
+            },
         ]
     }
 ])

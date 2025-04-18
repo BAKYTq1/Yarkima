@@ -16,7 +16,10 @@ import Login from '../SignIn/SignIn'
 import Profile from '../../components/Profile/Profile'
 import Personal from '../../components/personal/Personal'
 import Quiz from '../../components/Quiz/Quiz'
-
+import ErrorMessage from '../../components/Subscribe/ErrorMessage'
+import SubscriptionForm from '../../components/Subscribe/SubscriptionForm'
+import Popular from '../../components/popular/Popular'
+import HexagonAnimation from '../../components/heaxgonAnimation/HexagonAnimation'
 function Home() {
   return (
     <div>
@@ -28,11 +31,15 @@ function Home() {
       <Author/>
       <Otzyvy/>
       <Trust/>
-      {/* <CourseCover/> */}
-      <Chat/>
-      <Personal/>
-      <Profile/>
+      <CourseCover/>
+      {/* <HexagonAnimation/> */}
+      {/* <Chat/> */}
+      {/* <Personal/> */}
+      {/* <Profile/> */}
       <Quiz/>
+      {/* <ErrorMessage/>
+      <SubscriptionForm/>
+      <Popular/> */}
       {/* <Login/> */}
       {/* <CourseChat/> */}
     </div>

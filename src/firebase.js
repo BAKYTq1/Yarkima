@@ -1,4 +1,5 @@
-// Импорт необходимых функций из Firebase
+// firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { 
@@ -6,9 +7,11 @@ import {
   collection,
   query,
   orderBy,
-  onSnapshot,  // Добавлен недостающий импорт
+  onSnapshot,  // Для подписки на обновления
   addDoc,      // Для отправки сообщений
-  serverTimestamp
+  serverTimestamp,
+  getDoc,      // Для получения данных о пользователе
+  doc          // Для ссылки на конкретный документ
 } from "firebase/firestore";
 
 // Конфигурация вашего Firebase проекта
@@ -34,8 +37,8 @@ const messagesRef = collection(db, "messages");
 
 // Функция для подписки на сообщения
 const subscribeToMessages = (callback) => {
-  const q = query(messagesRef, orderBy("timestamp", "desc")); // Сортировка по времени
-  
+  const q = query(messagesRef, orderBy("timestamp", "desc"));
+
   // Подписка на обновления
   const unsubscribe = onSnapshot(q, (snapshot) => {
     const messages = snapshot.docs.map(doc => ({
@@ -48,30 +51,65 @@ const subscribeToMessages = (callback) => {
   return unsubscribe; // Функция для отписки
 };
 
-// Добавьте эту функцию в ваш firebase.js
+// Функция получения данных пользователя
 export const getUserData = async (userId) => {
   try {
     const userDoc = await getDoc(doc(db, "users", userId));
-    return userDoc.data();
+    if (userDoc.exists()) {
+      return userDoc.data();
+    } else {
+      console.error("Пользователь не найден");
+      return null;
+    }
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Ошибка при получении данных пользователя:", error);
     return null;
   }
 };
+
 // Функция отправки сообщения
 export const sendMessage = async (text, userId, displayName, userEmail) => {
   try {
     await addDoc(messagesRef, {
       text,
       uid: userId,
-      displayName,  // Добавляем имя пользователя
-      userEmail,    // Добавляем email
+      displayName,
+      userEmail,
       timestamp: serverTimestamp()
     });
   } catch (error) {
-    console.error("Ошибка отправки:", error);
+    console.error("Ошибка отправки сообщения:", error);
     throw error;
   }
 };
 
-export { auth, db, subscribeToMessages };
+// Ссылка на коллекцию курсов
+const coursesRef = collection(db, "courses");
+
+// Функция для создания нового курса
+export const createCourse = async (courseData) => {
+  try {
+    await addDoc(coursesRef, {
+      ...courseData,
+      timestamp: serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Ошибка при создании курса:", error);
+    throw error;
+  }
+};
+
+// Функция для сохранения результатов викторины
+export const saveQuizResult = async (result) => {
+  try {
+    await addDoc(collection(db, "quizResults"), {
+      ...result,
+      timestamp: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error("Ошибка при сохранении викторины:", error);
+  }
+};
+
+// Экспорт всех функций
+export { auth, db, subscribeToMessages, saveQuizResult };
