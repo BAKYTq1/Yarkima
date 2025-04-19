@@ -91,6 +91,7 @@
   }
 }
 .dropdown-menu {
+  width: 100%;
   height: 100px;
   background: transparent;
   border-bottom: 2px solid #e0e0e0;
@@ -105,7 +106,7 @@
 
 .close-btn {
   position: relative;
-  right: -1340px;
+  right: -1400px;
   display: block;
   background: none;
   border: none;
