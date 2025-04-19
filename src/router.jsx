@@ -15,7 +15,8 @@ import ErrorMessage from "./components/Subscribe/ErrorMessage";
 
 import Personal from "./components/personal/Personal";
 import Profile from "./components/Profile/Profile";
-
+import Chatlist from "./components/ChatItem/ChatList";
+import Group from "./components/Group/Group";
 
 
 export const myRouter = createBrowserRouter([
@@ -74,7 +75,15 @@ export const myRouter = createBrowserRouter([
                 element: <Profile />
 
             },
-
+        
+            {
+                path: "chatlist",
+                element: <Chatlist />
+            },
+            {
+                path: "Group",
+                element: <Group />
+            },
         ]
     }
 ])
