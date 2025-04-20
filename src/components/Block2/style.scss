@@ -22,18 +22,7 @@
     width: min-content;
     padding: 0 20px;
     will-change: transform;
-    
-    &:nth-child(1) {
-      animation-duration: 30s;
-    }
-    
-    // &:nth-child(2) {
-      animation-duration: 35s;
-    // }
-    
-    &:nth-child(3) {
-      animation-duration: 40s;
-    }
+    animation: scroll-horizontal 30s linear infinite;
   }
   
   @keyframes scroll-horizontal {
@@ -139,3 +128,165 @@
       transform: rotate(90deg);
     }
   }
+  .creator-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  
+    h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      color: #333;
+    }
+  
+    &.no-creator {
+      .creator-placeholder {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #777;
+  
+        .placeholder-icon {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  
+    .creator-avatar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+  
+    .creator-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4a76a8;
+  
+      &.placeholder {
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 1.5rem;
+      }
+    }
+  
+    .creator-name {
+      margin: 0;
+      font-weight: 500;
+      color: #444;
+    }
+  
+    .creator-email {
+      margin: 5px 0 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
+  .creator-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  
+    h3 {
+      margin-bottom: 10px;
+    }
+  
+    .creator-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 10px 0;
+    }
+  }
+  
+  .modal-content {
+    margin-top: 70px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 600px;
+    height: 600px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: white;
+    position: relative;
+  }
+  .start-course-btn{
+    margin-top: 30px;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-size: 22px;
+    color: white;
+    border: 1px solid white;
+    background: radial-gradient(circle, #8745FE 3%, #F36DFF 190%, #17BAE5 100%);
+    &:hover{
+      border: 1px solid rgb(29, 23, 23);
+    }
+  }
+  .creator-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  
+    h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      color: #333;
+    }
+  
+    .creator-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 10px 0;
+      border: 2px solid #4a76a8;
+  
+      &.placeholder {
+        background: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 1.5rem;
+      }
+    }
+  
+    .creator-avatar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+  
+    .creator-name {
+      font-weight: 500;
+      color: #444;
+    }
+  
+    .creator-email {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  
+    &.no-creator {
+      .creator-placeholder {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #777;
+  
+        .placeholder-icon {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  

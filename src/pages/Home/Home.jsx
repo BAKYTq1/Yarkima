@@ -20,6 +20,7 @@ import ErrorMessage from '../../components/Subscribe/ErrorMessage'
 import SubscriptionForm from '../../components/Subscribe/SubscriptionForm'
 import Popular from '../../components/popular/Popular'
 import HexagonAnimation from '../../components/heaxgonAnimation/HexagonAnimation'
+import QuizResults from '../../components/Quiz/Quizresult'
 function Home() {
   return (
     <div>
@@ -32,10 +33,11 @@ function Home() {
       <Otzyvy/>
       <Trust/>
       <CourseCover/>
+      <QuizResults/>
       {/* <HexagonAnimation/> */}
       {/* <Chat/> */}
       {/* <Personal/> */}
-      {/* <Profile/> */}
+      <Profile/>
       <Quiz/>
       {/* <ErrorMessage/>
       <SubscriptionForm/>

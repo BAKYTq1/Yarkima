@@ -12,7 +12,7 @@ function Addinfo() {
                 <div className='top-profile'>
                     <p>Публичный профиль</p>
                     <p>/</p>
-                    <p>История заказов</p>
+                    <p>Дополнительная информация</p>
                 </div>
                 <div className='profile__first'>
                     <img src={arrow} alt="" />

@@ -19,6 +19,9 @@ import Public from "./components/Public/Public";
 import Addinfo from "./components/dopinfo/Add__info";
 import Layout2 from "./components/Layout/ItemLayout/Layout2";
 import Popular from "./components/popular/Popular";
+import Layout3 from "./components/Layout/Layout2/Layout";
+import Notfound from "./components/NotFound/Notfound";
+import SupportChat from "./components/SupportChat/SupportChat";
 
 
 
@@ -64,15 +67,14 @@ export const myRouter = createBrowserRouter([
                 element: <ErrorMessage />
             },
             {
-                path: "personal",
-                element: <Personal />
-
-            },
-            {
                 path: "catalog",
                 element: <Popular />
 
             },
+            {
+                path: '*',
+                element: <Notfound/>
+            }
         ]
     },
     {
@@ -89,15 +91,30 @@ export const myRouter = createBrowserRouter([
 
             },
             {
-                path: "addinfo",
-                element: <Addinfo/>
-
-            },
-            {
                 path: "public",
                 element: <Public/>
 
             },
         ]
+    },
+    {
+        path:'/personal',
+        element: <Layout3/>,
+        children: [
+            {
+                index: true,
+                element: <Personal />
+
+            },
+            {
+                path: 'supportchat',
+                element: <SupportChat />
+
+            },
+        ]
+    },
+    {
+        path: '*',
+        element: <Notfound/>
     }
 ])

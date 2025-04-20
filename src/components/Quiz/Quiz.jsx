@@ -1,112 +1,201 @@
 import React, { useState, useEffect } from 'react';
 import './Quiz.scss';
-import { saveQuizResult } from '../../firebase'; // Путь под себя
+import { auth, db, saveQuizResult } from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
-const questions = [
-  // Ваши вопросы
-];
+const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите правильный ID курса
+  const [state, setState] = useState({
+    currentIndex: 0,
+    selected: null,
+    isChecked: false,
+    isCorrect: false,
+    streak: 0,
+    answers: [],
+    userId: null,
+    courseData: null,
+    isLoading: true,
+    error: null
+  });
 
-const Quiz = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState(null);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [streak, setStreak] = useState(0);
-  const [answers, setAnswers] = useState([]);
+  // Загрузка курса/теста из Firestore
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        if (!courseId) {
+          throw new Error("Не указан ID курса");
+        }
 
-  const current = questions[currentIndex];
-  const { word, transcription, options, correctIndex } = current;
+        console.log("Загружаю курс с ID:", courseId);
+        const courseRef = doc(db, "courses", courseId);
+        const courseSnap = await getDoc(courseRef);
 
-  const speak = () => {
-    const utterance = new SpeechSynthesisUtterance(word);
+        if (!courseSnap.exists()) {
+          throw new Error("Курс с указанным ID не найден");
+        }
+
+        const courseData = courseSnap.data();
+        console.log("Полученные данные курса:", courseData);
+        
+        if (!courseData.questions || courseData.questions.length === 0) {
+          throw new Error("Курс не содержит вопросов");
+        }
+
+        // Фильтруем вопросы с хотя бы одним вариантом ответа
+        const validQuestions = courseData.questions.filter(q => 
+          q.options && q.options.length > 0 && q.term && q.definition
+        );
+
+        if (validQuestions.length === 0) {
+          throw new Error("Нет валидных вопросов с вариантами ответов");
+        }
+
+        setState(prev => ({ 
+          ...prev, 
+          courseData: {
+            ...courseData,
+            questions: validQuestions
+          }, 
+          isLoading: false 
+        }));
+      } catch (error) {
+        console.error("Ошибка загрузки курса:", error);
+        setState(prev => ({ 
+          ...prev, 
+          isLoading: false, 
+          error: error.message 
+        }));
+      }
+    };
+
+    fetchCourse();
+
+    // Подписка на изменения авторизации
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setState(prev => ({ 
+        ...prev, 
+        userId: user ? user.uid : null 
+      }));
+    });
+
+    return () => unsubscribe();
+  }, [courseId]);
+
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
     speechSynthesis.speak(utterance);
   };
 
-  useEffect(() => {
-    speak();
-  }, [currentIndex]);
-
-  useEffect(() => {
-    if (streak === 4) {
-      alert('🎉 Поздравляем! 4 правильных ответа подряд!');
-      setStreak(0);
-    }
-  }, [streak]);
-
   const handleCheck = () => {
-    if (selected === null) return;
-    const correct = selected === correctIndex;
-    setIsCorrect(correct);
-    setIsChecked(true);
-    setStreak(correct ? streak + 1 : 0);
-  
+    if (state.selected === null) return;
+    
+    const currentQuestion = state.courseData.questions[state.currentIndex];
+    const correct = currentQuestion.options[state.selected] === currentQuestion.definition;
+    
     const answer = {
-      word,
-      transcription,
-      selectedAnswer: options[selected],
-      correctAnswer: options[correctIndex],
+      term: currentQuestion.term,
+      definition: currentQuestion.definition,
+      selectedAnswer: currentQuestion.options[state.selected],
       isCorrect: correct,
     };
-  
-    setAnswers(prev => [...prev, answer]);
+
+    setState(prev => ({
+      ...prev,
+      isChecked: true,
+      isCorrect: correct,
+      streak: correct ? prev.streak + 1 : 0,
+      answers: [...prev.answers, answer]
+    }));
   };
 
-  const handleNext = () => {
-    const nextIndex = currentIndex + 1;
-    if (nextIndex >= questions.length) {
-      // Сохранение результатов викторины в Firebase после завершения всех вопросов
-      saveQuizResult({
-        userId: "example_user_id", // Замените на реальный ID пользователя
-        answers,
-      });
+  const handleNext = async () => {
+    const nextIndex = state.currentIndex + 1;
 
-      alert('Вы прошли все вопросы!');
-      setCurrentIndex(0);
-      setStreak(0);
-      setAnswers([]);
-    } else {
-      setCurrentIndex(nextIndex);
+    if (nextIndex >= state.courseData.questions.length) {
+      // Сохранение результатов при завершении теста
+      if (state.userId) {
+        await saveQuizResult({
+          userId: state.userId,
+          courseId,
+          courseName: state.courseData.courseName || "Анонимный тест",
+          answers: state.answers,
+          score: state.answers.filter(a => a.isCorrect).length,
+          totalQuestions: state.courseData.questions.length,
+          timestamp: new Date().toISOString(),
+        });
+      }
+
+      alert(`Тест завершен! Результат: ${state.answers.filter(a => a.isCorrect).length}/${state.courseData.questions.length}`);
+      
+      // Сброс состояния
+      setState(prev => ({
+        ...prev,
+        currentIndex: 0,
+        streak: 0,
+        answers: [],
+        selected: null,
+        isChecked: false,
+        isCorrect: false
+      }));
+      return;
     }
 
-    setSelected(null);
-    setIsChecked(false);
-    setIsCorrect(false);
+    setState(prev => ({
+      ...prev,
+      currentIndex: nextIndex,
+      selected: null,
+      isChecked: false,
+      isCorrect: false
+    }));
   };
+
+  if (state.isLoading) {
+    return <div className="quiz-container">Загрузка теста...</div>;
+  }
+
+  if (state.error) {
+    return <div className="quiz-container error">Ошибка: {state.error}</div>;
+  }
+
+  if (!state.courseData) {
+    return <div className="quiz-container">Данные курса не загружены</div>;
+  }
+
+  const currentQuestion = state.courseData.questions[state.currentIndex];
 
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <span>АНГЛИЙСКИЙ ЯЗЫК</span>
+        <span>{state.courseData.courseName || "Тест по словам"}</span>
         <div className="streak-info">
-          <span className="progress">{streak} ПРАВИЛЬНЫХ ОТВЕТА ПОДРЯД!</span>
+          <span className="progress">{state.streak} ПРАВИЛЬНЫХ ОТВЕТОВ ПОДРЯД!</span>
           <div className="streak-bar">
-            <div className="bar-fill" style={{ width: `${(streak / 4) * 100}%` }}></div>
+            <div className="bar-fill" style={{ width: `${(state.streak / 4) * 100}%` }}></div>
           </div>
         </div>
       </div>
 
       <div className="quiz-body">
-        <div className={`quiz-card ${isChecked ? (isCorrect ? 'correct' : 'wrong') : ''}`}>
-          <p className="instruction">Выберите слово</p>
+        <div className={`quiz-card ${state.isChecked ? (state.isCorrect ? 'correct' : 'wrong') : ''}`}>
+          <p className="instruction">Выберите правильный перевод</p>
           <h2 className="word">
-            {word}
-            <span className="sound-icon" onClick={speak}>🔊</span>
+            {currentQuestion.term}
+            <span className="sound-icon" onClick={() => speak(currentQuestion.term)}>🔊</span>
           </h2>
-          <p className="transcription">{transcription}</p>
 
           <div className="options">
-            {options.map((opt, i) => (
+            {currentQuestion.options.map((option, i) => (
               <button
                 key={i}
                 className={`option 
-                  ${selected === i ? 'selected' : ''} 
-                  ${isChecked && i === correctIndex ? 'right' : ''} 
-                  ${isChecked && selected === i && selected !== correctIndex ? 'wrong' : ''}`}
-                onClick={() => !isChecked && setSelected(i)}
+                  ${state.selected === i ? 'selected' : ''} 
+                  ${state.isChecked && option === currentQuestion.definition ? 'right' : ''} 
+                  ${state.isChecked && state.selected === i && option !== currentQuestion.definition ? 'wrong' : ''}`}
+                onClick={() => !state.isChecked && setState(prev => ({ ...prev, selected: i }))}
+                disabled={!option}
               >
-                {opt}
-                <span className="number">{i + 1}</span>
+                {option || "(пустой вариант)"}
               </button>
             ))}
           </div>
@@ -114,24 +203,16 @@ const Quiz = () => {
       </div>
 
       <div className="actions container">
-        {!isChecked ? (
+        {!state.isChecked ? (
           <>
             <button className="skip" onClick={handleNext}>ПРОПУСТИТЬ</button>
-            <button className="check" onClick={handleCheck} disabled={selected === null}>ПРОВЕРИТЬ</button>
-          </>
-        ) : isCorrect ? (
-          <>
-            <div className="result success">
-              <div className="icon">✅</div>
-              <span>СУПЕР!</span>
-            </div>
-            <button className="next" onClick={handleNext}>ДАЛЕЕ</button>
+            <button className="check" onClick={handleCheck} disabled={state.selected === null}>ПРОВЕРИТЬ</button>
           </>
         ) : (
           <>
-            <div className="result error">
-              <div className="icon">❌</div>
-              <span>ОШИБКА!</span>
+            <div className={`result ${state.isCorrect ? 'success' : 'error'}`}>
+              <div className="icon">{state.isCorrect ? '✅' : '❌'}</div>
+              <span>{state.isCorrect ? 'СУПЕР!' : 'ОШИБКА!'}</span>
             </div>
             <button className="next" onClick={handleNext}>ДАЛЕЕ</button>
           </>

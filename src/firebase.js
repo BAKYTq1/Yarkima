@@ -1,5 +1,4 @@
 // firebase.js
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { 
@@ -7,14 +6,13 @@ import {
   collection,
   query,
   orderBy,
-  onSnapshot,  // Для подписки на обновления
-  addDoc,      // Для отправки сообщений
+  onSnapshot,
+  addDoc,
   serverTimestamp,
-  getDoc,      // Для получения данных о пользователе
-  doc          // Для ссылки на конкретный документ
+  getDoc,
+  doc
 } from "firebase/firestore";
 
-// Конфигурация вашего Firebase проекта
 const firebaseConfig = {
   apiKey: "AIzaSyDAF2K5VsbhQpbZ_4rXxfiRvFaRAqVo97s",
   authDomain: "yarkima-register.firebaseapp.com",
@@ -25,21 +23,49 @@ const firebaseConfig = {
   measurementId: "G-D8DKTCRVBN"
 };
 
-// Инициализация Firebase
 const app = initializeApp(firebaseConfig);
-
-// Инициализация сервисов
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Ссылка на коллекцию сообщений
+// Функция конвертации файла в base64
+const fileToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve(null);
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+};
+
+// Обновленная функция создания курса
+const createCourse = async (courseData) => {
+  try {
+    // Конвертируем изображения в base64
+    const processedData = {
+      ...courseData,
+      coverImage: await fileToBase64(courseData.coverImage),
+      shirtImage: await fileToBase64(courseData.shirtImage),
+      timestamp: serverTimestamp()
+    };
+
+    const docRef = await addDoc(collection(db, "courses"), processedData);
+    return docRef.id; // Возвращаем ID созданного курса
+  } catch (error) {
+    console.error("Ошибка при создании курса:", error);
+    throw error;
+  }
+};
+
+// Остальные функции остаются без изменений
 const messagesRef = collection(db, "messages");
 
-// Функция для подписки на сообщения
 const subscribeToMessages = (callback) => {
   const q = query(messagesRef, orderBy("timestamp", "desc"));
-
-  // Подписка на обновления
   const unsubscribe = onSnapshot(q, (snapshot) => {
     const messages = snapshot.docs.map(doc => ({
       id: doc.id,
@@ -47,28 +73,20 @@ const subscribeToMessages = (callback) => {
     }));
     callback(messages);
   });
-
-  return unsubscribe; // Функция для отписки
+  return unsubscribe;
 };
 
-// Функция получения данных пользователя
-export const getUserData = async (userId) => {
+const getUserData = async (userId) => {
   try {
     const userDoc = await getDoc(doc(db, "users", userId));
-    if (userDoc.exists()) {
-      return userDoc.data();
-    } else {
-      console.error("Пользователь не найден");
-      return null;
-    }
+    return userDoc.exists() ? userDoc.data() : null;
   } catch (error) {
     console.error("Ошибка при получении данных пользователя:", error);
     return null;
   }
 };
 
-// Функция отправки сообщения
-export const sendMessage = async (text, userId, displayName, userEmail) => {
+const sendMessage = async (text, userId, displayName, userEmail) => {
   try {
     await addDoc(messagesRef, {
       text,
@@ -83,24 +101,7 @@ export const sendMessage = async (text, userId, displayName, userEmail) => {
   }
 };
 
-// Ссылка на коллекцию курсов
-const coursesRef = collection(db, "courses");
-
-// Функция для создания нового курса
-export const createCourse = async (courseData) => {
-  try {
-    await addDoc(coursesRef, {
-      ...courseData,
-      timestamp: serverTimestamp()
-    });
-  } catch (error) {
-    console.error("Ошибка при создании курса:", error);
-    throw error;
-  }
-};
-
-// Функция для сохранения результатов викторины
-export const saveQuizResult = async (result) => {
+const saveQuizResult = async (result) => {
   try {
     await addDoc(collection(db, "quizResults"), {
       ...result,
@@ -108,8 +109,17 @@ export const saveQuizResult = async (result) => {
     });
   } catch (error) {
     console.error("Ошибка при сохранении викторины:", error);
+    throw error;
   }
 };
 
-// Экспорт всех функций
-export { auth, db, subscribeToMessages, saveQuizResult };
+export {
+  auth,
+  db,
+  fileToBase64,
+  subscribeToMessages,
+  getUserData,
+  sendMessage,
+  createCourse,
+  saveQuizResult
+};

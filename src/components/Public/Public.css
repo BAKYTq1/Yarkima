@@ -13,9 +13,10 @@
 }
 
 .top-profile {
-    width: 350px;
+    width: 650px;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
+    gap: 10px;
     align-items: center;
 }
 
