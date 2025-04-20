@@ -22,7 +22,8 @@ import Popular from "./components/popular/Popular";
 import Layout3 from "./components/Layout/Layout2/Layout";
 import Notfound from "./components/NotFound/Notfound";
 import SupportChat from "./components/SupportChat/SupportChat";
-
+import Chatlist from "./components/ChatItem/ChatList";
+import Group from "./components/Group/Group";
 
 
 export const myRouter = createBrowserRouter([
@@ -109,7 +110,13 @@ export const myRouter = createBrowserRouter([
             {
                 path: 'supportchat',
                 element: <SupportChat />
-
+            {
+                path: "chatlist",
+                element: <Chatlist />
+            },
+            {
+                path: "Group",
+                element: <Group />
             },
         ]
     },
