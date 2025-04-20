@@ -15,6 +15,13 @@ import ErrorMessage from "./components/Subscribe/ErrorMessage";
 
 import Personal from "./components/personal/Personal";
 import Profile from "./components/Profile/Profile";
+import Public from "./components/Public/Public";
+import Addinfo from "./components/dopinfo/Add__info";
+import Layout2 from "./components/Layout/ItemLayout/Layout2";
+import Popular from "./components/popular/Popular";
+import Layout3 from "./components/Layout/Layout2/Layout";
+import Notfound from "./components/NotFound/Notfound";
+import SupportChat from "./components/SupportChat/SupportChat";
 import Chatlist from "./components/ChatItem/ChatList";
 import Group from "./components/Group/Group";
 
@@ -61,21 +68,48 @@ export const myRouter = createBrowserRouter([
                 element: <ErrorMessage />
             },
             {
-                path: "login",
-                element: <Login />
+                path: "catalog",
+                element: <Popular />
 
             },
             {
-                path: "personal",
+                path: '*',
+                element: <Notfound/>
+            }
+        ]
+    },
+    {
+        path: 'infoblock',
+        element: <Layout2/>,
+        children: [
+            {
+                index: true,
+                element: <Profile/>
+            },
+            {
+                path: "addinfo",
+                element: <Addinfo/>
+
+            },
+            {
+                path: "public",
+                element: <Public/>
+
+            },
+        ]
+    },
+    {
+        path:'/personal',
+        element: <Layout3/>,
+        children: [
+            {
+                index: true,
                 element: <Personal />
 
             },
             {
-                path: "personInformation",
-                element: <Profile />
-
-            },
-        
+                path: 'supportchat',
+                element: <SupportChat />
             {
                 path: "chatlist",
                 element: <Chatlist />
@@ -85,5 +119,9 @@ export const myRouter = createBrowserRouter([
                 element: <Group />
             },
         ]
+    },
+    {
+        path: '*',
+        element: <Notfound/>
     }
 ])

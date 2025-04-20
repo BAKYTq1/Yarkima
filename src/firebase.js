@@ -1,4 +1,4 @@
-// Импорт необходимых функций из Firebase
+// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { 
@@ -6,12 +6,13 @@ import {
   collection,
   query,
   orderBy,
-  onSnapshot,  // Добавлен недостающий импорт
-  addDoc,      // Для отправки сообщений
-  serverTimestamp
+  onSnapshot,
+  addDoc,
+  serverTimestamp,
+  getDoc,
+  doc
 } from "firebase/firestore";
 
-// Конфигурация вашего Firebase проекта
 const firebaseConfig = {
   apiKey: "AIzaSyDAF2K5VsbhQpbZ_4rXxfiRvFaRAqVo97s",
   authDomain: "yarkima-register.firebaseapp.com",
@@ -22,21 +23,49 @@ const firebaseConfig = {
   measurementId: "G-D8DKTCRVBN"
 };
 
-// Инициализация Firebase
 const app = initializeApp(firebaseConfig);
-
-// Инициализация сервисов
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Ссылка на коллекцию сообщений
+// Функция конвертации файла в base64
+const fileToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      resolve(null);
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+};
+
+// Обновленная функция создания курса
+const createCourse = async (courseData) => {
+  try {
+    // Конвертируем изображения в base64
+    const processedData = {
+      ...courseData,
+      coverImage: await fileToBase64(courseData.coverImage),
+      shirtImage: await fileToBase64(courseData.shirtImage),
+      timestamp: serverTimestamp()
+    };
+
+    const docRef = await addDoc(collection(db, "courses"), processedData);
+    return docRef.id; // Возвращаем ID созданного курса
+  } catch (error) {
+    console.error("Ошибка при создании курса:", error);
+    throw error;
+  }
+};
+
+// Остальные функции остаются без изменений
 const messagesRef = collection(db, "messages");
 
-// Функция для подписки на сообщения
 const subscribeToMessages = (callback) => {
-  const q = query(messagesRef, orderBy("timestamp", "desc")); // Сортировка по времени
-  
-  // Подписка на обновления
+  const q = query(messagesRef, orderBy("timestamp", "desc"));
   const unsubscribe = onSnapshot(q, (snapshot) => {
     const messages = snapshot.docs.map(doc => ({
       id: doc.id,
@@ -44,34 +73,53 @@ const subscribeToMessages = (callback) => {
     }));
     callback(messages);
   });
-
-  return unsubscribe; // Функция для отписки
+  return unsubscribe;
 };
 
-// Добавьте эту функцию в ваш firebase.js
-export const getUserData = async (userId) => {
+const getUserData = async (userId) => {
   try {
     const userDoc = await getDoc(doc(db, "users", userId));
-    return userDoc.data();
+    return userDoc.exists() ? userDoc.data() : null;
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Ошибка при получении данных пользователя:", error);
     return null;
   }
 };
-// Функция отправки сообщения
-export const sendMessage = async (text, userId, displayName, userEmail) => {
+
+const sendMessage = async (text, userId, displayName, userEmail) => {
   try {
     await addDoc(messagesRef, {
       text,
       uid: userId,
-      displayName,  // Добавляем имя пользователя
-      userEmail,    // Добавляем email
+      displayName,
+      userEmail,
       timestamp: serverTimestamp()
     });
   } catch (error) {
-    console.error("Ошибка отправки:", error);
+    console.error("Ошибка отправки сообщения:", error);
     throw error;
   }
 };
 
-export { auth, db, subscribeToMessages };
+const saveQuizResult = async (result) => {
+  try {
+    await addDoc(collection(db, "quizResults"), {
+      ...result,
+      timestamp: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error("Ошибка при сохранении викторины:", error);
+    throw error;
+  }
+};
+
+export {
+  auth,
+  db,
+  fileToBase64,
+  subscribeToMessages,
+  getUserData,
+  sendMessage,
+  createCourse,
+  saveQuizResult
+};

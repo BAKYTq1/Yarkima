@@ -1,0 +1,110 @@
+.add__flex {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 35px;
+}
+
+.add__info h5 {
+    color: rgb(139, 142, 154);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.add__info h5:hover {
+    color: rgb(142, 53, 255);
+
+}
+
+.add__input {
+    margin-top: 30px;
+}
+
+.add__input div {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    gap: 150px;
+}
+
+.add__input p {
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+}
+
+.add__input input {
+    width: 674px;
+    height: 60px;
+    padding: 0px 32px 0px 32px;
+    border-radius: 99999px;
+    background: rgb(245, 248, 250);
+}
+
+.add__second {
+    margin-top: 20px;
+}
+
+.add__second p {
+    color: rgb(25, 26, 38);
+    font-family: Inter Display;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -1%;
+    text-align: left;
+}
+
+.second__input input {
+    width: 674px;
+    height: 60px;
+    padding: 0px 32px 0px 32px;
+    border-radius: 99999px;
+    background: rgb(245, 248, 250);
+}
+
+.second__input {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.add__button {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+.add__button button {
+    box-sizing: border-box;
+    border: 1px solid rgb(222, 227, 232);
+    border-radius: 20px;
+
+    background: rgb(255, 255, 255);
+    width: 325px;
+    height: 60px;
+}
+
+
+.checkbox__btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid rgb(222, 227, 232);
+    border-radius: 20px;
+
+    background: rgb(255, 255, 255);
+    width: 325px;
+    height: 60px;
+}

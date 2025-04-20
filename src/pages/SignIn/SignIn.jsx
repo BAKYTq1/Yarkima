@@ -82,13 +82,19 @@ function Login() {
   return (
     <div className='auth-container'>
       <div className='auth-image-section'>
-       <div className='animation'>
-        <div className="loginAnimation"></div>
-        <div className="login-cart"></div>
-        <div className="login-cart"></div>
-        <div className="login-cart"></div>
-        <div className="login-cart"></div>
-       </div>
+      <div className='main-containerr'>
+      <div className="containerrr">
+	<div className="cube">
+		<div className="face"></div>
+		<div className="face"></div>
+		<div className="face"></div>
+		<div className="face"></div>
+		<div className="face"></div>
+		<div className="face"></div>
+	</div>
+	<div className="hexa"></div>
+</div>
+      </div>
       </div>
       
       <div className="auth-form-section">

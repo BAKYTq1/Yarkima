@@ -4,15 +4,16 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import './personal.scss';
 import defaultAvatar from '../../assets/image/personal-man.png';
-import { CgProfile } from "react-icons/cg";
-import { GiPostOffice } from "react-icons/gi";
-import { RiSettings3Line } from "react-icons/ri";
-import { MdSupportAgent } from "react-icons/md";
-import { MdOutlinePowerSettingsNew } from "react-icons/md";
-import { FaUserFriends } from "react-icons/fa";
-import { IoChatboxEllipsesOutline } from "react-icons/io5"
-import { MdGroups2 } from "react-icons/md";
 import { Link } from 'react-router-dom';
+// import { CgProfile } from "react-icons/cg";
+// import { GiPostOffice } from "react-icons/gi";
+// import { RiSettings3Line } from "react-icons/ri";
+// import { MdSupportAgent } from "react-icons/md";
+// import { MdOutlinePowerSettingsNew } from "react-icons/md";
+// import { FaUserFriends } from "react-icons/fa";
+// import { IoChatboxEllipsesOutline } from "react-icons/io5"
+// import { MdGroups2 } from "react-icons/md";
+// import { Link } from 'react-router-dom';
 function Personal() {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -20,7 +21,7 @@ function Personal() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('info');
   const [activeSidebarTop, setActiveSidebarTop] = useState('public');
-  const [activeSidebarBottom, setActiveSidebarBottom] = useState('dating');
+  // const [activeSidebarBottom, setActiveSidebarBottom] = useState('dating');
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const dropdownRef = useRef(null);
@@ -87,12 +88,12 @@ function Personal() {
   };
 
   const handleTabClick = (tab) => setActiveTab(tab);
-  const handleSidebarTopClick = (button) => {
-    setActiveSidebarTop(button);
-    if (button === 'more') {
-      toggleDropdown();
-    }
-  };
+  // const handleSidebarTopClick = (button) => {
+  //   setActiveSidebarTop(button);
+  //   if (button === 'more') {
+  //     toggleDropdown();
+  //   }
+  // };
 
 
   const renderContent = () => {
@@ -147,72 +148,6 @@ function Personal() {
   return (
     <div className="personal">
       <div className="personal__flex">
-        <div className="personal__fixed">
-          <div className="fixed__button1">
-            <button
-              className={activeSidebarTop === 'public' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('public')}
-            >
-             <CgProfile /> Публичный профиль
-            </button>
-            <button
-              className={activeSidebarTop === 'partner' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('partner')}
-            >
-             <GiPostOffice />
-             Кабинет партнёра
-            </button>
-            <Link to={'/personInformation'}>
-            <button
-              ref={moreButtonRef}
-              className={activeSidebarTop === 'nastroy' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('nastroy')}
-            >
-             <RiSettings3Line />
-             Настройки
-            </button>
-            </Link>
-            <button
-              ref={moreButtonRef}
-              className={activeSidebarTop === 'podd' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('podd')}
-            >
-             <MdSupportAgent /> Поддержка
-            </button>
-            <button
-              // ref={moreButtonRef}
-              className={activeSidebarTop === 'out' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('out')}
-            >
-             <MdOutlinePowerSettingsNew /> Выйти
-            </button>
-            
-          <p>Сообщество</p>
-
-          {/* <div className="fixed__button2"> */}
-            <button
-               className={activeSidebarTop === 'znakom' ? 'active' : ''}
-               onClick={() => handleSidebarTopClick('znakom')}
-            >
-            <FaUserFriends />
-            Знакомства
-            </button>
-            <button
-              className={activeSidebarTop === 'chats' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('chats')}
-            >
-             <IoChatboxEllipsesOutline /> Чаты
-            </button>
-            <button
-              className={activeSidebarTop === 'groups' ? 'active' : ''}
-              onClick={() => handleSidebarTopClick('groups')}
-            >
-            <MdGroups2 />  Группы
-            </button>
-          {/* </div> */}
-        </div>
-        </div>
-
         <div className="personal__content">
           <div className="personal__profile">
             <div className="personal__info">
@@ -237,8 +172,8 @@ function Personal() {
               </div>
             </div>
             <div className="btn__buttons">
-              <button>Настройки</button>
-              <button className="btn__gradient">Редактировать</button>
+              <Link to={'/chat'}><button>Написать</button></Link>
+              <button className="btn__gradient">Моя визитка</button>
             </div>
           </div>
 

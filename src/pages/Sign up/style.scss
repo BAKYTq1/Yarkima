@@ -118,3 +118,145 @@
       }
     }
   }
+  $bg: #fbfafb;
+  $front: #201f20;
+  $duration: 5s;
+  $easing: cubic-bezier(.7, 0, .3, 1);
+  $step: 100% / 6;
+  
+  .main-containerr {
+    background: transparent;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+  
+    * {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+  }
+  
+  .containerrr {
+    font-size: 180px;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    transform: translate(-50%, -50%);
+  }
+  
+  $baseRot: rotateX(-35.26deg) rotateY(45deg);
+  
+  @keyframes cube {
+    from, #{$step * 4} {
+      transform: $baseRot rotateX(0) rotateY(0);
+    }
+    #{$step * 5} {
+      transform: $baseRot rotateX(90deg) rotateY(0);
+    }
+    to {
+      transform: $baseRot rotateX(90deg) rotateY(-90deg);
+    }
+  }
+  
+  .cube {
+    animation: cube $duration $easing infinite;
+    transform-style: preserve-3d;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  
+  @keyframes facebg {
+    from { background-position: 0 1em; }
+    #{$step * 4}, to { background-position: 0 0; }
+  }
+  
+  .face {
+    width: 1em;
+    height: 1em;
+    color: $front;
+    background: currentColor no-repeat;
+    $p1: 25%;
+    $p2: 75%;
+    $grad: linear-gradient(45deg, transparent $p1, #8E35FF $p1, #8E35FF $p2, transparent $p2);
+  
+    &:nth-child(1) {
+      transform: translate(-50%, -50%) translateZ(.506em);
+      background-image: $grad;
+      animation: facebg $duration steps(1) infinite;
+    }
+    &:nth-child(2) { transform: translate(-50%, -50%) rotateY(90deg) translateZ(.5em); }
+    &:nth-child(3) { transform: translate(-50%, -50%) rotateX(90deg) translateZ(.5em); }
+    &:nth-child(4) { transform: translate(-50%, -50%) rotateY(-90deg) translateZ(.5em); }
+    &:nth-child(5) { transform: translate(-50%, -50%) rotateX(-90deg) translateZ(.5em); }
+    &:nth-child(6) { transform: translate(-50%, -50%) translateZ(-.5em); }
+  }
+  
+  .hexa {
+    background: #8E35FF;
+    $w: 1em / sqrt(2);
+    $h: 1em / sqrt(6);
+    width: $w;
+    height: $h;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      transform: translate(-50%, -50%) rotate(60deg);
+    }
+  
+    &:after {
+      transform: translate(-50%, -50%) rotate(-60deg);
+    }
+  
+    @function r($x, $y, $angle) {
+      @return translate($x, $y) rotate($angle) translate(-$x, -$y);
+    }
+  
+    $hw: .5em / sqrt(2);
+    $hh: .5em / sqrt(6);
+    $bt: scale(1.008) translateX(-100%) translateX(-.5px);
+    $adj: 2px;
+  
+    @keyframes hexa {
+      from {
+        transform: $bt r(-$hw, -$hh, 0deg) r($hw, -$hh, 0deg) translateY($adj)
+          r(0, $h, 0deg) translateY(-$adj) r(-$hw, -$hh, 0deg);
+        visibility: visible;
+      }
+      #{$step} {
+        transform: $bt r(-$hw, -$hh, -60deg) r($hw, -$hh, 0deg) translateY($adj)
+          r(0, $h, 0deg) translateY(-$adj) r(-$hw, -$hh, 0deg);
+      }
+      #{$step * 2} {
+        transform: $bt r(-$hw, -$hh, -60deg) r($hw, -$hh, -60deg) translateY($adj)
+          r(0, $h, 0deg) translateY(-$adj) r(-$hw, -$hh, 0deg);
+      }
+      #{$step * 3} {
+        transform: $bt r(-$hw, -$hh, -60deg) r($hw, -$hh, -60deg) translateY($adj)
+          r(0, $h, -60deg) translateY(-$adj) r(-$hw, -$hh, 0deg);
+      }
+      #{$step * 4} {
+        transform: $bt r(-$hw, -$hh, -60deg) r($hw, -$hh, -60deg) translateY($adj)
+          r(0, $h, -60deg) translateY(-$adj) r(-$hw, -$hh, -60deg);
+        visibility: hidden;
+      }
+      to {
+        transform: $bt r(-$hw, -$hh, 0deg) r($hw, -$hh, 0deg) translateY($adj)
+          r(0, $h, 0deg) translateY(-$adj) r(-$hw, -$hh, 0deg);
+        visibility: hidden;
+      }
+    }
+  
+    animation: hexa $duration $easing infinite;
+  }
+  
