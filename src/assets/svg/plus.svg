@@ -1,0 +1,21 @@
+<svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip33_40317">
+			<rect id="Plus" rx="0.000000" width="23.000000" height="23.000000" transform="translate(12.500000 12.500000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<radialGradient gradientTransform="translate(24 -24.8235) rotate(90) scale(80.3235 54.9758)" cx="0.000000" cy="0.000000" r="1.000000" id="paint_radial_33_40319_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#F36DFF"/>
+			<stop offset="0.605000" stop-color="#8745FE"/>
+			<stop offset="1.000000" stop-color="#17BAE5"/>
+		</radialGradient>
+	</defs>
+	<rect id="Button" rx="23.500000" width="47.000000" height="47.000000" transform="translate(0.500000 0.500000)" fill="url(#paint_radial_33_40319_0)" fill-opacity="1.000000"/>
+	<rect id="Plus" rx="0.000000" width="23.000000" height="23.000000" transform="translate(12.500000 12.500000)" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip33_40317)">
+		<path id="Vector" d="M24 15.75C24.19 15.75 24.39 15.82 24.53 15.96C24.67 16.1 24.75 16.3 24.75 16.5L24.75 23.25L31.5 23.25C31.69 23.25 31.89 23.32 32.03 23.46C32.17 23.6 32.25 23.8 32.25 24C32.25 24.19 32.17 24.39 32.03 24.53C31.89 24.67 31.69 24.75 31.5 24.75L24.75 24.75L24.75 31.5C24.75 31.69 24.67 31.89 24.53 32.03C24.39 32.17 24.19 32.25 24 32.25C23.8 32.25 23.6 32.17 23.46 32.03C23.32 31.89 23.25 31.69 23.25 31.5L23.25 24.75L16.5 24.75C16.3 24.75 16.1 24.67 15.96 24.53C15.82 24.39 15.75 24.19 15.75 24C15.75 23.8 15.82 23.6 15.96 23.46C16.1 23.32 16.3 23.25 16.5 23.25L23.25 23.25L23.25 16.5C23.25 16.3 23.32 16.1 23.46 15.96C23.6 15.82 23.8 15.75 24 15.75Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+	</g>
+	<rect id="Button" rx="23.500000" width="47.000000" height="47.000000" transform="translate(0.500000 0.500000)" stroke="#FFFFFF" stroke-opacity="0.200000" stroke-width="1.000000"/>
+</svg>

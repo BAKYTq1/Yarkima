@@ -108,8 +108,10 @@ export const myRouter = createBrowserRouter([
 
             },
             {
+
                 path: 'supportchat',
                 element: <SupportChat />
+            },
             {
                 path: "chatlist",
                 element: <Chatlist />
