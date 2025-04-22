@@ -7,6 +7,8 @@ import { FaGripLines } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase"; // путь до firebase.js
+import plus from "../../assets/svg/plus.svg";
+import avatar from "../../assets/image/avatar.png";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,12 +42,13 @@ const Header = () => {
         <div className="auth-buttons">
           {user ? (
             <>
+            <img className="plus" src={plus} alt="" />
               <Link to="/personal">
-                <button className="personal-btn">Личный кабинет</button>
+                <button className="personal-btn"><img src={avatar} alt="" /></button>
               </Link>
               <img 
                 src={user.photoURL || "https://via.placeholder.com/32"} 
-                alt="user" 
+                alt="" 
                 className="user-photo" 
               />
             </>
