@@ -3,7 +3,7 @@ import './style.scss';
 import { db } from '../../firebase';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { FaUser } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Block2 = () => {
   const [courses, setCourses] = useState([]);
@@ -34,7 +34,10 @@ const Block2 = () => {
 
     fetchCourses();
   }, []);
-
+  const handleStartCourse = (courseId) => {
+    navigate(`/quiz/${courseId}`); // изменили путь
+  };
+  
   // Загрузка информации о создателе
   useEffect(() => {
     const fetchCreator = async () => {
@@ -98,11 +101,6 @@ const Block2 = () => {
   };
   
 
-  // Переход на страницу курса
-  const handleStartCourse = (courseId) => {
-    navigate(`/course/${courseId}`);
-  };
-
   if (loading) {
     return <div className="loading">Загрузка курсов...</div>;
   }
@@ -135,6 +133,7 @@ const Block2 = () => {
                     className='preview-img'
                     loading="lazy"
                   />
+                <h1 style={{color: 'white'}}>{course.courseName || course.title}</h1>
                 </div>
               </div>
             ))}
@@ -191,7 +190,7 @@ const Block2 = () => {
               )}
             </div>
 
-            <button 
+           `<button 
               className="start-course-btn"
               onClick={() => handleStartCourse(selectedCourse.id)}
             >

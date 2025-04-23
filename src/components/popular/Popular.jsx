@@ -1,74 +1,41 @@
-import React, { useState } from 'react'
-
-// import sword from "../../assets/svg/sword.svg"
-// import vector from "../../assets/svg/vector.svg"
-// import "./popular.css"
-// import { katalog } from '../../data/katalog'
-// import kub from "../../assets/svg/kub.svg"
-// import six from "../../assets/svg/six.svg"
-import back from "../../assets/image/back.png"
-
-import sword from "../../assets/svg/sword.svg"
-import vector from "../../assets/svg/vector.svg"
-import "./popular.css"
-import { katalog } from '../data/katalog.js'
-import kub from "../../assets/svg/kub.svg"
-import six from "../../assets/svg/six.svg"
-import popular from "../../assets/image/color.png"
-import './popular.css'
+import React, { useState } from 'react';
+import sword from "../../assets/svg/sword.svg";
+import vector from "../../assets/svg/vector.svg";
+import "./popular.css";
+import { katalog } from '../data/katalog.js';
+import kub from "../../assets/svg/kub.svg";
+import six from "../../assets/svg/six.svg";
+import back from "../../assets/image/back.png";
 import { useOutSideClick } from '../../hooks/outsideclick.js';
-import square from '../../assets/svg/square.svg'
-import hicon from "../../assets/svg/hicon.svg"
-
+import { ChevronDown } from 'lucide-react';
 
 function Popular() {
-  const [popup, setPopup] = useState(false);
-  const [popupIndex, setPopupIndex] = useState();
-  const [index, setIndex] = useState(false);
-  const [indexType, setIndexType] = useState();
-  const ref = useOutSideClick(() => setPopup(fals))
-  const refIndex = useOutSideClick(() => setPopupIndex(false))
-  const filter = ["Самые популярные", "Самые дешевые"];
+  const sortOptions = ["САМЫЕ ПОПУЛЯРНЫЕ", "НОВЕЙШИЕ", "ПО РЕЙТИНГУ"];
+  const typeOptions = ["ВСЕ", "ВИДЕО", "ТЕКСТ", "ИНТЕРАКТИВ"];
 
-  const type = ["Тип", "Тип-1"];
+  const [selectedSort, setSelectedSort] = useState(sortOptions[0]);
+  const [selectedType, setSelectedType] = useState("ТИП");
+  const [showSortDropdown, setShowSortDropdown] = useState(false);
+  const [showTypeDropdown, setShowTypeDropdown] = useState(false);
 
-  const handleIndex = (event) => {
-    const selectIndex = Number(event.currentTarget.dataset.index);
-    setIndex(selectIndex);
-    setPopup(false)
-  };
+  const refSort = useOutSideClick(() => setShowSortDropdown(false));
+  const refType = useOutSideClick(() => setShowTypeDropdown(false));
 
-  const handleIndexType = (event) => {
-    const selectIndex = Number(event.currentTarget.dataset.index);
-    setIndexType(selectIndex);
-    setPopupIndex(false)
-  };
-
-
-  const handlePopup = () => {
-    setPopup(true ? true : false);
-    
-  };
-
-  const handlePopupType = () => {
-    setPopupIndex(true);
-  };
   return (
-    <div className='category '>
+    <div className='category'>
       <h1>КАТЕГОРИИ</h1>
+
       <div className='populars'>
-
         <img className='gradient' src={back} alt="" />
+        <h2>ПОПУЛЯРНЫЕ КАТЕГОРИИ</h2>
 
-
-        <h2>ПОПУПЛЯРНЫЕ КАТЕГОРИИ</h2>
         <div className='popular-flex'>
+          {/* Пример карточек категорий */}
           <div className='popularies'>
             <div className='popular-first'>
               <img src={sword} alt="" />
               <div className='small'>
                 <img className='vector' src={vector} alt="" />
-
                 <p>21 курс</p>
               </div>
             </div>
@@ -82,115 +49,116 @@ function Popular() {
               <p>Борьба за смысл, снижение того, во что есть вера, устойчивость позиций своих и необходимость переход...</p>
             </div>
           </div>
-          <a href="/language"><div className='popularies'>
-            <div className='popular-first'>
-              <img src={sword} alt="" />
-              <div className='small'>
-                <img className='vector' src={vector} alt="" />
-                <p>32 курса</p>
-              </div>
-            </div>
-
-            <div className='popular-second'>
-              <a href='/language'><button>Языки</button></a>
-              <button>Общение</button>
-            </div>
-
-            <div className='popular-three'>
-              <h3>Языки</h3>
-              <p>Спонтанные озарения, инсайты, структурирование информации, потен...</p>
-            </div>
-          </div></a>
           <div className='popularies'>
             <div className='popular-first'>
               <img src={sword} alt="" />
               <div className='small'>
                 <img className='vector' src={vector} alt="" />
-                <p>12 курсов</p>
+                <p>21 курс</p>
               </div>
             </div>
-
             <div className='popular-second'>
               <button>Душа</button>
               <button>Личность</button>
-              <button>Характер</button>
+              <button>Вселенная</button>
             </div>
-
             <div className='popular-three'>
-              <h3>Провокация</h3>
-              <p>Провокация людей для усиления их эмоциональных событий. В случае, если...</p>
+              <h3>Воин</h3>
+              <p>Борьба за смысл, снижение того, во что есть вера, устойчивость позиций своих и необходимость переход...</p>
             </div>
           </div>
+          <div className='popularies'>
+            <div className='popular-first'>
+              <img src={sword} alt="" />
+              <div className='small'>
+                <img className='vector' src={vector} alt="" />
+                <p>21 курс</p>
+              </div>
+            </div>
+            <div className='popular-second'>
+              <button>Душа</button>
+              <button>Личность</button>
+              <button>Вселенная</button>
+            </div>
+            <div className='popular-three'>
+              <h3>Воин</h3>
+              <p>Борьба за смысл, снижение того, во что есть вера, устойчивость позиций своих и необходимость переход...</p>
+            </div>
+          </div>
+          {/* Добавь другие блоки по аналогии */}
         </div>
-
       </div>
 
-
+      {/* Фильтры */}
       <div className='flex'>
         <div className='modals'>
           <div className='container'>
             <div className='modals__first'>
-              <div className="dropdown-main">
-                <div className="dropdown">
-                  <button className="dropdown-text" onClick={handlePopup}>
-                    {filter[index ?? 0]}
-                    <svg width="11.507812" height="6.500000" viewBox="0 0 11.5078 6.5" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <desc>
-                        Created with Pixso.
-                      </desc>
-                      <defs />
-                      <path id="Vector" d="M10.75 0.75L5.75 5.75L0.75 0.75" stroke="#191A26" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round" />
-                    </svg>
-
+              <div className="dropdown-filters">
+                <div className="dropdown-wrapper" ref={refSort}>
+                  <button
+                    className="dropdown-button"
+                    onClick={() => setShowSortDropdown(!showSortDropdown)}
+                  >
+                    {selectedSort}
+                    <ChevronDown size={16} />
                   </button>
+                  {showSortDropdown && (
+                    <ul className="dropdown-menu">
+                      {sortOptions.map((option) => (
+                        <li
+                          key={option}
+                          onClick={() => {
+                            setSelectedSort(option);
+                            setShowSortDropdown(false);
+                          }}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                {popup && (
-                  <div className="dropdown-popup" ref={ref}>
-                    {filter.map((el, idx) => (
-                      <button key={idx} data-index={idx} onClick={handleIndex}>
-                        {el}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div className="dropdown-type">
-                <div className="type">
-                  <button className="dropdown-text" onClick={handlePopupType}>
-                    {type[indexType ?? 0]}
-                    <svg width="11.507812" height="6.500000" viewBox="0 0 11.5078 6.5" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <desc>
-                        Created with Pixso.
-                      </desc>
-                      <defs />
-                      <path id="Vector" d="M10.75 0.75L5.75 5.75L0.75 0.75" stroke="#191A26" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round" />
-                    </svg>
 
+                <div className="dropdown-wrapper" ref={refType}>
+                  <button
+                    className="dropdown-button"
+                    onClick={() => setShowTypeDropdown(!showTypeDropdown)}
+                  >
+                    {selectedType}
+                    <ChevronDown size={16} />
                   </button>
+                  {showTypeDropdown && (
+                    <ul className="dropdown-menu">
+                      {typeOptions.map((option) => (
+                        <li
+                          key={option}
+                          onClick={() => {
+                            setSelectedType(option);
+                            setShowTypeDropdown(false);
+                          }}
+                        >
+                          {option}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                {popupIndex && (
-                  <div className="dropdown-popup-type" ref={refIndex}>
-                    {type.map((el, idx) => (
-                      <button key={idx} data-index={idx} onClick={handleIndexType}>
-                        {el}
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
-            </div>
 
-            <div className='popular-btn'>
-              <img src={kub} alt="" />
-              <a href="/service"><img src={six} alt="" /></a>
+              <div className='popular-btn'>
+                <img src={kub} alt="" />
+                <a href="/service"><img src={six} alt="" /></a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Сетка карточек */}
       <div className='grid container'>
-        {katalog.map((item) => (
-          <div className='popular '>
+        {katalog.map((item, idx) => (
+          <div className='popular' key={idx}>
             <div className='popular-first'>
               <img src={sword} alt="" />
               <div className='small'>
@@ -214,11 +182,8 @@ function Popular() {
       </div>
 
       <div className='bottomLine'></div>
-
     </div>
-
-
-  )
+  );
 }
 
-export default Popular
+export default Popular;

@@ -142,7 +142,7 @@ function Personal() {
     }
   };
 
-  if (loading) return <div>Загрузка...</div>;
+  if (loading) return <div className='loader'></div>;
   if (!user) return <div>Пожалуйста, войдите в систему</div>;
 
   return (
@@ -172,7 +172,7 @@ function Personal() {
               </div>
             </div>
             <div className="btn__buttons">
-              <Link to={'/chat'}><button>Написать</button></Link>
+              <Link to={'chats'}><button>Написать</button></Link>
               <button className="btn__gradient">Моя визитка</button>
             </div>
           </div>

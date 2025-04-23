@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaGripLines } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase"; // путь до firebase.js
+import { auth } from "../../firebase"; 
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,8 +61,8 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={`dropdown-menu ${menuOpen ? "open" : ""}`}>
-        <button className="close-btn" onClick={() => setMenuOpen(false)}>
+      <div className={`dropdown-menuu ${menuOpen ? "open" : ""}`}>
+        <button className="closee-btn" onClick={() => setMenuOpen(false)}>
           <IoMdClose />
         </button>
         <nav>

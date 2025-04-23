@@ -20,7 +20,7 @@ function PersonBlock() {
     if (button === 'partner') navigate('/partner');
     if (button === 'supportchat') navigate('/personal/supportchat');
     if (button === 'infoblock') navigate('/infoblock');
-    if (button === 'chats') navigate('/chats');
+    if (button === 'chats') navigate('/personal/chats');
     if (button === 'groups') navigate('/groups');
     if (button === 'out') console.log('Выход');
   };
