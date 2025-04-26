@@ -1,4 +1,5 @@
 // firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { 
@@ -10,7 +11,8 @@ import {
   addDoc,
   serverTimestamp,
   getDoc,
-  doc
+  doc,
+  getDocs
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -113,6 +115,19 @@ const saveQuizResult = async (result) => {
   }
 };
 
+
+const getAllUsers = async () => {
+  try {
+    const usersRef = collection(db, "users");
+    const snapshot = await getDocs(usersRef);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Ошибка при получении пользователей:", error);
+    return [];
+  }
+};
+
+
 export {
   auth,
   db,
@@ -121,5 +136,6 @@ export {
   getUserData,
   sendMessage,
   createCourse,
-  saveQuizResult
+  saveQuizResult,
+  getAllUsers
 };

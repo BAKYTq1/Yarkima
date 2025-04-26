@@ -21,6 +21,9 @@ import SubscriptionForm from '../../components/Subscribe/SubscriptionForm'
 import Popular from '../../components/popular/Popular'
 import HexagonAnimation from '../../components/heaxgonAnimation/HexagonAnimation'
 import QuizResults from '../../components/Quiz/Quizresult'
+import ChatList from '../../components/ChatItem/ChatList'
+import SearchUser from '../../components/PublicProfile/PublicProfile'
+import PublicProfile from '../../components/PublicProfile/PublicProfile'
 function Home() {
   return (
     <div>
@@ -39,11 +42,13 @@ function Home() {
       {/* <Personal/> */}
       <Profile/>
       <Quiz/>
+      <ChatList/>
       {/* <ErrorMessage/>
       <SubscriptionForm/>
       <Popular/> */}
       {/* <Login/> */}
       {/* <CourseChat/> */}
+      <PublicProfile/>
     </div>
   )
 }

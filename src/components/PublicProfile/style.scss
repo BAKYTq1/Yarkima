@@ -1,0 +1,120 @@
+.profile {
+    background-color: #121212;
+    color: #fff;
+    min-height: 100vh;
+    padding: 2rem;
+  
+    &__container {
+      max-width: 960px;
+      margin: 0 auto;
+      background-color: #1e1e1e;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+  
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 1.5rem;
+    }
+  
+    &__avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #444;
+    }
+  
+    &__info {
+      flex-grow: 1;
+    }
+  
+    &__username {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 0 0.5rem;
+    }
+  
+    &__email {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+  
+    &__actions {
+      display: flex;
+      gap: 1rem;
+    }
+  
+    &__button {
+      background: #2a2a2a;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+  
+      &:hover {
+        background: #3a3a3a;
+      }
+  
+      &--gradient {
+        background: linear-gradient(135deg, #6e72fc, #ad1deb);
+      }
+    }
+  
+    &__tabs {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      border-bottom: 1px solid #2a2a2a;
+      padding-bottom: 1rem;
+    }
+  
+    &__tab {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s;
+  
+      &--active {
+        color: #fff;
+        font-weight: bold;
+  
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60%;
+          height: 2px;
+          background: #ad1deb;
+        }
+      }
+  
+      &:hover {
+        color: #fff;
+      }
+    }
+  
+    &__content {
+      margin-top: 2rem;
+    }
+  }
+  
+  .profile-content__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ddd;
+  }
+  

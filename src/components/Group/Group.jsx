@@ -29,7 +29,7 @@ const chats = [
 
 const Group = () => {
   return (
-      <div className="chat-list container">
+      <div className="chat-list">
       <div className="sidebar">
         <Sidebar />
       </div>

@@ -3,8 +3,11 @@ import './Quiz.scss';
 import { auth, db, saveQuizResult } from '../../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
 
-const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите правильный ID курса
+const Quiz = () => {
+  const { courseId } = useParams();
+
   const [state, setState] = useState({
     currentIndex: 0,
     selected: null,
@@ -18,7 +21,6 @@ const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите пр
     error: null
   });
 
-  // Загрузка курса/теста из Firestore
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -36,13 +38,12 @@ const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите пр
 
         const courseData = courseSnap.data();
         console.log("Полученные данные курса:", courseData);
-        
+
         if (!courseData.questions || courseData.questions.length === 0) {
           throw new Error("Курс не содержит вопросов");
         }
 
-        // Фильтруем вопросы с хотя бы одним вариантом ответа
-        const validQuestions = courseData.questions.filter(q => 
+        const validQuestions = courseData.questions.filter(q =>
           q.options && q.options.length > 0 && q.term && q.definition
         );
 
@@ -50,31 +51,30 @@ const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите пр
           throw new Error("Нет валидных вопросов с вариантами ответов");
         }
 
-        setState(prev => ({ 
-          ...prev, 
+        setState(prev => ({
+          ...prev,
           courseData: {
             ...courseData,
             questions: validQuestions
-          }, 
-          isLoading: false 
+          },
+          isLoading: false
         }));
       } catch (error) {
         console.error("Ошибка загрузки курса:", error);
-        setState(prev => ({ 
-          ...prev, 
-          isLoading: false, 
-          error: error.message 
+        setState(prev => ({
+          ...prev,
+          isLoading: false,
+          error: error.message
         }));
       }
     };
 
     fetchCourse();
 
-    // Подписка на изменения авторизации
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setState(prev => ({ 
-        ...prev, 
-        userId: user ? user.uid : null 
+      setState(prev => ({
+        ...prev,
+        userId: user ? user.uid : null
       }));
     });
 
@@ -99,21 +99,21 @@ const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите пр
       selectedAnswer: currentQuestion.options[state.selected],
       isCorrect: correct,
     };
-
+  
     setState(prev => ({
       ...prev,
       isChecked: true,
       isCorrect: correct,
-      streak: correct ? prev.streak + 1 : 0,
+      streak: correct ? Math.min(prev.streak + 1, state.courseData.questions.length) : 0,
       answers: [...prev.answers, answer]
     }));
   };
+  
 
   const handleNext = async () => {
     const nextIndex = state.currentIndex + 1;
 
     if (nextIndex >= state.courseData.questions.length) {
-      // Сохранение результатов при завершении теста
       if (state.userId) {
         await saveQuizResult({
           userId: state.userId,
@@ -127,8 +127,7 @@ const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите пр
       }
 
       alert(`Тест завершен! Результат: ${state.answers.filter(a => a.isCorrect).length}/${state.courseData.questions.length}`);
-      
-      // Сброс состояния
+
       setState(prev => ({
         ...prev,
         currentIndex: 0,
@@ -171,8 +170,9 @@ const Quiz = ({ courseId = "YJLFZ1au93f1dXPDGYgA" }) => { // Укажите пр
         <div className="streak-info">
           <span className="progress">{state.streak} ПРАВИЛЬНЫХ ОТВЕТОВ ПОДРЯД!</span>
           <div className="streak-bar">
-            <div className="bar-fill" style={{ width: `${(state.streak / 4) * 100}%` }}></div>
-          </div>
+  <div className="bar-fill" style={{ width: `${(state.streak / state.courseData.questions.length) * 100}%` }}></div>
+</div>
+
         </div>
       </div>
 
