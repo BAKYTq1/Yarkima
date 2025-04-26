@@ -6,7 +6,7 @@
  width: 98%;
  margin: 0 auto;
  position: sticky;
- z-index: 9999;
+ z-index: 9898978999;
  top: 0;
   .box {
     display: flex;
@@ -88,7 +88,7 @@
     cursor: pointer;
   }
 }
-.dropdown-menu {
+.dropdown-menuu {
   margin-top: 3px !important;
   width: 100%;
   height: 100px;
@@ -99,21 +99,22 @@
   transition: max-height 0.4s ease-in-out;
 }
 
-.dropdown-menu.open {
+.dropdown-menuu.open {
   max-height: 250px;
 }
 
-.close-btn {
+.closee-btn {
   position: relative;
   right: -1400px;
   display: block;
   background: none;
   border: none;
+  z-index: 323232323;
   font-size: 24px;
   cursor: pointer;
 }
 
-.dropdown-menu nav ul {
+.dropdown-menuu nav ul {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,11 +124,11 @@
   text-align: center;
 }
 
-.dropdown-menu nav ul li {
+.dropdown-menuu nav ul li {
   margin: 10px 0;
 }
 
-.dropdown-menu nav ul li a {
+.dropdown-menuu nav ul li a {
   text-decoration: none;
   color: black;
   font-weight: bold;
@@ -137,7 +138,7 @@
   padding-bottom: 5px;
 }
 
-.dropdown-menu nav ul li a::after {
+.dropdown-menuu nav ul li a::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -149,7 +150,7 @@
   transform: translateX(-50%);
 }
 
-.dropdown-menu nav ul li a:hover::after {
+.dropdown-menuu nav ul li a:hover::after {
   width: 100%; 
 }
 .user-photo {

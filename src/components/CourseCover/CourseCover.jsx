@@ -5,6 +5,10 @@ import { Remove1 } from './Remove1/Remove1';
 import { Settings } from './Settings/Settings';
 import './CourseCover.css';
 import { createCourse } from '../../firebase';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
+// Инициализация Firebase Storage
+const storage = getStorage();  // Подключаем Firebase Storage
 
 const CourseCover = () => {
   // Состояния формы
@@ -25,38 +29,42 @@ const CourseCover = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Обработчик выбора обложки
-  const handleCoverChange = (e) => {
+  // Обработчик загрузки обложки
+  const handleCoverChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setCoverImage(file);
-      setCoverPreview(URL.createObjectURL(file));
-    }
-  };
-
-  // Обработчик выбора рубашки
-  const handleShirtChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setShirtImage(file);
-      setShirtPreview(URL.createObjectURL(file));
-    }
-  };
-
-  // Функция конвертации файла в base64
-  const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      // Проверяем, что file существует и является Blob-объектом
-      if (!file || !(file instanceof Blob)) {
-        resolve(null);
-        return;
+      try {
+        const coverUrl = await uploadFileToStorage(file);  // Загружаем файл в Firebase Storage
+        setCoverImage(coverUrl);  // Сохраняем URL обложки
+        setCoverPreview(URL.createObjectURL(file));  // Показываем превью
+      } catch (error) {
+        console.error('Ошибка загрузки изображения:', error);
+        setError('Ошибка загрузки изображения');
       }
-      
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-      reader.readAsDataURL(file);
-    });
+    }
+  };
+
+  // Обработчик загрузки рубашки
+  const handleShirtChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const shirtUrl = await uploadFileToStorage(file);  // Загружаем рубашку
+        setShirtImage(shirtUrl);  // Сохраняем URL рубашки
+        setShirtPreview(URL.createObjectURL(file));  // Показываем превью
+      } catch (error) {
+        console.error('Ошибка загрузки изображения:', error);
+        setError('Ошибка загрузки изображения');
+      }
+    }
+  };
+
+  // Функция для загрузки файла в Firebase Storage
+  const uploadFileToStorage = async (file) => {
+    const storageRef = ref(storage, 'courses/' + file.name);  // Путь для хранения файла
+    const snapshot = await uploadBytes(storageRef, file);  // Загрузка файла
+    const downloadURL = await getDownloadURL(snapshot.ref);  // Получаем URL для файла
+    return downloadURL;
   };
 
   // Создание курса
@@ -70,10 +78,6 @@ const CourseCover = () => {
       setIsLoading(true);
       setError(null);
 
-      // Конвертируем изображения только если они были выбраны
-      const coverBase64 = coverImage ? await fileToBase64(coverImage) : null;
-      const shirtBase64 = shirtImage ? await fileToBase64(shirtImage) : null;
-
       await createCourse({
         courseName,
         courseDescription,
@@ -81,14 +85,13 @@ const CourseCover = () => {
         language,
         courseType,
         questions,
-        coverImage: coverBase64,
-        shirtImage: shirtBase64,
+        coverImage,  // Используем URL обложки из состояния
+        shirtImage,  // Используем URL рубашки из состояния
         createdAt: new Date().toISOString()
       });
 
       alert('Курс успешно создан!');
-      // Сброс формы
-      resetForm();
+      resetForm();  // Сброс формы
     } catch (error) {
       console.error('Ошибка:', error);
       setError(`Ошибка при создании курса: ${error.message}`);
@@ -111,40 +114,40 @@ const CourseCover = () => {
     ]);
   };
 
-  // ... остальные обработчики (добавление/удаление вопросов и вариантов) ...
+  // Добавить вопрос
   const handleAddQuestion = () => {
     setQuestions([...questions, { term: '', definition: '', options: [] }]);
   };
 
-  const handleAddOption = (index) => {
-    const newQuestions = [...questions];
-    newQuestions[index].options.push('');
-    setQuestions(newQuestions);
-  };
-
+  // Удалить вопрос
   const handleRemoveQuestion = (index) => {
-    const newQuestions = questions.filter((_, i) => i !== index);
-    setQuestions(newQuestions);
+    const updatedQuestions = questions.filter((_, qIndex) => qIndex !== index);
+    setQuestions(updatedQuestions);
   };
 
-  const handleRemoveOption = (qIndex, oIndex) => {
+  // Добавить вариант ответа
+  const handleAddOption = (questionIndex) => {
     const newQuestions = [...questions];
-    newQuestions[qIndex].options = newQuestions[qIndex].options.filter((_, i) => i !== oIndex);
+    newQuestions[questionIndex].options.push('');
     setQuestions(newQuestions);
   };
 
-  const isCreateButtonActive = courseName.trim() !== '' && questions.length > 0;
+  // Удалить вариант ответа
+  const handleRemoveOption = (questionIndex, optionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].options = newQuestions[questionIndex].options.filter((_, oIndex) => oIndex !== optionIndex);
+    setQuestions(newQuestions);
+  };
 
   return (
     <div className="frame container">
-      {/* Заголовок и кнопки */}
       <div className="div">
         <div className="text-wrapper">СОЗДАТЬ НОВЫЙ КУРС</div>
         <div className="div-2">
           <button
-            className={`button ${isCreateButtonActive ? 'active' : ''}`}
+            className={`button ${courseName.trim() !== '' && questions.length > 0 ? 'active' : ''}`}
             onClick={handleCreateCourse}
-            disabled={!isCreateButtonActive || isLoading}
+            disabled={isLoading || courseName.trim() === '' || questions.length === 0}
           >
             <div className="text-wrapper-2">
               {isLoading ? 'СОХРАНЕНИЕ...' : 'СОЗДАТЬ'}
@@ -156,10 +159,8 @@ const CourseCover = () => {
         </div>
       </div>
 
-      {/* Сообщение об ошибке */}
       {error && <div className="error-message">{error}</div>}
 
-      {/* Секция загрузки изображений */}
       <div className="div-3">
         <div className="group">
           <div className="overlap-group">
@@ -214,7 +215,6 @@ const CourseCover = () => {
         </div>
       </div>
 
-      {/* Остальная часть формы (поля ввода, вопросы и т.д.) */}
       <div className="div-7">
         <div className="field">
           <div className="FIELD-NAME-3">Название курса</div>
@@ -312,83 +312,34 @@ const CourseCover = () => {
                       newQuestions[qIndex].options[oIndex] = e.target.value;
                       setQuestions(newQuestions);
                     }}
-                  />
-                  <Remove1 className="img" onClick={() => handleRemoveOption(qIndex, oIndex)} />
-                </div>
-              </div>
-            ))}
-
-            <button className="button-3" onClick={() => handleAddOption(qIndex)}>
-              <Plus className="img-33" />
-              <div className="text-wrapper-4">ДОБАВИТЬ ВАРИАНТЫ ОТВЕТА</div>
-            </button>
+                    /> </div>
+            <div className="div-15">
+              <Remove1 className="img" onClick={() => handleRemoveOption(qIndex, oIndex)} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
-      <div className="button-4" onClick={handleAddQuestion}>
-        <Plus className="img-33" />
-        <div className="text-wrapper-11">ДОБАВИТЬ КАРТОЧКУ</div>
+        <div className="plus-wrapper">
+          <Plus className="plus-instance" onClick={() => handleAddOption(qIndex)} />
+        </div>
       </div>
-
-      <button className="button-5" onClick={handleCreateCourse}>
-        <div className="text-wrapper-2">СОЗДАТЬ</div>
-      </button>
-
-      {showSettings && (
-        <div className="modal-overlay555" onClick={() => setShowSettings(false)}>
-          <div className="modal555" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header555">
-              <h2 className="modal-title555">НАСТРОЙКИ КУРСА</h2>
-              <button className="modal-close-btn555" onClick={() => setShowSettings(false)}>
-                ×
-              </button>
-            </div>
-            
-            <div className="modal-content555">
-              <div className="modal-section555">
-                <div className="modal-subtitle555">Вопросы (Максимум 20)</div>
-                <div className="checkbox-group555">
-                  <div className="checkbox-wrapper-555">
-                    <span className="checkbox-label-text555">Верно - неверно</span>
-                    <input className="tgl555 tgl-light555" id="cb1-555" type="checkbox" defaultChecked />
-                    <label className="tgl-btn555" htmlFor="cb1-555"></label>
-                  </div>
-                  <div className="checkbox-wrapper-555">
-                    <span className="checkbox-label-text555">С выбором ответов</span>
-                    <input className="tgl555 tgl-light555" id="cb2-555" type="checkbox" defaultChecked />
-                    <label className="tgl-btn555" htmlFor="cb2-555"></label>
-                  </div>
-                  <div className="checkbox-wrapper-555">
-                    <span className="checkbox-label-text555">Подбор</span>
-                    <input className="tgl555 tgl-light555" id="cb3-555" type="checkbox" />
-                    <label className="tgl-btn555" htmlFor="cb3-555"></label>
-                  </div>
-                </div>
-              </div>
-
-              <div className="modal-section555">
-                <div className="number-input-container555">
-                  <span className="number-input-label555">Количество вопросов</span>
-                  <input
-                    type="number"
-                    className="number-input555"
-                    min="1"
-                    max="20"
-                    defaultValue="4"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="modal-footer555">
-              <button className="save-button555">СОХРАНИТЬ</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
-  );
-};
+  ))}
+
+  <div className="group-4" onClick={handleAddQuestion}>
+    <div className="text-wrapper-5">ДОБАВИТЬ ТЕРМИН</div>
+    <Plus className="plus-2" />
+  </div>
+
+  {showSettings && (
+    <div className="settings-modal">
+      <div className="modal-content">
+        <button onClick={() => setShowSettings(false)}>Закрыть</button>
+        {/* Здесь можно разместить дополнительные настройки */}
+      </div>
+    </div>
+  )}
+</div>
+); };
 
 export default CourseCover;

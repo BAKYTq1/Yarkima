@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth } from '../../firebase';
 import GoogleIcon from '../../assets/svg/arrow.svg'; // Импортируйте SVG иконку Google
 import './style.scss';
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from '../../firebase';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -24,9 +26,27 @@ function Login() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
+        checkAndAddUser(currentUser);
         toast.success(`Добро пожаловать, ${currentUser.email}!`);
         navigate('/');
-      }
+      }     
+      const checkAndAddUser = async (currentUser) => {
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+      
+        if (!userSnap.exists()) {
+          await setDoc(userRef, {
+            uid: currentUser.uid,
+            email: currentUser.email,
+            displayName: currentUser.displayName || "Пользователь",
+            createdAt: new Date()
+          });
+          console.log("✅ Пользователь добавлен в Firestore");
+        } else {
+          console.log("ℹ️ Пользователь уже есть в Firestore");
+        }
+      };
+      
     });
 
     return () => unsubscribe();

@@ -4,6 +4,9 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+  ::-webkit-scrollbar{
+    width: 0px;
+  }
 }
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 body {
@@ -58,3 +61,18 @@ h6 {
   font-weight: inherit;
   font-size: inherit;
 }
+/* HTML: <div class="loader"></div> */
+.loader {
+  margin: 0 auto;
+  width: fit-content;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 30px;
+  padding-bottom: 8px;
+  background: linear-gradient(currentColor 0 0) 0 100%/0% 3px no-repeat;
+  animation: l2 2s linear infinite;
+}
+.loader:before {
+  content:"Loading..."
+}
+@keyframes l2 {to{background-size: 100% 3px}}
