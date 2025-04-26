@@ -24,6 +24,7 @@ import Notfound from "./components/NotFound/Notfound";
 import SupportChat from "./components/SupportChat/SupportChat";
 import Chatlist from "./components/ChatItem/ChatList";
 import Group from "./components/Group/Group";
+import Usershow from "./components/Usershow/Usershow";
 
 
 export const myRouter = createBrowserRouter([
@@ -73,6 +74,10 @@ export const myRouter = createBrowserRouter([
 
             },
             {
+                path: "usershow",
+                element: <Usershow />
+            },
+            {
                 path: '*',
                 element: <Notfound/>
             }
@@ -119,7 +124,7 @@ export const myRouter = createBrowserRouter([
             {
                 path: "Group",
                 element: <Group />
-            },
+            },      
         ]
     },
     {
