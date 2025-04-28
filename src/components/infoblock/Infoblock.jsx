@@ -7,12 +7,10 @@ function Infoblock() {
            <div className='info__ul'>
                       <Link to={'/infoblock'}><button>Основная информация</button></Link>
                       <Link to="addinfo"><button>Дополнительная информация</button></Link>
-                      <button>Социальные сети</button>
-                      <button>Идентификатор пользователя</button>
-                      <button>Лицевой счет</button>
+                      <Link to={'socialNetwork'}><button>Социальные сети</button></Link> 
+                      <Link to={'accountbalance'}><button>Лицевой счет</button></Link>
                       <Link to="public"><button>История заказов</button></Link>
-                      <button>Пароль</button>
-                      <button className='info__red'>Выйти</button>
+                      <Link to={'/personal'}><button className='info__red'>Выйти</button></Link>
                   </div>
     </div>
   )

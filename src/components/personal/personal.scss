@@ -136,6 +136,10 @@ background-color: white;
     box-sizing: border-box;
     border-radius: 20px;
     border: 2px solid purple;
+     .personal__info{
+      margin-top: 20px;
+  display: flex;
+    }
 }
 
 .personal__icons {
@@ -182,6 +186,10 @@ background-color: white;
     border-radius: 20px;
     background: rgb(255, 255, 255);
     padding: 24px;
+    .personal__info{
+      margin-top: 30px;
+  display: flex;
+    }
 }
 
 

@@ -8,7 +8,6 @@ import Quiz from "./components/Quiz/Quiz";
 
 import Login from "./pages/SignIn/SignIn";
 import Register from "./pages/Sign up/SignUp";
-import Chat from "./components/Chat/Chat";
 
 import SubscriptionForm from "./components/Subscribe/SubscriptionForm";
 import ErrorMessage from "./components/Subscribe/ErrorMessage";
@@ -22,8 +21,17 @@ import Popular from "./components/popular/Popular";
 import Layout3 from "./components/Layout/Layout2/Layout";
 import Notfound from "./components/NotFound/Notfound";
 import SupportChat from "./components/SupportChat/SupportChat";
-import Chatlist from "./components/ChatItem/ChatList";
 import Group from "./components/Group/Group";
+
+
+import PublicProfile from "./components/PublicProfile/PublicProfile";
+import ChatComponent from "./components/Chat/ChaComponent";
+import ChatList from "./components/Chat/ChatList/ChatList";
+import Chats from "./components/ChatItem/Chats";
+import SocialNetwork from "./components/SocailNetwork/SocialNetwork";
+import AccountBalance from "./components/AccountBalance/AccountBalance";
+import Partners from "./components/Partner/Partner";
+import Detailkyrs from "./components/Detailkyrs/Detailkyrs";
 import Usershow from "./components/Usershow/Usershow";
 
 import ChatList from "./components/ChatItem/ChatList";
@@ -57,11 +65,6 @@ export const myRouter = createBrowserRouter([
                 element: <Register />
             },
             {
-                path: "chat",
-                element: <Chat />
-
-            },
-            {
 
                 path: "subscribe",
                 element: <SubscriptionForm />,
@@ -87,6 +90,14 @@ export const myRouter = createBrowserRouter([
                 path: '/quiz/:courseId',
                 element: <Quiz/>
             },
+            {
+                path: 'partners',
+                element: <Partners/>
+            },
+            {
+                path: 'createcurs',
+                element: <CourseCover/>
+            },
         ]
     },
     {
@@ -107,6 +118,16 @@ export const myRouter = createBrowserRouter([
                 element: <Public/>
 
             },
+            {
+                path: "socialNetwork",
+                element: <SocialNetwork/>
+
+            },
+            {
+                path: "accountbalance",
+                element: <AccountBalance/>
+
+            },
         ]
     },
     {
@@ -123,20 +144,31 @@ export const myRouter = createBrowserRouter([
                 path: 'supportchat',
                 element: <SupportChat />
             },
-            {
-                path: "chatlist",
-                element: <Chatlist />
-            },
+            // {
+            //     path: "chatlist",
+            //     element: <Chatlist />
+            // },
             {
                 path: "Group",
                 element: <Group />
        
             },
             {
-                path: "chats",
-                element: <ChatList />
+                path: "partner",
+                element: <PublicProfile />
             },
-
+            {
+                path: "/personal/partner/chat/:id",
+                element: <ChatComponent/>
+            },
+            {
+                path: "groups",
+                element: <ChatList/>
+            },
+            {
+                path: "chats",
+                element: <Chats/>
+            }
         ]
     },
     {

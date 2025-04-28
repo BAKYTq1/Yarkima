@@ -1,6 +1,6 @@
 import React from 'react';
 import grouplogo from '../../assets/image/grouplogo.png';
-import Sidebar from "../ChatItem/Sidebar";
+import Sidebar from "../ChatItem/Chats";
 import './Group.scss';
 
 const chats = [

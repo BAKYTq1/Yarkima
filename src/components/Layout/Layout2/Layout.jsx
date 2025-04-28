@@ -7,7 +7,7 @@ function Layout3() {
   return (
     <div>
       <Header/>
-      <div style={{ margin: 'auto',maxWidth: '1400px' ,display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{ margin: 'auto',maxWidth: '1400px' ,display: 'flex', justifyContent: 'space-between', gap: '20px', marginTop: '30px'}}>
         <PersonBlock/>
       <Outlet/>
         </div>
