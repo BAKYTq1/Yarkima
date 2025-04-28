@@ -11,7 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth, db } from '../../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import './style.scss';
-import GoogleIcon from '../../assets/svg/2minutee.svg';
+import { FcGoogle } from "react-icons/fc";
+
 
 function Register() {
   const [name, setName] = useState('');
@@ -186,11 +187,7 @@ function Register() {
             onClick={handleGoogleSignIn}
             disabled={isLoading}
           >
-            <img 
-              src={GoogleIcon} 
-              alt="Google" 
-              className="google-icon" 
-            />
+            <FcGoogle />
             Зарегистрироваться через Google
           </button>
 

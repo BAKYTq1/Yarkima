@@ -9,7 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 // import { auth } from "../../firebase"; 
 // import { auth } from "../../firebase"; 
-// import plus from "../../assets/svg/plus.svg";
+import plus from "../../assets/svg/plus.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,6 +44,7 @@ const Header = () => {
         <div className="auth-buttons">
           {user ? (
             <>
+              <Link to={'/createcurs'}><img className="plus" src={plus} alt="" /></Link>
               <Link to="/personal">
               <img 
                 src={user.photoURL || "https://via.placeholder.com/32"} 
