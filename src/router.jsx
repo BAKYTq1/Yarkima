@@ -24,7 +24,6 @@ import Notfound from "./components/NotFound/Notfound";
 import SupportChat from "./components/SupportChat/SupportChat";
 import Chatlist from "./components/ChatItem/ChatList";
 import Group from "./components/Group/Group";
-import Detailkyrs from "./components/Detailkyrs/Detailkyrs";
 import Usershow from "./components/Usershow/Usershow";
 
 import ChatList from "./components/ChatItem/ChatList";
@@ -79,10 +78,6 @@ export const myRouter = createBrowserRouter([
             {
                 path: "usershow",
                 element: <Usershow />
-            },
-            {
-                path: "detailkyrs",
-                element: <Detailkyrs />
             },
             {
                 path: '*',
