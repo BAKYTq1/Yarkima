@@ -8,6 +8,8 @@ import { FaGripLines } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 // import { auth } from "../../firebase"; 
+// import { auth } from "../../firebase"; 
+// import plus from "../../assets/svg/plus.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -30,8 +32,9 @@ const Header = () => {
             <img className="logoText" src={LogoText} alt="logo text" />
           </div>
         </Link>
-
+     <Link to="Detailkyrs">
         <button className="dropdown99">ИЗУЧИТЬ 🔻</button>
+    </Link>
 
         <div className="search">
           <span className="icon"><CiSearch /></span>

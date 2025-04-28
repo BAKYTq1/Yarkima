@@ -22,6 +22,8 @@ import Layout3 from "./components/Layout/Layout2/Layout";
 import Notfound from "./components/NotFound/Notfound";
 import SupportChat from "./components/SupportChat/SupportChat";
 import Group from "./components/Group/Group";
+
+
 import PublicProfile from "./components/PublicProfile/PublicProfile";
 import ChatComponent from "./components/Chat/ChaComponent";
 import ChatList from "./components/Chat/ChatList/ChatList";
@@ -29,8 +31,6 @@ import Chats from "./components/ChatItem/Chats";
 import SocialNetwork from "./components/SocailNetwork/SocialNetwork";
 import AccountBalance from "./components/AccountBalance/AccountBalance";
 import Partners from "./components/Partner/Partner";
-import Detailkyrs from "./components/Detailkyrs/Detailkyrs";
-import Usershow from "./components/Usershow/Usershow";
 
 // import ChatList from "./components/ChatItem/ChatList";
 
@@ -76,14 +76,10 @@ export const myRouter = createBrowserRouter([
                 element: <Popular />
 
             },
-            {
-                path: "usershow",
-                element: <Usershow />
-            },
-            {
-                path: "detailkyrs",
-                element: <Detailkyrs />
-            },
+            // {
+            //     path: "detailkyrs",
+            //     element: <Detailkyrs />
+            // },
             {
                 path: '/quiz/:courseId',
                 element: <Quiz/>
