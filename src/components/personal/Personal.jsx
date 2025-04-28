@@ -4,7 +4,7 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import './personal.scss';
 import defaultAvatar from '../../assets/image/personal-man.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Personal() {
   const [user, setUser] = useState(null);
@@ -12,7 +12,7 @@ function Personal() {
   const [photoURL, setPhotoURL] = useState(defaultAvatar);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('info');
-
+  const navigate = useNavigate()
   // Инициализация Firebase
   const auth = getAuth();
   const storage = getStorage();
@@ -56,6 +56,7 @@ function Personal() {
   const handleSignOut = () => {
     signOut(auth).then(() => {
       console.log('Выход выполнен успешно!');
+      navigate('/')
     }).catch((error) => {
       console.error('Ошибка при выходе:', error);
     });
