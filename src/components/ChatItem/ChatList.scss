@@ -1,26 +1,27 @@
 .chat-list {
-  display: block !important;
-  width: 100% !important;
+  display: block;
+  width: 100%;
   background: white;
   border-radius: 12px;
   overflow: hidden;
   justify-content: end;
-
 
   .sidebar {
     width: 370px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 12;
+    gap: 12px;  // Добавлена единица измерения для gap
     padding: 20px;
   }
+
   .chat-item {
     display: flex;
     padding: 1rem;
     gap: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0; // Добавил разделитель между чатами
 
     &:hover {
       background-color: #f8f9fa;
@@ -36,7 +37,7 @@
       width: 50px;
       height: 50px;
       overflow: hidden;
-      
+
       img {
         width: 100%;
         height: 100%;
@@ -77,6 +78,10 @@
       }
     }
   }
+
+  .chat-item--active {
+    background-color: #e9ecef;  // Добавим стиль для активного чата
+  }
 }
 
 @keyframes newMessage {
@@ -92,4 +97,93 @@
 
 .chat-item {
   animation: newMessage 0.3s ease forwards;
+}
+
+.chat-list {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.chat-list__container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chat-list__title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #0078d4;
+}
+
+.chat-list__users {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-list__user {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #f1f1f1;
+  }
+}
+
+.chat-list__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.chat-list__info {
+  flex-grow: 1;
+}
+
+.chat-list__name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.chat-list__email {
+  font-size: 14px;
+  color: #888;
+  margin: 5px 0 0;
+}
+
+.chat-list__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chat-list__button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100px;
+  
+  &:hover {
+    background-color: #0056b3;
+  }
 }

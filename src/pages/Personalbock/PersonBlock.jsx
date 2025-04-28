@@ -17,11 +17,11 @@ function PersonBlock() {
 
     // Переходы по маршрутам
     if (button === 'personal') navigate('/personal');
-    if (button === 'partner') navigate('/partner');
+    if (button === 'partner') navigate('/personal/partner');
     if (button === 'supportchat') navigate('/personal/supportchat');
     if (button === 'infoblock') navigate('/infoblock');
     if (button === 'chats') navigate('/personal/chats');
-    if (button === 'groups') navigate('/groups');
+    if (button === 'groups') navigate('/personal/groups');
     if (button === 'out') console.log('Выход');
   };
 
@@ -35,19 +35,19 @@ function PersonBlock() {
           >
             <CgProfile /> Публичный профиль
           </button>
-          <button
+          {/* <button
             className={activeSidebarTop === 'partner' ? 'active' : ''}
             onClick={() => handleSidebarTopClick('partner')}
           >
             <GiPostOffice /> Кабинет партнёра
-          </button>
-          <button
+          </button> */}
+          {/* <button
             ref={moreButtonRef}
             className={activeSidebarTop === 'infoblock' ? 'active' : ''}
             onClick={() => handleSidebarTopClick('infoblock')}
           >
             <RiSettings3Line /> Настройки
-          </button>
+          </button> */}
           <button
             className={activeSidebarTop === 'supportchat' ? 'active' : ''}
             onClick={() => handleSidebarTopClick('supportchat')}

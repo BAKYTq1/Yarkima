@@ -1,186 +1,113 @@
-import React, { useState } from 'react';
-import { Down1 } from './Down1/Down1';
-import { Plus } from './Plus/Plus';
-import { Remove1 } from './Remove1/Remove1';
-import { Settings } from './Settings/Settings';
-import './CourseCover.css';
-import { createCourse } from '../../firebase';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-
-// Инициализация Firebase Storage
-const storage = getStorage();  // Подключаем Firebase Storage
+import React, { useState } from "react";
+import { Down1 } from "./Down1/Down1"; // Пример использования компонента выпадающего списка
+import { Plus } from "./Plus/Plus";
+import { Remove1 } from "./Remove1/Remove1";
+import { Settings } from "./Settings/Settings";
+import "./CourseCover.css";
+import { createCourse } from "../../firebase"; // путь подкорректируй под себя
 
 const CourseCover = () => {
-  // Состояния формы
-  const [courseName, setCourseName] = useState('');
-  const [courseDescription, setCourseDescription] = useState('');
-  const [category, setCategory] = useState('Языки');
-  const [language, setLanguage] = useState('Русский');
-  const [courseType, setCourseType] = useState('Тест');
+  const [ courseName, setCourseName] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
+  const [category, setCategory] = useState("Языки"); // по умолчанию категория
+  const [language, setLanguage] = useState("Русский"); // по умолчанию язык
+  const [courseType, setCourseType] = useState("Тест");
   const [coverImage, setCoverImage] = useState(null);
-  const [coverPreview, setCoverPreview] = useState(null);
-  const [shirtImage, setShirtImage] = useState(null);
-  const [shirtPreview, setShirtPreview] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [shirtImage, setShirtImage] = useState(null);
   const [questions, setQuestions] = useState([
-    { term: 'Milk', definition: 'Молоко', options: ['Молоко', 'Корова', 'Трава', 'Творог'] },
-    { term: 'ЯЗЫК', definition: 'ЯЗЫК', options: [] }
+    { term: "Milk", definition: "Молоко", options: ["Молоко", "Корова", "Трава", "Творог"] },
+    { term: "ЯЗЫК", definition: "ЯЗЫК", options: [] }
   ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  // Обработчик загрузки обложки
-  const handleCoverChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
-        const coverUrl = await uploadFileToStorage(file);  // Загружаем файл в Firebase Storage
-        setCoverImage(coverUrl);  // Сохраняем URL обложки
-        setCoverPreview(URL.createObjectURL(file));  // Показываем превью
-      } catch (error) {
-        console.error('Ошибка загрузки изображения:', error);
-        setError('Ошибка загрузки изображения');
-      }
-    }
-  };
-
-  // Обработчик загрузки рубашки
-  const handleShirtChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
-        const shirtUrl = await uploadFileToStorage(file);  // Загружаем рубашку
-        setShirtImage(shirtUrl);  // Сохраняем URL рубашки
-        setShirtPreview(URL.createObjectURL(file));  // Показываем превью
-      } catch (error) {
-        console.error('Ошибка загрузки изображения:', error);
-        setError('Ошибка загрузки изображения');
-      }
-    }
-  };
-
-  // Функция для загрузки файла в Firebase Storage
-  const uploadFileToStorage = async (file) => {
-    const storageRef = ref(storage, 'courses/' + file.name);  // Путь для хранения файла
-    const snapshot = await uploadBytes(storageRef, file);  // Загрузка файла
-    const downloadURL = await getDownloadURL(snapshot.ref);  // Получаем URL для файла
-    return downloadURL;
-  };
-
-  // Создание курса
   const handleCreateCourse = async () => {
-    if (!courseName.trim()) {
-      setError('Название курса обязательно');
-      return;
-    }
-
     try {
-      setIsLoading(true);
-      setError(null);
-
-      await createCourse({
+      const newCourse = {
         courseName,
         courseDescription,
         category,
         language,
         courseType,
         questions,
-        coverImage,  // Используем URL обложки из состояния
-        shirtImage,  // Используем URL рубашки из состояния
-        createdAt: new Date().toISOString()
-      });
-
-      alert('Курс успешно создан!');
-      resetForm();  // Сброс формы
+      };
+  
+      await createCourse(newCourse);
+      alert("Курс успешно создан!");
     } catch (error) {
-      console.error('Ошибка:', error);
-      setError(`Ошибка при создании курса: ${error.message}`);
-    } finally {
-      setIsLoading(false);
+      console.error("Ошибка:", error);
     }
   };
 
-  // Сброс формы
-  const resetForm = () => {
-    setCourseName('');
-    setCourseDescription('');
-    setCoverImage(null);
-    setCoverPreview(null);
-    setShirtImage(null);
-    setShirtPreview(null);
-    setQuestions([
-      { term: 'Milk', definition: 'Молоко', options: ['Молоко', 'Корова', 'Трава', 'Творог'] },
-      { term: 'ЯЗЫК', definition: 'ЯЗЫК', options: [] }
-    ]);
-  };
-
-  // Добавить вопрос
   const handleAddQuestion = () => {
-    setQuestions([...questions, { term: '', definition: '', options: [] }]);
+    setQuestions([...questions, { term: "", definition: "", options: [] }]);
   };
 
-  // Удалить вопрос
+  const handleAddOption = (index) => {
+    const newQuestions = [...questions];
+    newQuestions[index].options.push("");
+    setQuestions(newQuestions);
+  };
+
   const handleRemoveQuestion = (index) => {
-    const updatedQuestions = questions.filter((_, qIndex) => qIndex !== index);
-    setQuestions(updatedQuestions);
-  };
-
-  // Добавить вариант ответа
-  const handleAddOption = (questionIndex) => {
-    const newQuestions = [...questions];
-    newQuestions[questionIndex].options.push('');
+    const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
   };
 
-  // Удалить вариант ответа
-  const handleRemoveOption = (questionIndex, optionIndex) => {
+  const handleRemoveOption = (qIndex, oIndex) => {
     const newQuestions = [...questions];
-    newQuestions[questionIndex].options = newQuestions[questionIndex].options.filter((_, oIndex) => oIndex !== optionIndex);
+    newQuestions[qIndex].options = newQuestions[qIndex].options.filter((_, i) => i !== oIndex);
     setQuestions(newQuestions);
+  };
+
+  // Проверка, активна ли кнопка "Создать"
+  const isCreateButtonActive = courseName.trim() !== "" && category !== "" && language !== "";
+
+  // Функции для переключения категории и языка
+  const toggleCategory = () => {
+    setCategory(prevCategory => (prevCategory === "Языки" ? "Программирование" : "Языки"));
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(prevLanguage => (prevLanguage === "Русский" ? "Английский" : "Русский"));
   };
 
   return (
     <div className="frame container">
       <div className="div">
         <div className="text-wrapper">СОЗДАТЬ НОВЫЙ КУРС</div>
+
         <div className="div-2">
           <button
-            className={`button ${courseName.trim() !== '' && questions.length > 0 ? 'active' : ''}`}
+            className={`button ${isCreateButtonActive ? "active" : ""}`} // Кнопка окрашивается в синий, если активна
             onClick={handleCreateCourse}
-            disabled={isLoading || courseName.trim() === '' || questions.length === 0}
+            disabled={!isCreateButtonActive} // Кнопка будет отключена, если условия не выполнены
           >
-            <div className="text-wrapper-2">
-              {isLoading ? 'СОХРАНЕНИЕ...' : 'СОЗДАТЬ'}
-            </div>
+            <div className="text-wrapper-2">СОЗДАТЬ</div>
           </button>
-          <div className="settings-wrapper" onClick={() => setShowSettings(true)}>
+
+          <div className="settings-wrapper" 
+          onClick={() => setShowSettings(true)}>
             <Settings className="settings-instance"/>
           </div>
         </div>
       </div>
-
-      {error && <div className="error-message">{error}</div>}
 
       <div className="div-3">
         <div className="group">
           <div className="overlap-group">
             <div className="div-4">
               <div className="text-wrapper-3">ОБЛОЖКА КУРСА</div>
+
               <div className="div-5">
                 <div className="FIELD-NAME">Изображение</div>
                 <div className="FIELD-NAME-2">Макс. размер 10 мб</div>
               </div>
+
               <input
                 type="file"
                 className="button-2"
-                accept="image/*"
-                onChange={handleCoverChange}
+                onChange={(e) => setCoverImage(e.target.files[0])}
               />
-              {coverPreview && (
-                <div className="image-preview-block">
-                  <img src={coverPreview} alt="Обложка курса" className="preview-image"/>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -189,27 +116,17 @@ const CourseCover = () => {
           <div className="overlap-group">
             <div className="div-6">
               <div className="text-wrapper-3">ДОБАВЬТЕ РУБАШКУ</div>
+
               <div className="div-5">
                 <div className="FIELD-NAME">Изображение или видео</div>
                 <p className="FIELD-NAME-2">Макс. размер 10 мб и продолжительность 15 с.</p>
               </div>
+
               <input
                 type="file"
                 className="button-2"
-                accept="image/*,video/*"
-                onChange={handleShirtChange}
+                onChange={(e) => setShirtImage(e.target.files[0])}
               />
-              {shirtPreview && (
-                <div className="image-preview-block">
-                  {shirtImage.type.startsWith('image/') ? (
-                    <img src={shirtPreview} alt="Рубашка курса" className="preview-image"/>
-                  ) : (
-                    <video controls className="preview-video">
-                      <source src={shirtPreview} type={shirtImage.type}/>
-                    </video>
-                  )}
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -236,28 +153,34 @@ const CourseCover = () => {
         </div>
 
         <div className="div-8">
+          {/* Категория */}
           <div className="dropdown">
             <div className="div-9">
               <div className="NAME">Категория</div>
               <div className="TEXT-3">{category}</div>
             </div>
-            <Down1 className="down" onClick={() => setCategory(category === 'Языки' ? 'Программирование' : 'Языки')} />
+            <Down1 className="down" onClick={toggleCategory} /> {/* Добавляем обработчик для категории */}
           </div>
 
+          {/* Язык */}
           <div className="dropdown">
             <div className="div-9">
               <div className="NAME">Язык</div>
               <div className="TEXT-3">{language}</div>
             </div>
-            <Down1 className="down" onClick={() => setLanguage(language === 'Русский' ? 'Английский' : 'Русский')} />
+            <Down1 className="down" onClick={toggleLanguage} /> {/* Добавляем обработчик для языка */}
           </div>
 
+          {/* Тип курса */}
           <div className="dropdown">
             <div className="div-9">
               <div className="NAME">Тип курса</div>
               <div className="TEXT-3">{courseType}</div>
             </div>
-            <Down1 className="down" onClick={() => setCourseType(courseType === 'Тест' ? 'Курс' : 'Тест')} />
+            <Down1
+              className="down"
+              onClick={() => setCourseType(courseType === "Тест" ? "Курс" : "Тест")}
+            />
           </div>
         </div>
       </div>
@@ -312,34 +235,82 @@ const CourseCover = () => {
                       newQuestions[qIndex].options[oIndex] = e.target.value;
                       setQuestions(newQuestions);
                     }}
-                    /> </div>
-            <div className="div-15">
-              <Remove1 className="img" onClick={() => handleRemoveOption(qIndex, oIndex)} />
+                  />
+                  <Remove1 className="img" onClick={() => handleRemoveOption(qIndex, oIndex)} />
+                </div>
+              </div>
+            ))}
+
+            <button className="button-3" onClick={() => handleAddOption(qIndex)}>
+              <Plus className="img-33" />
+              <div className="text-wrapper-4">ДОБАВИТЬ ВАРИАНТЫ ОТВЕТА</div>
+            </button>
+          </div>
+        </div>
+      ))}
+
+      <div className="button-4" onClick={handleAddQuestion}>
+        <Plus className="img-33" />
+        <div className="text-wrapper-11">ДОБАВИТЬ КАРТОЧКУ</div>
+      </div>
+
+      <button className="button-5" onClick={handleCreateCourse}>
+        <div className="text-wrapper-2">СОЗДАТЬ</div>
+      </button>
+      {showSettings && (
+  <div className="modal-overlay555" onClick={() => setShowSettings(false)}>
+    <div className="modal555" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header555">
+        <h2 className="modal-title555">НАСТРОЙКИ КУРСА</h2>
+        <button className="modal-close-btn555" onClick={() => setShowSettings(false)}>
+          ×
+        </button>
+      </div>
+      
+      <div className="modal-content555">
+        <div className="modal-section555">
+          <div className="modal-subtitle555">Вопросы (Максимум 20)</div>
+          <div className="checkbox-group555">
+            <div className="checkbox-wrapper-555">
+              <span className="checkbox-label-text555">Верно - неверно</span>
+              <input className="tgl555 tgl-light555" id="cb1-555" type="checkbox" defaultChecked />
+              <label className="tgl-btn555" htmlFor="cb1-555"></label>
+            </div>
+            <div className="checkbox-wrapper-555">
+              <span className="checkbox-label-text555">С выбором ответов</span>
+              <input className="tgl555 tgl-light555" id="cb2-555" type="checkbox" defaultChecked />
+              <label className="tgl-btn555" htmlFor="cb2-555"></label>
+            </div>
+            <div className="checkbox-wrapper-555">
+              <span className="checkbox-label-text555">Подбор</span>
+              <input className="tgl555 tgl-light555" id="cb3-555" type="checkbox" />
+              <label className="tgl-btn555" htmlFor="cb3-555"></label>
             </div>
           </div>
-        ))}
+        </div>
 
-        <div className="plus-wrapper">
-          <Plus className="plus-instance" onClick={() => handleAddOption(qIndex)} />
+        <div className="modal-section555">
+          <div className="number-input-container555">
+            <span className="number-input-label555">Количество вопросов</span>
+            <input
+              type="number"
+              className="number-input555"
+              min="1"
+              max="20"
+              defaultValue="4"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  ))}
 
-  <div className="group-4" onClick={handleAddQuestion}>
-    <div className="text-wrapper-5">ДОБАВИТЬ ТЕРМИН</div>
-    <Plus className="plus-2" />
-  </div>
-
-  {showSettings && (
-    <div className="settings-modal">
-      <div className="modal-content">
-        <button onClick={() => setShowSettings(false)}>Закрыть</button>
-        {/* Здесь можно разместить дополнительные настройки */}
+      <div className="modal-footer555">
+        <button className="save-button555">СОХРАНИТЬ</button>
       </div>
     </div>
-  )}
-</div>
-); };
+  </div>
+)}
+    </div>
+  );
+};
 
 export default CourseCover;

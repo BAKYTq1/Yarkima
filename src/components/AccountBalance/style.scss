@@ -1,0 +1,40 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .account-balance h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .balance-info {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  
+  .top-up-section {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .top-up-section input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .top-up-section button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .top-up-section button:disabled {
+    background: #9E9E9E;
+  }
+  

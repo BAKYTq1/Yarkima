@@ -1,15 +1,17 @@
 .profile {
-    background-color: #121212;
+    background-color: transparent;
     color: #fff;
+    width: 100%;
     min-height: 100vh;
     padding: 2rem;
   
     &__container {
       max-width: 960px;
       margin: 0 auto;
-      background-color: #1e1e1e;
+      background-color: transparent;
       border-radius: 16px;
       padding: 2rem;
+      color: #000000;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
   
@@ -40,8 +42,9 @@
     }
   
     &__email {
+      font-weight: 700;
       font-size: 0.95rem;
-      color: #ccc;
+      color: #000000;
     }
   
     &__actions {
@@ -50,8 +53,8 @@
     }
   
     &__button {
-      background: #2a2a2a;
-      color: #fff;
+      background: transparent;
+      color: black;
       border: none;
       padding: 0.6rem 1.2rem;
       border-radius: 12px;
@@ -60,7 +63,7 @@
       transition: background 0.3s;
   
       &:hover {
-        background: #3a3a3a;
+        background: #544eaa;
       }
   
       &--gradient {
@@ -79,7 +82,7 @@
     &__tab {
       background: none;
       border: none;
-      color: #aaa;
+      color: #000000;
       font-size: 1rem;
       padding: 0.5rem 1rem;
       cursor: pointer;
@@ -87,7 +90,7 @@
       transition: color 0.3s;
   
       &--active {
-        color: #fff;
+        color: #000000;
         font-weight: bold;
   
         &::after {
@@ -95,6 +98,7 @@
           position: absolute;
           bottom: -12px;
           left: 50%;
+          color: #000000;
           transform: translateX(-50%);
           width: 60%;
           height: 2px;
@@ -103,7 +107,7 @@
       }
   
       &:hover {
-        color: #fff;
+        color: #030202;
       }
     }
   
@@ -115,6 +119,6 @@
   .profile-content__text {
     font-size: 1rem;
     line-height: 1.6;
-    color: #ddd;
+    color: #000000;
   }
   

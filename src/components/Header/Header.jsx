@@ -41,14 +41,14 @@ const Header = () => {
           {user ? (
             <>
               <Link to="/personal">
-                <button className="personal-btn">Личный кабинет</button>
-              </Link>
               <img 
                 src={user.photoURL || "https://via.placeholder.com/32"} 
                 alt="user" 
                 className="user-photo" 
               />
+                </Link>
             </>
+
           ) : (
             <>
               <Link to="/login"><button className="login">ВОЙТИ</button></Link>
@@ -69,7 +69,7 @@ const Header = () => {
           <ul>
             <li><Link to="/" onClick={() => setMenuOpen(false)}>ГЛАВНАЯ</Link></li>
             <li><Link to="/catalog" onClick={() => setMenuOpen(false)}>КАТАЛОГ</Link></li>
-            <li><Link to="/cases" onClick={() => setMenuOpen(false)}>КЕЙСЫ</Link></li>
+            <li><Link to="/createcurs" onClick={() => setMenuOpen(false)}>Создание курса</Link></li>
             <li><Link to="/FAQ" onClick={() => setMenuOpen(false)}>F.A.Q</Link></li>
             <li><Link to="/partners" onClick={() => setMenuOpen(false)}>ПАРТНЕРАМ</Link></li>
           </ul>
