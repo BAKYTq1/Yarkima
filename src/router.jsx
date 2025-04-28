@@ -32,7 +32,7 @@ import Partners from "./components/Partner/Partner";
 import Detailkyrs from "./components/Detailkyrs/Detailkyrs";
 import Usershow from "./components/Usershow/Usershow";
 
-import ChatList from "./components/ChatItem/ChatList";
+// import ChatList from "./components/ChatItem/ChatList";
 
 
 export const myRouter = createBrowserRouter([
@@ -83,10 +83,6 @@ export const myRouter = createBrowserRouter([
             {
                 path: "detailkyrs",
                 element: <Detailkyrs />
-            },
-            {
-                path: '*',
-                element: <Notfound/>
             },
             {
                 path: '/quiz/:courseId',

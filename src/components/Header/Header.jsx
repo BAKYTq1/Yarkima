@@ -1,3 +1,4 @@
+import { auth } from "../../firebase"; // путь до firebase.js
 import React, { useState, useEffect } from "react";
 import "./Header.scss";
 import Logo from "../../assets/svg/logo.svg";
@@ -6,9 +7,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaGripLines } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase"; 
-import { auth } from "../../firebase"; // путь до firebase.js
-import plus from "../../assets/svg/plus.svg";
+// import { auth } from "../../firebase"; 
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,15 +41,13 @@ const Header = () => {
         <div className="auth-buttons">
           {user ? (
             <>
-            <img className="plus" src={plus} alt="" />
               <Link to="/personal">
               <img 
                 src={user.photoURL || "https://via.placeholder.com/32"} 
-                alt="" 
+                alt="user" 
                 className="user-photo" 
               />
                 </Link>
-              </Link>
             </>
 
           ) : (
