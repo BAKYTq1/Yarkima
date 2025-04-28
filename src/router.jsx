@@ -29,6 +29,10 @@ import Chats from "./components/ChatItem/Chats";
 import SocialNetwork from "./components/SocailNetwork/SocialNetwork";
 import AccountBalance from "./components/AccountBalance/AccountBalance";
 import Partners from "./components/Partner/Partner";
+import Detailkyrs from "./components/Detailkyrs/Detailkyrs";
+import Usershow from "./components/Usershow/Usershow";
+
+import ChatList from "./components/ChatItem/ChatList";
 
 
 export const myRouter = createBrowserRouter([
@@ -71,6 +75,14 @@ export const myRouter = createBrowserRouter([
                 path: "catalog",
                 element: <Popular />
 
+            },
+            {
+                path: "usershow",
+                element: <Usershow />
+            },
+            {
+                path: "detailkyrs",
+                element: <Detailkyrs />
             },
             {
                 path: '*',
@@ -130,6 +142,7 @@ export const myRouter = createBrowserRouter([
 
             },
             {
+
                 path: 'supportchat',
                 element: <SupportChat />
             },
@@ -140,6 +153,7 @@ export const myRouter = createBrowserRouter([
             {
                 path: "Group",
                 element: <Group />
+       
             },
             {
                 path: "partner",
