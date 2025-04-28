@@ -1,10 +1,9 @@
 import React from 'react'
-import logo from "../../assets/react.svg"
 import instagram from "../../assets/svg/instagram.svg"
 import wkontakte from "../../assets/svg/wkontakte.svg"
 import facebook from "../../assets/svg/facebook.svg"
 import question from "../../assets/svg/question.svg"
-
+import Logo from "../../assets/svg/logo.svg";
 import "./footer.css"
 
 function Footer() {
@@ -13,7 +12,7 @@ function Footer() {
     <div className='footer container'>
        <div>
        <div className='footer-logo'>
-       <img src={logo} alt="" />
+       <img src={Logo} alt="" />
        <h1>Yarkima</h1>
        </div>
        <div>
