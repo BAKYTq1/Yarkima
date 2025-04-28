@@ -73,7 +73,6 @@ const Header = () => {
           <ul>
             <li><Link to="/" onClick={() => setMenuOpen(false)}>ГЛАВНАЯ</Link></li>
             <li><Link to="/catalog" onClick={() => setMenuOpen(false)}>КАТАЛОГ</Link></li>
-            <li><Link to="/createcurs" onClick={() => setMenuOpen(false)}>Создание курса</Link></li>
             <li><Link to="/FAQ" onClick={() => setMenuOpen(false)}>F.A.Q</Link></li>
             <li><Link to="/partners" onClick={() => setMenuOpen(false)}>ПАРТНЕРАМ</Link></li>
           </ul>

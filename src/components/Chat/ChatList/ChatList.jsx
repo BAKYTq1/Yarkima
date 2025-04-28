@@ -123,7 +123,7 @@ const ChatList = () => {
   // Получаем имя пользователя по его ID
   const getUserName = (userId) => {
     const user = users.find(user => user.id === userId);
-    return user ? user.displayName : 'Неизвестный';
+    return user ? user.displayName || user.email : 'Неизвестный';
   };
 
   return (
