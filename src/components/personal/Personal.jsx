@@ -1,53 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import './personal.scss';
 import defaultAvatar from '../../assets/image/personal-man.png';
 import { Link } from 'react-router-dom';
-// import { CgProfile } from "react-icons/cg";
-// import { GiPostOffice } from "react-icons/gi";
-// import { RiSettings3Line } from "react-icons/ri";
-// import { MdSupportAgent } from "react-icons/md";
-// import { MdOutlinePowerSettingsNew } from "react-icons/md";
-// import { FaUserFriends } from "react-icons/fa";
-// import { IoChatboxEllipsesOutline } from "react-icons/io5"
-// import { MdGroups2 } from "react-icons/md";
-// import { Link } from 'react-router-dom';
+
 function Personal() {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [photoURL, setPhotoURL] = useState(defaultAvatar);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('info');
-  const [activeSidebarTop, setActiveSidebarTop] = useState('public');
-  // const [activeSidebarBottom, setActiveSidebarBottom] = useState('dating');
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-  const dropdownRef = useRef(null);
-  const moreButtonRef = useRef(null);
 
   // Инициализация Firebase
   const auth = getAuth();
   const storage = getStorage();
   const db = getFirestore();
 
-  // Обработчик клика вне dropdown
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setLoading(true); // Начинаем загрузку, когда состояние аутентификации меняется
+
       if (currentUser) {
         setUser(currentUser);
         
@@ -55,71 +29,64 @@ function Personal() {
         if (userDoc.exists()) {
           const data = userDoc.data();
           setUserData(data);
-          
+
           if (data.photoURL) {
             try {
               const url = await getDownloadURL(ref(storage, data.photoURL));
               setPhotoURL(url);
             } catch (error) {
-              console.error("Error loading profile photo:", error);
-              setPhotoURL(defaultAvatar);
+              console.error("Error loading photo:", error);
+              setPhotoURL(defaultAvatar); // В случае ошибки загружаем фото по умолчанию
             }
+          } else {
+            setPhotoURL(defaultAvatar); // Если фото не задано, ставим фото по умолчанию
           }
         }
       } else {
         setUser(null);
         setUserData(null);
       }
-      setLoading(false);
+      
+      setLoading(false); // Завершаем загрузку
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe(); // Очищаем подписку на изменения состояния аутентификации
   }, [auth, db, storage]);
 
-  const toggleDropdown = () => {
-    if (moreButtonRef.current) {
-      const rect = moreButtonRef.current.getBoundingClientRect();
-      setDropdownPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + window.scrollX
-      });
-    }
-    setShowDropdown(!showDropdown);
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      console.log('Выход выполнен успешно!');
+    }).catch((error) => {
+      console.error('Ошибка при выходе:', error);
+    });
   };
-
-  const handleTabClick = (tab) => setActiveTab(tab);
-  // const handleSidebarTopClick = (button) => {
-  //   setActiveSidebarTop(button);
-  //   if (button === 'more') {
-  //     toggleDropdown();
-  //   }
-  // };
-
 
   const renderContent = () => {
     if (loading) return <div>Загрузка...</div>;
-    if (!user) return <div>Пожалуйста, войдите в систему</div>;
+
+    if (!user) {
+      return <div>Пожалуйста, войдите в систему</div>;
+    }
 
     switch (activeTab) {
       case 'info':
         return (
           <div className="personal__profiles">
-            <div className="first__button">
-              <div className="first__text">
-                <img className="first__image" src={photoURL} alt="Course" />
-                <div className="second__text">
-                  <h1>Основы программирования на Python</h1>
-                  <p>Начните свой путь в IT с основ программирования</p>
+            <h1>Информация о пользователе</h1>
+            <div className="personal__info">
+              <img 
+                src={photoURL} 
+                alt="User"
+                width={150} 
+                className="personal__avatar"
+                onError={(e) => e.target.src = defaultAvatar} // Обработка ошибок при загрузке изображения
+              />
+              <div className="personal__text">
+                <div>
+                  <h2>{userData?.username || user.displayName || 'Пользователь'}</h2>
+                  <p>{user.email || 'Email не указан'}</p>
                 </div>
               </div>
-              <button>В процессе</button>
-            </div>
-            <div className="personal__third">
-              <div>
-                <button>Программирование</button>
-                <button>Для начинающих</button>
-              </div>
-              <button>Продолжить</button>
             </div>
           </div>
         );
@@ -142,57 +109,53 @@ function Personal() {
     }
   };
 
-  if (loading) return <div className='loader'></div>;
-  if (!user) return <div>Пожалуйста, войдите в систему</div>;
-
   return (
     <div className="personal">
       <div className="personal__flex">
         <div className="personal__content">
           <div className="personal__profile">
-            <div className="personal__info">
-              <img 
-                src={photoURL} 
-                alt="User" 
-                className="personal__avatar"
-                onError={(e) => {
-                  e.target.src = defaultAvatar;
-                }}
-              />
-              <div className="personal__text">
-                <div>
-                  <h1>{userData?.username || user.displayName || 'Пользователь'}</h1>
-                  <p>{user.email || 'Email не указан'}</p>
+            {user ? (
+              <div className="personal__info">
+                <img 
+                  src={photoURL} 
+                  alt="User" 
+                  className="personal__avatar"
+                  onError={(e) => e.target.src = defaultAvatar} // Обработка ошибок при загрузке изображения
+                />
+                <div className="personal__text">
+                  <div>
+                    <h1>{userData?.username || user.displayName || 'Пользователь'}</h1>
+                    <p>{user.email || 'Email не указан'}</p>
+                  </div>
                 </div>
-                {/* <div className="personal__icons">
-                  <img src={photoURL} alt="Icon" className="personal__icon" />
-                  <img src={photoURL} alt="Icon" className="personal__icon" />
-                  <img src={photoURL} alt="Icon" className="personal__icon" />
-                </div> */}
               </div>
-            </div>
+            ) : (
+              <div>Пожалуйста, войдите в систему</div>
+            )}
             <div className="btn__buttons">
-              <Link to={'chats'}><button>Написать</button></Link>
-              <button className="btn__gradient">Моя визитка</button>
+              <Link to={'/infoblock'}><button>Настройки</button></Link>
+              {user && (
+                <button className="btn__gradient" onClick={handleSignOut}>Выйти</button>
+              )}
             </div>
           </div>
 
           <div className="personal__word">
             <button
               className={activeTab === 'info' ? 'active' : ''}
-              onClick={() => handleTabClick('info')}
+              onClick={() => setActiveTab('info')}
             >
               Информация
             </button>
             <button
               className={activeTab === 'favorites' ? 'active' : ''}
-              onClick={() => handleTabClick('favorites')}
+              onClick={() => setActiveTab('favorites')}
             >
               Избранные курсы
             </button>
             <button
               className={activeTab === 'my-courses' ? 'active' : ''}
-              onClick={() => handleTabClick('my-courses')}
+              onClick={() => setActiveTab('my-courses')}
             >
               Мои курсы
             </button>

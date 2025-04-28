@@ -1,80 +1,92 @@
 import React, { useEffect, useState } from 'react';
-import { getAllUsers } from '../../firebase';
+import { auth, getAllUsers, getUserData, userService } from '../../firebase'; // Импортируем нужные функции
 import { Link } from 'react-router-dom';
 import './style.scss';
 
 const PublicProfile = () => {
-  const [users, setUsers] = useState([]);
-  const [activeTab, setActiveTab] = useState('info');
+  const [user, setUser] = useState(null);  // Данные текущего пользователя
+  const [users, setUsers] = useState([]);  // Состояние для всех пользователей
+  const [loading, setLoading] = useState(true);
 
-  const mockUser = {
-    username: 'Алиса Иванова',
-    email: 'alisa@example.com',
-    photoURL: 'https://i.pravatar.cc/150?img=5',
-  };
+  useEffect(() => {
+    // Получаем данные текущего пользователя
+    const fetchUser = async () => {
+      try {
+        const currentUser = auth.currentUser;
+        if (currentUser) {
+          const userData = await getUserData(currentUser.uid);
+          console.log("Текущий пользователь:", userData);
+          setUser(userData);
+        } else {
+          console.log("Пользователь не авторизован.");
+        }
+      } catch (error) {
+        console.error("Ошибка при получении данных пользователя:", error);
+      }
+    };
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'info':
-        return <p className="profile-content__text">Здесь будет информация о пользователе.</p>;
-      case 'favorites':
-        return <p className="profile-content__text">Здесь избранные курсы.</p>;
-      case 'my-courses':
-        return <p className="profile-content__text">Здесь курсы пользователя.</p>;
-      default:
-        return null;
-    }
-  };
+    // Получаем всех пользователей из Firestore
+    const fetchAllUsers = async () => {
+      try {
+        const allUsers = await getAllUsers();
+        console.log("Все пользователи:", allUsers);  // Логируем всех пользователей
+        setUsers(allUsers);  // Обновляем состояние с пользователями
+      } catch (error) {
+        console.error("Ошибка при получении списка пользователей:", error);
+      }
+    };
+
+    fetchUser();
+    fetchAllUsers();  // Загружаем всех пользователей при монтировании компонента
+  }, []);  // Зависимость пустая, значит эффект выполнится только при монтировании компонента
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const allUsers = await getAllUsers();
-      setUsers(allUsers);
+      try {
+        const usersData = await userService.getAll();
+        setUsers(usersData);  // Сохраняем пользователей в state
+        setLoading(false);  // Останавливаем загрузку
+      } catch (error) {
+        console.error("Error fetching users: ", error);
+        setLoading(false);
+      }
     };
-    fetchUsers();
+
+    fetchUsers();  // Загружаем пользователей при монтировании компонента
   }, []);
+
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
 
   return (
     <div className="profile">
       <div className="profile__container">
-        <div className="profile__header">
-          <img className="profile__avatar" src={mockUser.photoURL} alt="Аватар" />
-          <div className="profile__info">
-            <h2 className="profile__username">{mockUser.username}</h2>
-            <p className="profile__email">{mockUser.email}</p>
-          </div>
-          <div className="profile__actions">
-            <Link to="/chats">
-              <button className="profile__button">Написать</button>
-            </Link>
-            <button className="profile__button profile__button--gradient">Моя визитка</button>
-          </div>
-        </div>
-
-        <div className="profile__tabs">
-          <button
-            className={`profile__tab ${activeTab === 'info' ? 'profile__tab--active' : ''}`}
-            onClick={() => setActiveTab('info')}
-          >
-            Информация
-          </button>
-          <button
-            className={`profile__tab ${activeTab === 'favorites' ? 'profile__tab--active' : ''}`}
-            onClick={() => setActiveTab('favorites')}
-          >
-            Избранные курсы
-          </button>
-          <button
-            className={`profile__tab ${activeTab === 'my-courses' ? 'profile__tab--active' : ''}`}
-            onClick={() => setActiveTab('my-courses')}
-          >
-            Мои курсы
-          </button>
-        </div>
-
-        <div className="profile__content">
-          {renderContent()}
-        </div>
+        {users.length > 0 ? (
+          <ul>
+            {users.map((userItem) => (
+              <div className="profile__header" key={userItem.id}>
+                <img
+                  className="profile__avatar"
+                  src={userItem.photoURL || 'https://i.pravatar.cc/150?img=5'}
+                  alt="Аватар"
+                />
+                <div className="profile__info">
+                  <h2 className="profile__username">{userItem.displayName}</h2>
+                  <p className="profile__email">{userItem.email}</p>
+                </div>
+                <div className="profile__actions">
+                  <Link to={`chat/${userItem.id} `}>
+                    <button className="profile__button">Написать</button>
+                  </Link>
+                  <button className="profile__button profile__button--gradient">Моя визитка</button>
+                </div>
+              </div>
+            ))}
+          </ul>
+        ) : (
+          <p>Пользователи не найдены</p>
+        )}
       </div>
     </div>
   );

@@ -11,14 +11,21 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth, db } from '../../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import './style.scss';
-import GoogleIcon from '../../assets/svg/2minutee.svg'; // Убедитесь, что используете правильную иконку
+import GoogleIcon from '../../assets/svg/2minutee.svg';
 
 function Register() {
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState(''); // добавили состояние для телефона
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Проверка правильности номера
+  const isValidPhone = (phone) => {
+    const phoneRegex = /^(\+?\d{10,15})$/;
+    return phoneRegex.test(phone);
+  };
 
   // Сохраняем пользователя в Firestore
   const saveUserToFirestore = async (user) => {
@@ -26,6 +33,7 @@ function Register() {
       uid: user.uid,
       displayName: user.displayName,
       email: user.email,
+      phone: phone, // сохраняем телефон
       createdAt: new Date()
     });
   };
@@ -33,19 +41,25 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
+    if (!isValidPhone(phone)) {
+      toast.error('Введите корректный номер телефона');
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      // 1. Регистрируем пользователя
+      // Регистрируем пользователя
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      // 2. Обновляем профиль с именем
+
+      // Обновляем профиль с именем
       await updateProfile(userCredential.user, {
         displayName: name
       });
-      
-      // 3. Сохраняем в Firestore
+
+      // Сохраняем в Firestore
       await saveUserToFirestore(userCredential.user);
-      
+
       toast.success(`Добро пожаловать, ${name}!`);
       navigate('/');
     } catch (error) {
@@ -60,6 +74,8 @@ function Register() {
         case 'auth/invalid-email':
           errorMessage = "Некорректный email";
           break;
+        default:
+          errorMessage = error.message;
       }
       toast.error(errorMessage);
     } finally {
@@ -70,13 +86,13 @@ function Register() {
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     const provider = new GoogleAuthProvider();
-    
+
     try {
       const result = await signInWithPopup(auth, provider);
-      
+
       // Сохраняем пользователя Google в Firestore
       await saveUserToFirestore(result.user);
-      
+
       toast.success(`Добро пожаловать, ${result.user.displayName || 'пользователь'}!`);
       navigate('/');
     } catch (error) {
@@ -89,26 +105,26 @@ function Register() {
   return (
     <div className='auth-container'>
       <div className='auth-image-section'>
-      <div className='main-containerr'>
-      <div className="containerrr">
-	<div className="cube">
-		<div className="face"></div>
-		<div className="face"></div>
-		<div className="face"></div>
-		<div className="face"></div>
-		<div className="face"></div>
-		<div className="face"></div>
-	</div>
-	<div className="hexa"></div>
-</div>
+        <div className='main-containerr'>
+          <div className="containerrr">
+            <div className="cube">
+              <div className="face"></div>
+              <div className="face"></div>
+              <div className="face"></div>
+              <div className="face"></div>
+              <div className="face"></div>
+              <div className="face"></div>
+            </div>
+            <div className="hexa"></div>
+          </div>
+        </div>
       </div>
-      </div>
-      
+
       <div className="auth-form-section">
         <div className="auth-form-wrapper">
           <h2>Создать аккаунт</h2>
           <p className="auth-subtitle">Заполните данные ниже</p>
-          
+
           <form onSubmit={handleRegister} className="auth-form">
             <div className="form-group">
               <input
@@ -120,7 +136,17 @@ function Register() {
                 minLength={2}
               />
             </div>
-            
+
+            <div className="form-group">
+              <input
+                type="tel"
+                placeholder="Телефон (+79991234567)"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </div>
+
             <div className="form-group">
               <input
                 type="email"
@@ -130,7 +156,7 @@ function Register() {
                 required
               />
             </div>
-            
+
             <div className="form-group">
               <input
                 type="password"
@@ -141,7 +167,7 @@ function Register() {
                 minLength={6}
               />
             </div>
-            
+
             <button 
               type="submit" 
               className="primary-button"
@@ -150,11 +176,11 @@ function Register() {
               {isLoading ? 'Создание...' : 'Создать аккаунт'}
             </button>
           </form>
-          
+
           <div className="auth-divider">
             <span>или</span>
           </div>
-          
+
           <button 
             className="google-button"
             onClick={handleGoogleSignIn}
@@ -167,7 +193,7 @@ function Register() {
             />
             Зарегистрироваться через Google
           </button>
-          
+
           <p className="auth-redirect">
             Уже есть аккаунт? <Link to="/login" className="auth-link">Войти</Link>
           </p>
